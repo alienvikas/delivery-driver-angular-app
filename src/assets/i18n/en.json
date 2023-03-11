@@ -1,0 +1,36 @@
+{
+    "Labels": {
+        "username": "Username",
+        "password": "Password",
+        "forgotpassword": "Forgot Password",
+        "form": "Form",
+        "rememberme": "Remember me",
+        "registration": "Registration",
+        "login": "login",
+        "register": "Register",
+        "noaccount": "Don't have an account",
+        "email": "Email",
+        "firstname": "First Name",
+        "middlename": "Middle Name",
+        "lastname": "Last Name",
+        "gender": "Gender",
+        "mobile": "Mobile Number",
+        "country": "Country",
+        "confirmpassword": "Confirm Password",
+        "accountlock": "Is Account Locked",
+        "role": "Role"
+    },
+    "Validation": {
+        "emailrequired": "Email is required",
+        "emailpattern": "Invalid email",
+        "usernamerequired": "Username is required",
+        "passwordrequired": "Password is required",
+        "firstnamerequired": "First name is required",
+        "lastnamerequired": "Last name is required",
+        "confirmPasswordrequired": "Confirm password is required",
+        "genderrequired": "Please select the gender",
+        "mobilenumberrequired": "Mobile number is required",
+        "confirmpassword": "Password and confirm password doesn't match",
+        "mobilerequired": "Mobile number is required"
+    }
+}

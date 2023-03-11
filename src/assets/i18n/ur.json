@@ -1,0 +1,36 @@
+{
+    "Labels": {
+        "username": "صارف نام",
+        "password": "پاس ورڈ",
+        "forgotpassword": "پاسورڈ بھول گے",
+        "form": "فارم",
+        "rememberme": "مجھے پہچانتے ہو",
+        "registration": "اندراج",
+        "login": "لاگ ان کریں",
+        "register": "رجسٹر کریں۔",
+        "noaccount": "اکاؤنٹ نہیں ہے۔",
+        "email": "ای میل",
+        "firstname": "پہلا نام",
+        "middlename": "درمیانی نام",
+        "lastname": "آخری نام",
+        "gender": "صنف",
+        "mobile": "موبائل فون کانمبر",
+        "country": "ملک",
+        "confirmpassword": "پاس ورڈ کی تصدیق کریں۔",
+        "accountlock": "کیا اکاؤنٹ لاک ہے؟",
+        "role": "کردار"
+    },
+    "Validation": {
+        "emailrequired": "ای میل کی ضرورت ہے",
+        "emailpattern": "غلط ای میل",
+        "usernamerequired": "صارف نام کی ضرورت ہے۔",
+        "passwordrequired": "پاس ورڈ کی ضرورت ہے۔",
+        "firstnamerequired": "پہلا نام درکار ہے۔",
+        "lastnamerequired": "آخری نام درکار ہے۔",
+        "confirmPasswordrequired": "تصدیق کریں کہ پاس ورڈ درکار ہے۔",
+        "genderrequired": "براہ کرم جنس منتخب کریں۔",
+        "mobilenumberrequired": "موبائل نمبر درکار ہے۔",
+        "confirmpassword": "پاس ورڈ اور تصدیقی پاس ورڈ مماثل نہیں ہیں۔",
+        "mobilerequired": "موبائل نمبر درکار ہے۔"
+    }
+}
