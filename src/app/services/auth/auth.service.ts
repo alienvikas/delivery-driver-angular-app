@@ -51,7 +51,6 @@ export class AuthService implements CanActivate {
 
   authenicateUser(user: any): Observable<any> {
     //let queryParams = { "email": user.email, "password": user.password };
-    alert(environment.baseUrl);
     return this.http.post<any>(environment.baseUrl + "User/Authorize/",
       user, this.httpOptions);
   }
