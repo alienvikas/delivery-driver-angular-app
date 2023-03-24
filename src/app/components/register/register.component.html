@@ -1,6 +1,7 @@
 <div class="container-fluid mt-3">
     <div class="row">
-        <form #signUpForm="ngForm" [formGroup]="registerForm" (ngSubmit)="onSubmit(signUpForm.value)">
+        <form #signUpForm="ngForm" [formGroup]="registerForm"
+            (ngSubmit)="onSubmit(signUpForm.value,'User created successfully!!!','Success')">
             <mat-card>
                 <mat-card-header style="border-left: 5px solid green; background-color: lightgray;">
                     <mat-card-title>{{'Labels.register'|translate}}</mat-card-title>

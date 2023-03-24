@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { User } from 'src/app/models/User';
-import { HttpBaseUrl } from '../../commonMethods/httpBaseUrl';
+import { User } from 'src/app/models/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class AuthService implements CanActivate {
     //     return userObj;
     //   }));
 
-    return this.http.post<any>(HttpBaseUrl.getHttpBaseUrl() + "User/InsertUserDetails/",
+    return this.http.post<any>(environment.baseUrl + "User/InsertUserDetails/",
       user, this.httpOptions)
       .pipe(
         map(() => {
@@ -51,7 +51,8 @@ export class AuthService implements CanActivate {
 
   authenicateUser(user: any): Observable<any> {
     //let queryParams = { "email": user.email, "password": user.password };
-    return this.http.post<any>(HttpBaseUrl.getHttpBaseUrl() + "User/Authorize/",
+    alert(environment.baseUrl);
+    return this.http.post<any>(environment.baseUrl + "User/Authorize/",
       user, this.httpOptions);
   }
 

@@ -1,4 +1,4 @@
 export const environment = {
-    baseUrl:"https://localhost:44383/api/",
+    baseUrl: "https://deliverydriverwebservice.azurewebsites.net/api/",
     production: true
 };

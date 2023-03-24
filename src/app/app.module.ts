@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent, MY_DATE_FORMATS } from './app.component';
 
 /* Angular Material */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,30 +18,29 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 /* Components */
 import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PersonFormComponent } from './components/person-form/person-form.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 
 /* Translate */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AuthService } from './services/auth/auth.service';
-import { ApiInterceptor } from './interceptors/httpInterceptor ';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 // AoT requires an exported function for factories
-export function createTranslateLoader(http: HttpClient) {
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
-export function getBaseUrl() {
-  return "https://localhost:44383/api/";
-}
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
-    RegisterComponent
+    RegisterComponent,
+    PersonFormComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
@@ -55,13 +54,15 @@ export function getBaseUrl() {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: createTranslateLoader,
+        useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
       defaultLanguage: 'en'
     }),
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    { provide: MAT_DATE_LOCALE, useValue: MY_DATE_FORMATS }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -18,7 +18,11 @@
         "country": "Country",
         "confirmpassword": "Confirm Password",
         "accountlock": "Is Account Locked",
-        "role": "Role"
+        "role": "Role",
+        "person": "Person",
+        "PersonalDetails": "Personal Details",
+        "ChooseIntroducer": "Choose an introducer",
+        "ChooseNationality": "Choose nationality"
     },
     "Validation": {
         "emailrequired": "Email is required",

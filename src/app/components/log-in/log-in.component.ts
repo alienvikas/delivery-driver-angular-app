@@ -3,7 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/User';
+import { GlobalComponent } from 'src/app/global-component';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
@@ -28,7 +29,9 @@ export class LogInComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    GlobalComponent.isloggedIn = false;
+   }
 
   onLanguageChange(selectedLanguage: any) {
     console.log(selectedLanguage);
@@ -40,8 +43,10 @@ export class LogInComponent implements OnInit {
       return this.authService.authenicateUser(this.loginForm.value).subscribe((res) => {
         localStorage.setItem('SessionUser', res);
         const isAuthenticated = this.authService.getAuthStatus();
-        if (isAuthenticated)
-          this.router.navigate(['/', 'register']);
+        if (isAuthenticated) {
+          this.router.navigate(['/', 'person']);
+          GlobalComponent.isloggedIn = true;
+        }
       });
     }
   }
