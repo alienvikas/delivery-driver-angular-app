@@ -18,7 +18,8 @@
         "country": "देश",
         "confirmpassword": "पासवर्ड की पुष्टि कीजिये",
         "accountlock": "क्या खाता बंद है",
-        "role": "भूमिका"
+        "role": "भूमिका",
+        "ChooseNationality": "राष्ट्रीयता चुनें"
     },
     "Validation": {
         "emailrequired": "ईमेल की जरूरत है",

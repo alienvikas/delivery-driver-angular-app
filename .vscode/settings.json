@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/4540658f-2fb0-437b-8bfd-24a101618b60/resourceGroups/DeliveryDriverApp/providers/Microsoft.Web/sites/DeliveryDriverUK",
+    "appService.deploySubpath": "dist"
+}

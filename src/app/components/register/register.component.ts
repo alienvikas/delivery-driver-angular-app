@@ -2,10 +2,11 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { validateBasis } from '@angular/flex-layout';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ConfirmedValidator } from 'src/app/commonMethods/confirmedValidator';
 import { MustMatch } from 'src/app/helper/must-match.validator';
-import { User } from 'src/app/models/User';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountryService } from 'src/app/services/country/country.service';
 import { RoleService } from 'src/app/services/role/role.service';
@@ -24,10 +25,12 @@ export class RegisterComponent implements OnInit {
   roles: any = [];
   user = new User();
   durationInSeconds = 5;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private fb: FormBuilder, private authService: AuthService,
     private roleService: RoleService, private countryService: CountryService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group(
@@ -66,15 +69,15 @@ export class RegisterComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
-  onSubmit(form: any) {
+  onSubmit(form: any, message: string, action: string) {
     if (this.registerForm.invalid) return; // stop here if form is invalid
     this.authService.register(form).subscribe((res) => {
       if (res.Id != "") {
-        //this.openSnackBar();
-        alert(res.Id);
+        this.openSnackBar(message, action);
+        this.router.navigate(['login']);
       }
       else {
-        this.openSnackBar();
+        this.openSnackBar(message, action);
       }
       console.log(res);
     });
@@ -105,8 +108,13 @@ export class RegisterComponent implements OnInit {
       this.countries = res;
     });
   }
-  openSnackBar() {
-    this._snackBar.openFromComponent(SnackBarComponent, {
+  openSnackBar(message: string, action: string) {
+    // this._snackBar.openFromComponent(SnackBarComponent, {
+    //   duration: this.durationInSeconds * 1000,
+    // });
+    this._snackBar.open(message, action, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
       duration: this.durationInSeconds * 1000,
     });
   }

@@ -18,7 +18,8 @@
         "country": "ملک",
         "confirmpassword": "پاس ورڈ کی تصدیق کریں۔",
         "accountlock": "کیا اکاؤنٹ لاک ہے؟",
-        "role": "کردار"
+        "role": "کردار",
+        "ChooseNationality": "قومیت کا انتخاب کریں۔"
     },
     "Validation": {
         "emailrequired": "ای میل کی ضرورت ہے",
