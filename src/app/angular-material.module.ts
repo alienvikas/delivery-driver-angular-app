@@ -33,6 +33,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
+// Available options
+interface NgxSpinnerConfig {
+  type?: string;
+}
 
 const materialModules = [
   CdkTreeModule,
@@ -69,11 +75,13 @@ const materialModules = [
   MatTooltipModule,
   MatNativeDateModule,
   CdkAccordionModule,
+  NgxSpinnerModule,
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    NgxSpinnerModule.forRoot({ type: 'la-square-jelly-box' }),
     ...materialModules
   ],
   exports: [
