@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
+import { connect } from 'rxjs';
 import { DDHomeBase } from 'src/app/models/ddhomebase';
 import { Introducer } from 'src/app/models/introducer';
 import { CountryService } from 'src/app/services/country/country.service';
 import { HomeBaseService } from 'src/app/services/home-base/home-base.service';
 import { IntroducerService } from 'src/app/services/introducer/introducer.service';
+import { validate } from 'uuid';
 
 @Component({
   selector: 'app-person-form',
@@ -14,11 +16,11 @@ import { IntroducerService } from 'src/app/services/introducer/introducer.servic
 })
 export class PersonFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,
-    private countryService: CountryService,
+  constructor(private fb: FormBuilder, private countryService: CountryService,
     private introducerService: IntroducerService,
     private ddhomebaseService: HomeBaseService) { }
 
+  isPersonFormSubmitted: boolean = false;
   personForm!: FormGroup;
   selectedNationality!: string;
   nationalityOption: any = [];
@@ -46,6 +48,11 @@ export class PersonFormComponent implements OnInit {
         //personPhoto: new FormControl('', [Validators.required]),
         emailAddress: new FormControl(null, [Validators.required, Validators.email]),
         mobileNumber: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
+        postcode: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
+        county: new FormControl(null, [Validators.required]),
+        towncity: new FormControl(null, [Validators.required]),
+        area: new FormControl(null, [Validators.required]),
+        street: new FormControl(null, [Validators.required])
       }
     )
   }

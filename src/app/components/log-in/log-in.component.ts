@@ -6,7 +6,10 @@ import { Subscription } from 'rxjs';
 import { GlobalComponent } from 'src/app/global-component';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CommonService } from 'src/app/services/common/common.service';
 import { LoginService } from 'src/app/services/login/login.service';
+import { environment } from 'src/environments/environment';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-log-in',
@@ -21,7 +24,8 @@ export class LogInComponent implements OnInit {
    */
   constructor(private loginService: LoginService, private authService: AuthService,
     private translateService: TranslateService, private formBulider: FormBuilder,
-    private router: Router) {
+    private router: Router, public commonService: CommonService,
+    private spinner: NgxSpinnerService) {
     this.stateOptions = this.loginService.getAllLanguage();
     this.loginForm = this.formBulider.group({
       password: new FormControl("", [Validators.required]),
@@ -30,15 +34,24 @@ export class LogInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+    // setTimeout(() => {
+    //   /** spinner ends after 5 seconds */
+    //   this.spinner.hide();
+    // }, 5000);
+    this.loginForm.markAsUntouched();
     GlobalComponent.isloggedIn = false;
-   }
+  }
 
   onLanguageChange(selectedLanguage: any) {
-    console.log(selectedLanguage);
     this.translateService.use(selectedLanguage);
   }
 
   onLoginSubmit(): any {
+    /** spinner starts on init */
+    this.spinner.show();
+    this.loginForm.markAsTouched();
     if (this.loginForm.valid) {
       return this.authService.authenicateUser(this.loginForm.value).subscribe((res) => {
         localStorage.setItem('SessionUser', res);
@@ -46,8 +59,16 @@ export class LogInComponent implements OnInit {
         if (isAuthenticated) {
           this.router.navigate(['/', 'person']);
           GlobalComponent.isloggedIn = true;
+          this.spinner.hide();
         }
+      }, error => {
+        GlobalComponent.loading = false;
+        this.spinner.hide();
       });
+    }
+    else {
+      GlobalComponent.loading = false;
+      this.spinner.hide();
     }
   }
 
