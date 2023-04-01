@@ -21,8 +21,12 @@
         "role": "Role",
         "person": "Person",
         "PersonalDetails": "Personal Details",
-        "ChooseIntroducer": "Choose an introducer",
-        "ChooseNationality": "Choose nationality"
+        "ChooseIntroducer": "Authoriser name",
+        "ChooseNationality": "Nationality",
+        "countrycode": "Country code",
+        "countryname": "Country name",
+        "countryicon": "Country icon",
+        "countrydelete": "Country delete"
     },
     "Validation": {
         "emailrequired": "Email is required",
@@ -35,6 +39,9 @@
         "genderrequired": "Please select the gender",
         "mobilenumberrequired": "Mobile number is required",
         "confirmpassword": "Password and confirm password doesn't match",
-        "mobilerequired": "Mobile number is required"
+        "mobilerequired": "Mobile number is required",
+        "countrynamerequired": "Country name is required",
+        "countrycoderequired": "Country code is required",
+        "countryiconrequired": "Country icon is required"
     }
 }

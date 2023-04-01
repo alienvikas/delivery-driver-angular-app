@@ -4,6 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { GlobalComponent } from 'src/app/global-component';
 import { LoginService } from 'src/app/services/login/login.service';
+import { faCoffee, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -19,7 +20,7 @@ export class NavigationBarComponent implements OnInit {
       GlobalComponent.isloggedIn = true;
   }
   ngOnInit(): void {
-    
+
   }
 
   logout() {

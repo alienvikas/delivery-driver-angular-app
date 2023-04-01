@@ -1,0 +1,58 @@
+<div class="content-center">
+    <form [formGroup]="countryForm" (ngSubmit)="onSubmit(countryForm.value)">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <h2>Add country</h2>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field fxFlexFill class="form-field mb-2">
+                            <mat-label>{{'Labels.countryname'|translate}}</mat-label>
+                            <input matInput placeholder="{{'Labels.countryname'|translate}}" formControlName="name"
+                                (blur)="onBlur()">
+                            <mat-icon matPrefix>country</mat-icon>
+                            <mat-error *ngIf="f['name'].errors?.['required'] && submitted === true">
+                                {{'Validation.countrynamerequired'|translate}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field fxFlexFill class="form-field mb-2">
+                            <mat-label>{{'Labels.countryicon'|translate}}</mat-label>
+                            <input matInput placeholder="{{'Labels.countryicon'|translate}}"
+                                formControlName="countryIcon" (blur)="onBlur()">
+                            <mat-icon matPrefix>country</mat-icon>
+                            <mat-error *ngIf="f['countryIcon'].errors?.['required'] && submitted === true">
+                                {{'Validation.countryiconrequired'|translate}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field fxFlexFill class="form-field mb-2">
+                            <mat-label>{{'Labels.countrycode'|translate}}</mat-label>
+                            <input matInput placeholder="{{'Labels.countrycode'|translate}}"
+                                formControlName="countryCode" (blur)="onBlur()">
+                            <mat-icon matPrefix>country-code</mat-icon>
+                            <mat-error *ngIf="f['countryCode'].errors?.['required'] && submitted === true">
+                                {{'Validation.countrycoderequired'|translate}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions style="justify-content: end;">
+                <button type="submit" (click)="onClick()" mat-raised-button color="primary">
+                    Submit
+                </button>
+                <div style="width: 2rem;"></div>
+                <button type="button" (click)="onReset()" mat-raised-button color="warn">
+                    Clear
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

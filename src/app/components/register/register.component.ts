@@ -108,10 +108,8 @@ export class RegisterComponent implements OnInit {
       this.countries = res;
     });
   }
+  
   openSnackBar(message: string, action: string) {
-    // this._snackBar.openFromComponent(SnackBarComponent, {
-    //   duration: this.durationInSeconds * 1000,
-    // });
     this._snackBar.open(message, action, {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,

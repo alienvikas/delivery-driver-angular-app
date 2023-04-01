@@ -8,6 +8,7 @@ import { AppComponent, MY_DATE_FORMATS } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 /* FormsModule */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PersonFormComponent } from './components/person-form/person-form.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { AddCountryComponent } from './components/admin-view/add-country/add-country.component';
 
 /* Translate */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -40,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LogInComponent,
     RegisterComponent,
     PersonFormComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    AddCountryComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
+    FontAwesomeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,206 +1,236 @@
-<mat-accordion class="example-headers-align">
-    <form #personDetailForm="ngForm" [formGroup]="personForm" (ngSubmit)="onPersonDetailSubmit(personForm)">
-        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+<div class="app-sidenav-content">
+    <mat-accordion class="example-headers-align" multi>
+        <form #personDetailForm="ngForm" [formGroup]="personForm" (ngSubmit)="onPersonDetailSubmit(personForm)">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
 
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{'Labels.PersonalDetails'|translate}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Information regarding personal details
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{'Labels.ChooseIntroducer'|translate}}</mat-label>
+                            <mat-select formControlName="introducerId">
+                                <mat-option *ngFor="let introducer of introducerOptions" [value]="introducer">
+                                    {{introducer.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="personForm.hasError('required','introducerId') && personDetailForm.submitted">Select
+                                introducer
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select home base </mat-label>
+                            <mat-select formControlName="ddHomeBaseId">
+                                <mat-option *ngFor="let homebase of ddHomeBaseOptions" [value]="homebase">
+                                    {{homebase.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="personForm.hasError('required','ddHomeBaseId') && personDetailForm.submitted">Select
+                                home
+                                base</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Known as</mat-label>
+                            <input matInput formControlName="knownAs">
+                            <mat-hint>
+                                <mat-icon
+                                    matTooltip="What you would like to be Known As (Christian Name, + Surname or Family name)">help
+                                    outline
+                                    icon</mat-icon>
+                            </mat-hint>
+                            <mat-error
+                                *ngIf="personForm.hasError('required','knownAs') && personDetailForm.submitted">KnownAs
+                                required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Offical name</mat-label>
+                            <input matInput formControlName="officialName">
+                            <mat-hint>
+                                <mat-icon matTooltip="Full Name as on Your passport
+                                    ">help
+                                    outline
+                                    icon</mat-icon>
+                            </mat-hint>
+                            <mat-error
+                                *ngIf="personForm.hasError('required','officialName') && personDetailForm.submitted">Offical
+                                name required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{'Labels.mobile'|translate}}</mat-label>
+                            <input matInput formControlName="mobileNumber" placeholder="+xx xxx-xxx-xxxx">
+                            <mat-hint>
+                                <mat-icon matTooltip="it should be in the format +*** **** ******">help
+                                    outline
+                                    icon</mat-icon>
+                            </mat-hint>
+                            <mat-error *ngIf="f['mobileNumber'].hasError('required')">Mobile number required</mat-error>
+                            <mat-error *ngIf="f['mobileNumber'].hasError('pattern')">Only numbers are
+                                allowed</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Date of birth</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth"
+                                placeholder="DD/MM/YYYY">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{'Labels.ChooseNationality'|translate}}</mat-label>
+                            <mat-select formControlName="nationalityId">
+                                <mat-option *ngFor="let nationality of nationalityOption" [value]="nationality.id">
+                                    <span class="fi fi-{{nationality.countryIcon | lowercase}}">
+                                    </span>
+                                    {{nationality.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f['nationalityId'].hasError('required')">Select nationality</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{'Labels.email'|translate}}</mat-label>
+                            <input matInput formControlName="emailAddress" placeholder="example@abc.com">
+                            <mat-error *ngIf="f['emailAddress'].hasError('required')">Mobile number required</mat-error>
+                            <mat-error *ngIf="f['emailAddress'].hasError('email')">Invalid email</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Telegram Number / Username</mat-label>
+                            <input matInput formControlName="usernameOrTelegramNumber" placeholder="+xx xxx-xxx-xxxx">
+                            <mat-error *ngIf="f['usernameOrTelegramNumber'].hasError('pattern')">Only numbers are
+                                allowed
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Street</mat-label>
+                            <input matInput formControlName="street">
+                            <mat-error *ngIf="f['street'].hasError('required')">Street required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Area</mat-label>
+                            <input matInput formControlName="area">
+                            <mat-error *ngIf="f['area'].hasError('required')">Area required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Town or City</mat-label>
+                            <input matInput formControlName="towncity">
+                            <mat-error *ngIf="f['towncity'].hasError('required')">Town or City required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>County</mat-label>
+                            <input matInput formControlName="county">
+                            <mat-error *ngIf="f['county'].hasError('required')">Country required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Post Code</mat-label>
+                            <input matInput formControlName="postcode">
+                            <mat-error *ngIf="f['postcode'].hasError('required')">Post code required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-action-row>
+                    <button mat-button type="submit" color="primary">Next</button>
+                </mat-action-row>
+
+            </mat-expansion-panel>
+        </form>
+
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    {{'Labels.PersonalDetails'|translate}}
+                    Identification
                 </mat-panel-title>
                 <mat-panel-description>
-                    Type your personal details
-                    <mat-icon>account_circle</mat-icon>
+                    Information regarding identification proof
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <div class="row">
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>{{'Labels.ChooseIntroducer'|translate}}</mat-label>
-                        <mat-select formControlName="introducerId">
-                            <mat-option *ngFor="let introducer of introducerOptions" [value]="introducer">
-                                {{introducer.name}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error
-                            *ngIf="personForm.hasError('required','introducerId') && personDetailForm.submitted ">Select
-                            introducer
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Select home base </mat-label>
-                        <mat-select formControlName="ddHomeBaseId">
-                            <mat-option *ngFor="let homebase of ddHomeBaseOptions" [value]="homebase">
-                                {{homebase.name}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error
-                            *ngIf="personForm.hasError('required','ddHomeBaseId') && personDetailForm.submitted">Select
-                            home
-                            base</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Known as</mat-label>
-                        <input matInput formControlName="knownAs">
-                        <mat-error
-                            *ngIf="personForm.hasError('required','knownAs') && personDetailForm.submitted">KnownAs
-                            required</mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Country</mat-label>
+                <input matInput>
+            </mat-form-field>
 
-            <div class="row">
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Offical name</mat-label>
-                        <input matInput formControlName="officialName">
-                        <mat-error
-                            *ngIf="personForm.hasError('required','officialName') && personDetailForm.submitted">Offical
-                            name required</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>{{'Labels.mobile'|translate}}</mat-label>
-                        <input matInput formControlName="mobileNumber">
-                        <mat-hint>only numbers are allowed</mat-hint>
-                        <mat-error *ngIf="f['mobileNumber'].hasError('required')">Mobile number required</mat-error>
-                        <mat-error *ngIf="f['mobileNumber'].hasError('pattern')">Only numbers are allowed</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Date of birth</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
-                        <mat-hint>DD/MM/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>{{'Labels.ChooseNationality'|translate}}</mat-label>
-                        <mat-select formControlName="nationalityId">
-                            <mat-option *ngFor="let nationality of nationalityOption" [value]="nationality.id">
-                                <span class='{{nationality.countryIcon}}'></span>
-                                {{nationality.name}} ({{nationality.countryCode}})
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="f['nationalityId'].hasError('required')">Select nationality</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>{{'Labels.email'|translate}}</mat-label>
-                        <input matInput formControlName="emailAddress">
-                        <mat-error *ngIf="f['emailAddress'].hasError('required')">Mobile number required</mat-error>
-                        <mat-error *ngIf="f['emailAddress'].hasError('email')">Invalid email</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Telegram Number / Username</mat-label>
-                        <input matInput formControlName="usernameOrTelegramNumber">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Street</mat-label>
-                        <input matInput formControlName="street">
-                        <mat-error *ngIf="f['street'].hasError('required')">Street required</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Area</mat-label>
-                        <input matInput formControlName="area">
-                        <mat-error *ngIf="f['area'].hasError('required')">Area required</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Town or City</mat-label>
-                        <input matInput formControlName="towncity">
-                        <mat-error *ngIf="f['towncity'].hasError('required')">Town or City required</mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>County</mat-label>
-                        <input matInput formControlName="county">
-                        <mat-error *ngIf="f['county'].hasError('required')">Country required</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-md-4 col-sm-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Post Code</mat-label>
-                        <input matInput formControlName="postcode">
-                        <mat-error *ngIf="f['postcode'].hasError('required')">Post code required</mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
             <mat-action-row>
-                <button mat-button type="submit" color="primary">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                <button mat-button color="primary">Next</button>
             </mat-action-row>
-
         </mat-expansion-panel>
-    </form>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                ID, Prove Ability to Work In UK
-            </mat-panel-title>
-            <mat-panel-description>
-                Add identity proof
-                <mat-icon>map</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Vehicle Details
+                </mat-panel-title>
+                <mat-panel-description>
+                    Information regarding the vechicle
+                </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Country</mat-label>
-            <input matInput>
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker1" (focus)="picker.open()" readonly>
+            </mat-form-field>
+            <mat-datepicker #picker1></mat-datepicker>
 
-        <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary">Next</button>
-        </mat-action-row>
-    </mat-expansion-panel>
+            <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                <button mat-button color="primary">End</button>
+            </mat-action-row>
+        </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Day of the trip
-            </mat-panel-title>
-            <mat-panel-description>
-                Inform the date you wish to travel
-                <mat-icon>date_range</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker1" (focus)="picker.open()" readonly>
-        </mat-form-field>
-        <mat-datepicker #picker1></mat-datepicker>
-
-        <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary">End</button>
-        </mat-action-row>
-    </mat-expansion-panel>
-
-</mat-accordion>
+        <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Working Area
+                </mat-panel-title>
+                <mat-panel-description>
+                    Information regarding the working area
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

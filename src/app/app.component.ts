@@ -27,4 +27,10 @@ export class AppComponent {
   isLoggedIn() {
     return GlobalComponent.isloggedIn;
   }
+
+  ngDestory() {
+    alert('closed');
+    localStorage.clear();
+    GlobalComponent.isloggedIn = false;
+  }
 }
