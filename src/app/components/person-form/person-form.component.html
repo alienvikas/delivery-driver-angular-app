@@ -210,11 +210,39 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <mat-form-field appearance="fill">
-                <mat-label>Date</mat-label>
-                <input matInput [matDatepicker]="picker1" (focus)="picker.open()" readonly>
-            </mat-form-field>
-            <mat-datepicker #picker1></mat-datepicker>
+            <div class="row">
+                <div class="col-4 col-sm-4 col-md-4">
+                    <mat-label>Vehicle Type</mat-label>
+                    <mat-radio-group aria-label="Select an option">
+                        <mat-radio-button value="1">Van</mat-radio-button>
+                        <mat-radio-button value="2">Car</mat-radio-button>
+                        <mat-radio-button value="3">Motor Cycle</mat-radio-button>
+                        <mat-radio-button value="4">Bicycle</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Vehicle Manufacturer</mat-label>
+                        <mat-select placeholder="Vehicle Manufacturer">
+                            <mat-option>
+                                <option value="0">Vehicle 1</option>
+                                <option value="0">Vehicle 2</option>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Vehicle Model</mat-label>
+                        <mat-select placeholder="Vehicle Model">
+                            <mat-option>
+                                <option value="0">Vehicle Model 1</option>
+                                <option value="0">Vehicle Model 2</option>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
 
             <mat-action-row>
                 <button mat-button color="warn" (click)="prevStep()">Previous</button>

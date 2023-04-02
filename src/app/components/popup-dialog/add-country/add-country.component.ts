@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
+import { Country } from 'src/app/models/country';
 import { CountryService } from 'src/app/services/country/country.service';
 
 @Component({
@@ -8,15 +13,27 @@ import { CountryService } from 'src/app/services/country/country.service';
   templateUrl: './add-country.component.html',
   styleUrls: ['./add-country.component.scss']
 })
-export class AddCountryComponent implements OnInit {
+export class AddCountryComponent {
   countryForm!: FormGroup;
   submitted: boolean = false;
   durationInSeconds = 5;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  displayedColumns: string[] = ['action', 'name', 'phonecode'];
+  countryDataSource = new MatTableDataSource();
 
-  constructor(private fb: FormBuilder, private countryService: CountryService,
-    private _snackBar: MatSnackBar) { }
+  constructor(private fb: FormBuilder,
+    private countryService: CountryService,
+    private _snackBar: MatSnackBar,
+    private toastr: ToastrService) { }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.countryDataSource.paginator = this.paginator;
+    this.countryDataSource.sort = this.sort;
+  }
 
   ngOnInit(): void {
     this.countryForm = this.fb.group({
@@ -27,38 +44,22 @@ export class AddCountryComponent implements OnInit {
   }
 
   onBlur() {
-    alert(this.submitted);
     if (!this.submitted)
       this.countryForm.markAsUntouched();
   }
 
   onClick() {
     this.submitted = true;
-    this.countryForm.reset();
   }
 
   onSubmit(form: any) {
     if (this.countryForm.invalid) return; // stop here if form is invalid
     this.countryService.saveCountry(form).subscribe((res) => {
-      if (res.Id != null || res.Id != "")
-        this.openSnackBar("Country added successfully !!!", "Success");
-      this.submitted = false;
-      this.countryForm.reset();
-      this.countryForm.updateValueAndValidity();
     })
   }
 
   onReset() {
     this.submitted = false;
-    this.countryForm.updateValueAndValidity();
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: this.durationInSeconds * 1000,
-    });
   }
 
   get f() { return this.countryForm.controls; }

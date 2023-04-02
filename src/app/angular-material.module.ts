@@ -34,6 +34,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Available options
 interface NgxSpinnerConfig {
@@ -76,6 +77,7 @@ const materialModules = [
   MatNativeDateModule,
   CdkAccordionModule,
   NgxSpinnerModule,
+  MatDialogModule,
 ];
 
 @NgModule({
