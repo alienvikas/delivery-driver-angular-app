@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToastrModule } from 'ngx-toastr';
 
 /* FormsModule */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +22,9 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PersonFormComponent } from './components/person-form/person-form.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
-import { AddCountryComponent } from './components/admin-view/add-country/add-country.component';
+import { EditCountryComponent } from './components/popup-dialog/edit-country/edit-country.component';
+import { AddCountryComponent } from './components/popup-dialog/add-country/add-country.component';
+import { CountryListComponent } from './components/admin-view/country-list/country-list.component';
 
 /* Translate */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -43,7 +46,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterComponent,
     PersonFormComponent,
     NavigationBarComponent,
-    AddCountryComponent
+    AddCountryComponent,
+    CountryListComponent,
+    EditCountryComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     FlexLayoutModule,
     FontAwesomeModule,
+    ToastrModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }), // ToastrModule added
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

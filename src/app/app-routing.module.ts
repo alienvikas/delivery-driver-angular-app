@@ -4,7 +4,8 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { PersonFormComponent } from './components/person-form/person-form.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth/auth.service';
-import { AddCountryComponent } from './components/admin-view/add-country/add-country.component';
+import { AddCountryComponent } from './components/popup-dialog/add-country/add-country.component';
+import { CountryListComponent } from './components/admin-view/country-list/country-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'person', component: PersonFormComponent, canActivate: [AuthService] },
   { path: 'addcountry', component: AddCountryComponent, canActivate: [AuthService] },
+  { path: 'countryList', component: CountryListComponent, canActivate: [AuthService] },
 ];
 
 @NgModule({
