@@ -48,9 +48,10 @@ export class CountryListComponent {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddCountryComponent,{
+    const dialogRef = this.dialog.open(AddCountryComponent, {
       backdropClass: 'custom-dialog-backdrop-class',
-      panelClass: 'custom-dialog-panel-class'
+      panelClass: 'custom-dialog-panel-class',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -62,6 +63,7 @@ export class CountryListComponent {
     const dialogRef = this.dialog.open(EditCountryComponent, {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'custom-dialog-panel-class',
+      disableClose: true,
       data: { country: form }
     });
 
