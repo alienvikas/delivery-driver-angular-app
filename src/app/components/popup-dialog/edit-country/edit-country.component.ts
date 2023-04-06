@@ -2,6 +2,7 @@ import { Component, Optional, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CountryService } from 'src/app/services/country/country.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-country',
@@ -11,11 +12,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class EditCountryComponent {
   countryForm!: FormGroup;
   submitted: boolean = false;
+  currentUser: any;
   constructor(private fb: FormBuilder,
     private countryService: CountryService,
+    private spinner: NgxSpinnerService,
+    private dialogRef: MatDialogRef<EditCountryComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.currentUser = localStorage.getItem('SessionUser');
     this.countryForm = this.fb.group({
       id: new FormControl(this.data.country.id),
       name: new FormControl(this.data.country.name, [Validators.required]),
@@ -34,8 +39,11 @@ export class EditCountryComponent {
   }
 
   onUpdate(form: any) {
-    if (this.countryForm.invalid) return; // stop here if form is invalid
+    this.spinner.show();
+    if (this.countryForm.invalid) { this.spinner.hide(); return; } // stop here if form is invalid
     this.countryService.updateCountry(form).subscribe((res) => {
+      this.dialogRef.close();
+      this.spinner.hide();
     })
   }
 

@@ -1,31 +1,31 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from '../notification/notification.service';
-import { Role } from 'src/app/models/role';
-import { GlobalComponent } from 'src/app/global-component';
-import { RoleType } from 'src/app/enums/role-type-enum';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RoleService {
-
+export class PassportService {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   constructor(private http: HttpClient,
     private notificationService: NotificationService) { }
 
-  getAllRoles() {
-    return this.http.get(environment.baseUrl + "Role");
+  getAllPassport(): Observable<any> {
+    return this.http.get(environment.baseUrl + "Passport");
   }
 
-  getRole(id: any): Observable<any> {
-    return this.http.get(environment.baseUrl + "Role/" + id)
-      .pipe(map(() => {
-          const roleObj = new Role();
-          const strEnum = roleObj.name as unknown as RoleType;
-          GlobalComponent.roleType = strEnum;
-      }))
+  uploadPassportList(form: FormData) {
+    return this.http.post<any>(environment.baseUrl + "Passport/UploadPassportList",
+      form).
+      pipe(
+        map((res: any) => {
+          if (res == 200)
+            this.notificationService.showSuccess("Passport list uploaded successfully !!!", "Success");
+        }))
       .pipe(catchError(err => {
         this.notificationService.showError(err.error, "Error");
         const error = err.error?.error_description || err.error?.message || err.statusText;

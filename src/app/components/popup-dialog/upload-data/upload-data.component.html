@@ -1,0 +1,20 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Uploading...</p>
+</ngx-spinner>
+<h2 class="divAction" mat-dialog-title>
+    Upload Country
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col">
+            <input type="file" (change)="onFileSelect($event)" accept=".xlsx" class="form-control" id="customFile"
+                name="myfile" #UploadFileInput>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+    <button mat-button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+    <button type="button" (click)="onUploadFile()" mat-button mat-raised-button color="primary" cdkFocusInitial>Upload</button>
+</mat-dialog-actions>

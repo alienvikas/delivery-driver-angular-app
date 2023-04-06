@@ -9,7 +9,4 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-  showLoader() {
-    return GlobalComponent.loading;
-  }
 }

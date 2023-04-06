@@ -77,7 +77,7 @@
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="fill">
                             <mat-label>{{'Labels.mobile'|translate}}</mat-label>
-                            <input matInput formControlName="mobileNumber" placeholder="+xx xxx-xxx-xxxx">
+                            <input matInput formControlName="mobileNumber" placeholder="+xxx xxxx xxxxxx">
                             <mat-hint>
                                 <mat-icon matTooltip="it should be in the format +*** **** ******">help
                                     outline
@@ -105,9 +105,9 @@
                             <mat-label>{{'Labels.ChooseNationality'|translate}}</mat-label>
                             <mat-select formControlName="nationalityId">
                                 <mat-option *ngFor="let nationality of nationalityOption" [value]="nationality.id">
-                                    <span class="fi fi-{{nationality.countryIcon | lowercase}}">
+                                    <span class="fi fi-{{nationality.countryISO | lowercase}}">
                                     </span>
-                                    {{nationality.name}}
+                                    {{nationality.countryName}}
                                 </mat-option>
                             </mat-select>
                             <mat-error *ngIf="f['nationalityId'].hasError('required')">Select nationality</mat-error>
@@ -160,8 +160,12 @@
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="fill">
                             <mat-label>County</mat-label>
-                            <input matInput formControlName="county">
-                            <mat-error *ngIf="f['county'].hasError('required')">Country required</mat-error>
+                            <mat-select formControlName="countyId">
+                                <mat-option *ngFor="let county of countyOptions" [value]="county.id">
+                                    {{county.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f['countyId'].hasError('required')">Country required</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
