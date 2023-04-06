@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
@@ -8,6 +7,9 @@ import { Country } from 'src/app/models/country';
 import { CountryService } from 'src/app/services/country/country.service';
 import { AddCountryComponent } from '../../popup-dialog/add-country/add-country.component';
 import { EditCountryComponent } from '../../popup-dialog/edit-country/edit-country.component';
+import { ConfirmationDialogComponent } from '../../popup-dialog/confirmation-dialog/confirmation-dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { UploadDataComponent } from '../../popup-dialog/upload-data/upload-data.component';
 
 @Component({
   selector: 'app-country-list',
@@ -21,7 +23,7 @@ export class CountryListComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private countryService: CountryService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog, private spinner: NgxSpinnerService) { }
 
   ngAfterViewInit() {
     this.countryDataSource.paginator = this.paginator;
@@ -29,21 +31,25 @@ export class CountryListComponent {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.getCountries();
   }
 
   applyFilter(event: Event) {
+    this.spinner.show();
     const filterValue = (event.target as HTMLInputElement).value;
     this.countryDataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.countryDataSource.paginator) {
       this.countryDataSource.paginator.firstPage();
+      this.spinner.hide();
     }
   }
 
   getCountries() {
     this.countryService.fetchAllCountries().subscribe((res: Country[]) => {
       this.countryDataSource.data = res;
+      this.spinner.hide();
     })
   }
 
@@ -54,21 +60,41 @@ export class CountryListComponent {
       disableClose: true
     });
 
+    dialogRef.afterClosed().subscribe(() => {
+      this.getCountries();
+    });
+  }
+
+  editCountry(data: any) {
+    const dialogRef = this.dialog.open(EditCountryComponent, {
+      backdropClass: 'custom-dialog-backdrop-class',
+      panelClass: 'custom-dialog-panel-class',
+      disableClose: true,
+      data: { country: data }
+    });
+
     dialogRef.afterClosed().subscribe(result => {
       this.getCountries();
     });
   }
 
-  editCountry(form: any) {
-    const dialogRef = this.dialog.open(EditCountryComponent, {
+  deleteConfirm(data: any) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'custom-dialog-panel-class',
       disableClose: true,
-      data: { country: form }
+      data: { country: data }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.getCountries();
+    });
+  }
+
+  uploadCountryList(){
+    const dialogRef = this.dialog.open(UploadDataComponent, {
+      backdropClass: 'custom-dialog-backdrop-class',
+      panelClass: 'custom-dialog-panel-class',
+      disableClose: true
     });
   }
 }

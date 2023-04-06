@@ -4,29 +4,30 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 import { Country } from 'src/app/models/country';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from '../notification/notification.service';
+import { County } from 'src/app/models/county';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CountryService {
+export class CountyService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   constructor(private http: HttpClient,
     private notificationService: NotificationService) { }
 
-  fetchAllCountries(): Observable<any> {
-    return this.http.get(environment.baseUrl + "Country");
+  getAllCounties(): Observable<any> {
+    return this.http.get(environment.baseUrl + "County");
   }
 
-  saveCountry(country: Country): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + "Country/AddCountry/",
-      country, this.httpOptions)
+  saveCounty(county: County): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + "County/AddCounty/",
+      county, this.httpOptions)
       .pipe(
         map(() => {
           const countryObj = new Country();
           if (countryObj.Id != null || countryObj.Id != "")
-            this.notificationService.showSuccess("Country added successfully !!!", "Success");
+            this.notificationService.showSuccess("County added successfully !!!", "Success");
           return countryObj;
         }))
       .pipe(catchError(err => {
@@ -36,15 +37,15 @@ export class CountryService {
       }));
   }
 
-  updateCountry(country: Country): Observable<any> {
-    return this.http.put<any>(environment.baseUrl + "Country/UpdateCountry/",
-      country, this.httpOptions)
+  updateCounty(county: County): Observable<any> {
+    return this.http.put<any>(environment.baseUrl + "County/UpdateCounty/",
+      county, this.httpOptions)
       .pipe(
         map(() => {
-          const countryObj = new Country();
-          if (countryObj.Id != null || countryObj.Id != "")
-            this.notificationService.showSuccess("Country updated successfully !!!", "Success");
-          return countryObj;
+          const countyObj = new County();
+          if (countyObj.Id != null || countyObj.Id != "")
+            this.notificationService.showSuccess("County updated successfully !!!", "Success");
+          return countyObj;
         }))
       .pipe(catchError(err => {
         this.notificationService.showError(err.error, "Error");
@@ -53,26 +54,13 @@ export class CountryService {
       }));
   }
 
-  deleteCountry(id: string): Observable<any> {
-    return this.http.delete<any>(environment.baseUrl + 'Country/DeleteCountry/' + id)
-      .pipe(
-        map(() => {
-          this.notificationService.showSuccess("Country deleted successfully !!!", "Success");
-        }))
-      .pipe(catchError(err => {
-        this.notificationService.showError(err.error, "Error");
-        const error = err.error?.error_description || err.error?.message || err.statusText;
-        return throwError(error);
-      }));
-  }
-
-  uploadCountry(form: FormData) {
-    return this.http.post<any>(environment.baseUrl + "County/UploadCountry",
+  uploadCounty(form: FormData) {
+    return this.http.post<any>(environment.baseUrl + "County/UploadCounty",
       form).
       pipe(
         map((res: any) => {
           if (res == 200)
-            this.notificationService.showSuccess("Country uploaded successfully !!!", "Success");
+            this.notificationService.showSuccess("County updated successfully !!!", "Success");
         }))
       .pipe(catchError(err => {
         this.notificationService.showError(err.error, "Error");

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LoginService {
-
+  loggedIn: boolean = false;
   constructor(private http: HttpClient) { }
 
   getAllLanguage() {
@@ -25,6 +25,9 @@ export class LoginService {
   }
 
   isLoggedIn() {
-    return GlobalComponent.isloggedIn;
+    if (localStorage.getItem('user') != null)
+      this.loggedIn = true;
+    return this.isLoggedIn;
+    //return GlobalComponent.isloggedIn;
   }
 }

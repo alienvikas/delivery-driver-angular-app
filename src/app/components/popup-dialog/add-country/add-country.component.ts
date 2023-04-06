@@ -5,7 +5,6 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { Country } from 'src/app/models/country';
 import { CountryService } from 'src/app/services/country/country.service';
 
 @Component({

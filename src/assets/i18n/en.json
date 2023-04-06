@@ -20,13 +20,16 @@
         "accountlock": "Is Account Locked",
         "role": "Role",
         "person": "Person",
-        "PersonalDetails": "Personal Details",
-        "ChooseIntroducer": "Authoriser name",
-        "ChooseNationality": "Nationality",
+        "personaldetails": "Personal Details",
+        "chooseintroducer": "Authoriser name",
+        "choosenationality": "Nationality",
         "countrycode": "Country code",
         "countryname": "Country name",
         "countryicon": "Country icon",
-        "countrydelete": "Country delete"
+        "countrydelete": "Country delete",
+        "confirmmessage": "Are you sure you want to delete?",
+        "confirm": "Confirm",
+        "editcountry": "Edit Country"
     },
     "Validation": {
         "emailrequired": "Email is required",

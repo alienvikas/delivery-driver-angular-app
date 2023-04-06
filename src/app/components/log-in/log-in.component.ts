@@ -62,12 +62,10 @@ export class LogInComponent implements OnInit {
           this.spinner.hide();
         }
       }, error => {
-        GlobalComponent.loading = false;
         this.spinner.hide();
       });
     }
     else {
-      GlobalComponent.loading = false;
       this.spinner.hide();
     }
   }

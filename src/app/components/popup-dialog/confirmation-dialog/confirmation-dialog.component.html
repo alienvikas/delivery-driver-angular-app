@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>{{"Labels.Confirm"|translate}}</h1>
+<div mat-dialog-content>{{'Labels.confirmMessage'|translate}}</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="onConfirm()">Confirm</button>
+    <button mat-raised-button color="warn" (click)="dialogRef.close(false)">Cancel</button>
+</div>

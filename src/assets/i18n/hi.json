@@ -19,7 +19,15 @@
         "confirmpassword": "पासवर्ड की पुष्टि कीजिये",
         "accountlock": "क्या खाता बंद है",
         "role": "भूमिका",
-        "ChooseNationality": "राष्ट्रीयता चुनें"
+        "person": "व्यक्ति",
+        "personaldetails": "व्यक्तिगत विवरण",
+        "chooseintroducer": "अधिकार देना",
+        "choosenationality": "राष्ट्रीयता चुनें",
+        "countrycode":"",
+        "countryname":"",
+        "countryicon":"",
+        "countrydelete":"",
+        "confirmmessage":""
     },
     "Validation": {
         "emailrequired": "ईमेल की जरूरत है",

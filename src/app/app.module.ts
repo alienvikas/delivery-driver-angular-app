@@ -25,6 +25,12 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { EditCountryComponent } from './components/popup-dialog/edit-country/edit-country.component';
 import { AddCountryComponent } from './components/popup-dialog/add-country/add-country.component';
 import { CountryListComponent } from './components/admin-view/country-list/country-list.component';
+import { ConfirmationDialogComponent } from './components/popup-dialog/confirmation-dialog/confirmation-dialog.component';
+import { UploadDataComponent } from './components/popup-dialog/upload-data/upload-data.component';
+import { CountyListComponent } from './components/admin-view/county-list/county-list.component';
+import { AddCountyComponent } from './components/popup-dialog/add-county/add-county.component';
+import { EditCountyComponent } from './components/popup-dialog/edit-county/edit-county.component';
+import { PassportListComponent } from './components/admin-view/passport-list/passport-list.component';
 
 /* Translate */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -49,6 +55,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddCountryComponent,
     CountryListComponent,
     EditCountryComponent,
+    ConfirmationDialogComponent,
+    UploadDataComponent,
+    CountyListComponent,
+    AddCountyComponent,
+    EditCountyComponent,
+    PassportListComponent
   ],
   imports: [
     BrowserModule,

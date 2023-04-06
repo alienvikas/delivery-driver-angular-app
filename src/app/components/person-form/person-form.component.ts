@@ -5,8 +5,10 @@ import { connect } from 'rxjs';
 import { DDHomeBase } from 'src/app/models/ddhomebase';
 import { Introducer } from 'src/app/models/introducer';
 import { CountryService } from 'src/app/services/country/country.service';
+import { CountyService } from 'src/app/services/county/county.service';
 import { HomeBaseService } from 'src/app/services/home-base/home-base.service';
 import { IntroducerService } from 'src/app/services/introducer/introducer.service';
+import { PassportService } from 'src/app/services/passport/passport.service';
 import { validate } from 'uuid';
 
 @Component({
@@ -18,13 +20,16 @@ export class PersonFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private countryService: CountryService,
     private introducerService: IntroducerService,
-    private ddhomebaseService: HomeBaseService) { }
+    private ddhomebaseService: HomeBaseService,
+    private passportService: PassportService,
+    private countyService: CountyService) { }
 
   isPersonFormSubmitted: boolean = false;
   personForm!: FormGroup;
   selectedNationality!: string;
   nationalityOption: any = [];
   ddHomeBaseOptions: any = [];
+  countyOptions: any = [];
   selectedHomeBase!: string;
   introducerOptions: any = [];
   selectedIntroducer!: string;
@@ -34,6 +39,7 @@ export class PersonFormComponent implements OnInit {
     this.getNationality();
     this.getIntroducer();
     this.getDdHomeBase();
+    this.getCounties();
     this.personForm = this.fb.group(
       {
         introducerId: new FormControl(null, [Validators.required]),
@@ -49,7 +55,7 @@ export class PersonFormComponent implements OnInit {
         emailAddress: new FormControl(null, [Validators.required, Validators.email]),
         mobileNumber: new FormControl(null, [Validators.required, Validators.pattern("^[+][0-9]{12}$")]),
         postcode: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
-        county: new FormControl(null, [Validators.required]),
+        countyId: new FormControl(null, [Validators.required]),
         towncity: new FormControl(null, [Validators.required]),
         area: new FormControl(null, [Validators.required]),
         street: new FormControl(null, [Validators.required])
@@ -70,7 +76,7 @@ export class PersonFormComponent implements OnInit {
   }
 
   getNationality() {
-    this.countryService.fetchAllCountries().subscribe((res) => {
+    this.passportService.getAllPassport().subscribe((res) => {
       this.nationalityOption = res;
     });
   }
@@ -84,6 +90,12 @@ export class PersonFormComponent implements OnInit {
   getDdHomeBase() {
     this.ddhomebaseService.fetchAllHomeBase().subscribe((res) => {
       this.ddHomeBaseOptions = res;
+    })
+  }
+
+  getCounties() {
+    this.countyService.getAllCounties().subscribe((res) => {
+      this.countyOptions = res;
     })
   }
 
