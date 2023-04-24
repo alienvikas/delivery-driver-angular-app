@@ -35,10 +35,10 @@ export class RoleService extends CrudService<Role, number> {
   // }
 
   constructor(protected override _http: HttpClient) {
-    super(_http, `${environment.baseUrl}/Role`);
+    super(_http, `${environment.baseUrl}/role`);
   }
 
   findNameBasedRole(roleName: string) {
-    return this._http.get<Role>(environment.baseUrl + '/Role/RoleName?role=' + roleName);
+    return this._http.get<Role>(environment.baseUrl + '/role/RoleName?role=' + roleName);
   }
 }
