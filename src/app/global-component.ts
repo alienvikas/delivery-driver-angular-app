@@ -4,6 +4,7 @@ import { User } from "./models/user";
 
 @Injectable()
 export class GlobalComponent {
+    public static navigationBarVisibility: boolean = false;
     public static isloggedIn: boolean = false;
     public static loading: boolean = false;
     public static loggedUser: User;

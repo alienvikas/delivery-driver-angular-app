@@ -11,6 +11,10 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountryService } from 'src/app/services/country/country.service';
 import { RoleService } from 'src/app/services/role/role.service';
 import { SnackBarComponent } from '../popup-dialog/snack-bar/snack-bar.component';
+import { UkTelephoneService } from 'src/app/services/uk-area-telephone/uk-telephone.service';
+import { UkAreaTelephone } from 'src/app/models/ukAreaTelephone';
+import { A11yModule } from '@angular/cdk/a11y';
+import { LetterAutoIncrement } from 'src/app/commonMethods/letterAutoIncrement';
 
 @Component({
   selector: 'app-register',
@@ -23,13 +27,18 @@ export class RegisterComponent implements OnInit {
   genders: any = [];
   countries: any = [];
   roles: any = [];
+  ukareatelephone: any = [];
   user = new User();
+  selectedRole: any;
+  selectedCountry: any;
   durationInSeconds = 5;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  counter: number = 1252;
 
   constructor(private fb: FormBuilder, private authService: AuthService,
     private roleService: RoleService, private countryService: CountryService,
+    private ukAreaTelephoneService: UkTelephoneService,
     private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
@@ -41,12 +50,14 @@ export class RegisterComponent implements OnInit {
         email: new FormControl("", [Validators.required, Validators.email]),
         password: new FormControl("", [Validators.required, Validators.minLength(6)]),
         confirmPassword: ['', Validators.required],
-        gender: new FormControl("", Validators.required),
+        //gender: new FormControl("", Validators.required),
         mobile: new FormControl("", [Validators.required, Validators.pattern('')]),
         countryId: new FormControl("", Validators.required),
         memberSience: new FormControl(formatDate(new Date(), 'dd/MM/yyyy HH:mm:ss', 'en-GB')),
         isAccountLocked: new FormControl(false),
-        roleId: new FormControl("", Validators.required)
+        roleId: new FormControl("", Validators.required),
+        ukAreaTelephone: new FormControl("", [Validators.required]),
+        uniqueNumber: new FormControl()
       },
       {
         validator: ConfirmedValidator('password', 'confirmPassword')
@@ -63,14 +74,19 @@ export class RegisterComponent implements OnInit {
     //   { value: 'usa', viewValue: 'USA', iconvalue: "fi fi-us", countrycode: "(+1)" },
     //   { value: 'uk', viewValue: 'United Kingdom', iconvalue: "fi fi-gb", countrycode: "(+44)" },
     // ];
-    this.getCountries();
-    this.getRoles();
+    this.getAllCountries();
+    this.getAllRoles();
+    this.getAllUKAreaTelephone();
+    this.roleService.findNameBasedRole('DRI').subscribe(res => {
+      this.selectedRole = res.id;
+    });
   }
 
   get f() { return this.registerForm.controls; }
 
   onSubmit(form: any, message: string, action: string) {
     if (this.registerForm.invalid) return; // stop here if form is invalid
+    this.registerForm.value["uniqueNumber"] = this.generateAutoNumber();
     this.authService.register(form).subscribe((res) => {
       if (res.Id != "") {
         this.openSnackBar(message, action);
@@ -90,25 +106,54 @@ export class RegisterComponent implements OnInit {
     //     console.log('oops', alert(err.error)) 
     //   }      
     // );
-    this.onReset();
+    //this.onReset();
   }
 
   onReset() {
     this.registerForm.reset();
   }
 
-  getRoles() {
-    this.roleService.getAllRoles().subscribe((res) => {
+  getAllRoles() {
+    // this.roleService.getAllRoles().subscribe((res) => {
+    //   this.roles = res;
+    // });
+    this.roleService.findAll().subscribe((res) => {
       this.roles = res;
-    });
+    })
   }
 
-  getCountries() {
-    this.countryService.fetchAllCountries().subscribe((res) => {
+  getAllCountries() {
+    this.countryService.findAll().subscribe((res) => {
       this.countries = res;
     });
   }
-  
+
+  getAllUKAreaTelephone() {
+    this.ukAreaTelephoneService.findAll().subscribe((res: UkAreaTelephone[]) => {
+      this.ukareatelephone = res;
+    })
+  }
+
+  generateAutoNumber() {
+    let numberOfZeros = "000000";
+    const accType = "DRI";
+    const countryISO = "+44";
+    // this.countryService.findOne(this.registerForm.value["countryId"]).subscribe(res => {
+    //   countryISO = res.countryCode;
+    // });
+    const telephoneCode = this.registerForm.value["ukAreaTelephone"];
+    let alphabets = "AA";
+    let incrementCounter = this.counter + 1;
+    if (incrementCounter.toString().length > 6) {
+      alphabets = LetterAutoIncrement.nextChar(alphabets);
+      incrementCounter = 1;
+    }
+    const subStr = numberOfZeros.substr(incrementCounter.toString().length);
+    let result = `${subStr}${incrementCounter}`;
+
+    return `${accType} ${countryISO} ${telephoneCode} ${alphabets} ${result}`;
+  }
+
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       horizontalPosition: this.horizontalPosition,

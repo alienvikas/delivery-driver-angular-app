@@ -1,6 +1,15 @@
 export enum RoleType {
     None = 0,
-    Admin = 1,
-    SuperAdmin = 2,
-    Standard = 3
+    SuperAdmin,
+    ITSTA,
+    FSTA,
+    ASTA,
+    STA,
+    DRI,
+    RST,
+    RET,
+    FRAN,
+    POT,
+    OUT,
+
 }

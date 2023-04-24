@@ -1,0 +1,38 @@
+<h2 class="divAction" mat-dialog-title>
+    Add Passport
+</h2>
+<form [formGroup]="passportForm" (ngSubmit)="onSubmit(passportForm.value)">
+    <mat-dialog-content class="mat-typography">
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>{{'Labels.countryname'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.countryname'|translate}}" formControlName="countryName"
+                        (blur)="onBlur()">
+                    <mat-icon matPrefix>country</mat-icon>
+                    <mat-error *ngIf="f['countryName'].errors?.['required'] && submitted === true">
+                        {{'Validation.countrynamerequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>{{'Labels.countryISO'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.countryISO'|translate}}" formControlName="countryISO"
+                        (blur)="onBlur()">
+                    <mat-icon matPrefix>country</mat-icon>
+                    <mat-error *ngIf="f['countryISO'].errors?.['required'] && submitted === true">
+                        {{'Validation.countryiconrequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+        <button type="submit" mat-button mat-raised-button color="primary" (click)="onClick()" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
+</form>

@@ -1,191 +1,16 @@
-<!-- <div *ngIf="loginService.isLoggedIn()">
-    <mat-toolbar color="primary">
-        <mat-toolbar-row>
-            <button mat-icon-button matTooltip="Application Menu" (click)="sidenav.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            Delivery Driver
-            <span style="flex: 1 1 auto;"></span>
-            <button mat-icon-button matTooltip="Switch Apps">
-                <mat-icon>apps</mat-icon>
-            </button>
-            <button mat-icon-button matTooltip="Notifications">
-                <mat-icon>notifications</mat-icon>
-            </button>
-            <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="accountMenu">
-                <mat-icon>account_circle</mat-icon>
-            </button>
-            <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
-                <button mat-menu-item routerLink="#">
-                    <mat-icon>person</mat-icon><span>My Account</span>
-                </button>
-                <button mat-menu-item>
-                    <mat-icon>help</mat-icon><span>Help</span>
-                </button>
-                <mat-divider></mat-divider>
-                <button mat-menu-item (click)="logout()">
-                    <mat-icon>exit_to_app</mat-icon>Logout
-                </button>
-            </mat-menu>
-        </mat-toolbar-row>
-    </mat-toolbar>
-    <mat-sidenav-container class="app-container">
-        <mat-sidenav #sidenav mode="side" [class.mat-elevation-z4]="true" style="width: 240px">
-            <mat-nav-list dense>
-                <mat-list-item routerLink="#">
-                    <mat-icon>dashboard</mat-icon>
-                    Dashboard
-                </mat-list-item>
-                <mat-list-item routerLink="#">
-                    <mat-icon>check_box</mat-icon>
-                    General
-                </mat-list-item>
-                <mat-list-item routerLink="#">
-                    <mat-icon>person</mat-icon>
-                    Profile
-                </mat-list-item>
-                <mat-list-item routerLink="#">
-                    <mat-icon>notification_important</mat-icon>
-                    Notification
-                </mat-list-item>
-
-                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-                    <mat-expansion-panel-header>
-                        Preference
-                    </mat-expansion-panel-header>
-                    <mat-nav-list dense>
-                        <a mat-list-item routerLink="#"><mat-icon>attach_money</mat-icon>Billing</a>
-                        <a mat-list-item routerLink="#"><mat-icon>notification_important</mat-icon>Notification</a>
-                    </mat-nav-list>
-                </mat-expansion-panel>
-                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-                    <mat-expansion-panel-header>
-                        Privacy
-                    </mat-expansion-panel-header>
-                    <mat-nav-list dense>
-                        <a mat-list-item routerLink="#"><mat-icon>person_add</mat-icon>Partnership Request</a>
-                        <a mat-list-item routerLink="#"><mat-icon>visibility</mat-icon>Profile Visibility</a>
-                    </mat-nav-list>
-                </mat-expansion-panel>
-            </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <div fxLayout="column" fxFill>
-                <div id="mainContent" fxFlex>
-                    <router-outlet>
-                    </router-outlet>
-                </div>
-            </div>
-
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-</div>
-<div *ngIf="!loginService.isLoggedIn()">
-    <router-outlet>
-    </router-outlet>
-</div> -->
-<!-- ------------------------------------------------------------------------------ -->
-
-<!-- <div class="nav-container">
-    <mat-toolbar class="header" color="primary" *ngIf="loginService.isLoggedIn()">
-        <button mat-icon-button matTooltip="Application Menu" (click)="sidenav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        Delivery Driver
-        <span style="flex: 1 1 auto;"></span>
-        <div>
-            <button mat-icon-button matTooltip="Switch Apps">
-                <mat-icon>apps</mat-icon>
-            </button>
-            <button mat-icon-button matTooltip="Notifications">
-                <mat-icon>notifications</mat-icon>
-            </button>
-            <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="accountMenu">
-                <mat-icon>account_circle</mat-icon>
-            </button>
-            <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
-                <button mat-menu-item routerLink="#">
-                    <mat-icon>person</mat-icon><span>My Account</span>
-                </button>
-                <button mat-menu-item>
-                    <mat-icon>help</mat-icon><span>Help</span>
-                </button>
-                <mat-divider></mat-divider>
-                <button mat-menu-item (click)="logout()">
-                    <mat-icon>exit_to_app</mat-icon>Logout
-                </button>
-            </mat-menu>
-        </div>
-    </mat-toolbar>
-    <div class="content">
-        <mat-sidenav-container>
-            <mat-sidenav #sidenav mode="side" [class.mat-elevation-z4]="true" style="width: 240px">
-                <mat-nav-list dense>
-                    <mat-list-item routerLink="#">
-                        <mat-icon>dashboard</mat-icon>
-                        Dashboard
-                    </mat-list-item>
-                    <mat-list-item routerLink="#">
-                        <mat-icon>check_box</mat-icon>
-                        General
-                    </mat-list-item>
-                    <mat-list-item routerLink="#">
-                        <mat-icon>person</mat-icon>
-                        Profile
-                    </mat-list-item>
-                    <mat-list-item routerLink="#">
-                        <mat-icon>notification_important</mat-icon>
-                        Notification
-                    </mat-list-item>
-
-                    <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-                        <mat-expansion-panel-header>
-                            Preference
-                        </mat-expansion-panel-header>
-                        <mat-nav-list dense>
-                            <a mat-list-item routerLink="#"><mat-icon>attach_money</mat-icon>Billing</a>
-                            <a mat-list-item routerLink="#"><mat-icon>notification_important</mat-icon>Notification</a>
-                        </mat-nav-list>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-                        <mat-expansion-panel-header>
-                            Privacy
-                        </mat-expansion-panel-header>
-                        <mat-nav-list dense>
-                            <a mat-list-item routerLink="#"><mat-icon>person_add</mat-icon>Partnership Request</a>
-                            <a mat-list-item routerLink="#"><mat-icon>visibility</mat-icon>Profile Visibility</a>
-                        </mat-nav-list>
-                    </mat-expansion-panel>
-                </mat-nav-list>
-            </mat-sidenav>
-        </mat-sidenav-container>
-        <router-outlet>
-        </router-outlet>
-    </div>
-    <div class="footer text-center text-md-start justify-content-between py-3 px-auto px-xl-5 bg-primary">
-        <div class="text-white mb-3 mb-md-0">
-            Copyright © 2020. All rights reserved.
-        </div>
-    </div>
-</div> -->
-
 <mat-sidenav-container fullscreen *ngIf="loginService.isLoggedIn()">
     <mat-sidenav mode="side" #sidenav class="sw-sidenav">
         <mat-nav-list dense>
-            <mat-list-item routerLink="/countryList">
-                <mat-icon>add_location</mat-icon>
-                Country Details
+            <mat-list-item routerLink="/person">
+                <mat-icon class="icon-display">check_box</mat-icon>
+                Person
             </mat-list-item>
             <mat-list-item routerLink="#">
-                <mat-icon>check_box</mat-icon>
-                General
-            </mat-list-item>
-            <mat-list-item routerLink="#">
-                <mat-icon>person</mat-icon>
+                <mat-icon class="icon-display">person</mat-icon>
                 Profile
             </mat-list-item>
             <mat-list-item routerLink="#">
-                <mat-icon>notification_important</mat-icon>
+                <mat-icon class="icon-display">notification_important</mat-icon>
                 Notification
             </mat-list-item>
 
@@ -194,9 +19,18 @@
                     Data Section
                 </mat-expansion-panel-header>
                 <mat-nav-list dense>
-                    <a mat-list-item routerLink="/countryList"><mat-icon>add_location</mat-icon>Country List</a>
-                    <a mat-list-item routerLink="/countyList"><mat-icon>notification_important</mat-icon>County List</a>
-                    <a mat-list-item routerLink="/passportList"><mat-icon>notification_important</mat-icon>Passport List</a>
+                    <a mat-list-item routerLink="/countryList">
+                        <mat-icon class="icon-display">add_location</mat-icon>Country List</a>
+                    <a mat-list-item routerLink="/countyList">
+                        <mat-icon class="icon-display">notification_important</mat-icon>County List</a>
+                    <a mat-list-item routerLink="/passportList">
+                        <mat-icon class="icon-display">notification_important</mat-icon>Passport
+                        List</a>
+                    <a mat-list-item routerLink="/roleList">
+                        <mat-icon class="icon-display">notification_important</mat-icon>Role
+                        List</a>
+                    <a mat-list-item routerLink="/ukareatelephone">
+                        <mat-icon class="icon-display">settings_phone</mat-icon>UK Area Phone Code List</a>
                 </mat-nav-list>
             </mat-expansion-panel>
             <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
@@ -204,8 +38,10 @@
                     Privacy
                 </mat-expansion-panel-header>
                 <mat-nav-list dense>
-                    <a mat-list-item routerLink="#"><mat-icon>person_add</mat-icon>Partnership Request</a>
-                    <a mat-list-item routerLink="#"><mat-icon>visibility</mat-icon>Profile Visibility</a>
+                    <a mat-list-item routerLink="#">
+                        <mat-icon class="icon-display">person_add</mat-icon>Partnership Request</a>
+                    <a mat-list-item routerLink="#">
+                        <mat-icon class="icon-display">visibility</mat-icon>Profile Visibility</a>
                 </mat-nav-list>
             </mat-expansion-panel>
         </mat-nav-list>
@@ -247,12 +83,12 @@
         </div>
     </div>
 
-    <div class="footer" #footer>
+    <!-- <div class="footer" #footer>
         <div
             class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-            <div class="text-white mb-3 mb-md-0"> Copyright © 2020. All rights reserved. </div>
+            <div class="text-white mb-3 mb-md-0"> Copyright © 2023. All rights reserved. </div>
         </div>
-    </div>
+    </div> -->
 
 
 </mat-sidenav-container>

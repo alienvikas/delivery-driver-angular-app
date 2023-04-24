@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LoginService {
-  loggedIn: boolean = false;
   constructor(private http: HttpClient) { }
 
   getAllLanguage() {
@@ -26,8 +25,9 @@ export class LoginService {
 
   isLoggedIn() {
     if (localStorage.getItem('user') != null)
-      this.loggedIn = true;
-    return this.isLoggedIn;
-    //return GlobalComponent.isloggedIn;
+      GlobalComponent.navigationBarVisibility = true;
+    else
+      GlobalComponent.navigationBarVisibility = false;
+    return GlobalComponent.navigationBarVisibility;
   }
 }

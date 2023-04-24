@@ -19,7 +19,22 @@
         "confirmpassword": "پاس ورڈ کی تصدیق کریں۔",
         "accountlock": "کیا اکاؤنٹ لاک ہے؟",
         "role": "کردار",
-        "ChooseNationality": "قومیت کا انتخاب کریں۔"
+        "ChooseNationality": "قومیت کا انتخاب کریں۔",
+        "edit": "تدوین",
+        "delete": "مٹانا",
+        "addcountry": "نیا ملک شامل کریں",
+        "uploadcountry": "اپ لوڈ ملک",
+        "exportcountry": "برآمد کنندہ ملک",
+        "uploadcounty": "اپ لوڈ کاؤنٹی",
+        "exportcounty": "ایکسپورٹ کاؤنٹی",
+        "addcounty": "نئی کاؤنٹی شامل کریں",
+        "addpassport": "نیا پاسپورٹ شامل کریں",
+        "uploadpassport": "پاسپورٹ اپ لوڈ کریں",
+        "exportpassport": "ایکسپورٹ پاسپورٹ",
+        "filter": "فلٹر",
+        "name": "نام",
+        "uploadukareatelephone":"یو کے ایریا ٹیلی فون اپ لوڈ کریں",
+        "nodatamatching": "فلٹر سے میل کھاتا کوئی ڈیٹا نہیں"
     },
     "Validation": {
         "emailrequired": "ای میل کی ضرورت ہے",

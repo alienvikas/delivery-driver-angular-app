@@ -1,161 +1,136 @@
-<div class="container-fluid mt-3">
-    <div class="row">
-        <form #signUpForm="ngForm" [formGroup]="registerForm"
-            (ngSubmit)="onSubmit(signUpForm.value,'User created successfully!!!','Success')">
-            <mat-card>
-                <mat-card-header style="border-left: 5px solid green; background-color: lightgray;">
-                    <mat-card-title>{{'Labels.register'|translate}}</mat-card-title>
-                    <!-- <mat-divider></mat-divider> -->
-                </mat-card-header>
-                <mat-card-content class="mt-2">
-                    <mat-grid-list cols="2" rowHeight="4.5rem">
-                        <mat-grid-tile>
-                            <!-- first name input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.firstname'|translate}}</mat-label>
-                                <input matInput placeholder="{{'Labels.firstname'|translate}}"
-                                    formControlName="firstName">
-                                <mat-icon matSuffix>face</mat-icon>
-                                <mat-error *ngIf="f['firstName'].errors?.['required']">
-                                    {{'Validation.firstnamerequired'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
+<h2 class="divAction" mat-dialog-title>
+    {{'Labels.register'|translate}}
+</h2>
+<mat-divider></mat-divider>
+<form #signUpForm="ngForm" [formGroup]="registerForm"
+    (ngSubmit)="onSubmit(signUpForm.value,'User created successfully!!!','Success')">
 
-                        <mat-grid-tile>
-                            <!-- middle name input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.middlename'|translate}}</mat-label>
-                                <input matInput placeholder="{{'Labels.middlename'|translate}}"
-                                    formControlName="middleName">
-                                <mat-icon matSuffix>face</mat-icon>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <!-- last name input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.lastname'|translate}}</mat-label>
-                                <input matInput placeholder="{{'Labels.lastname'|translate}}"
-                                    formControlName="lastName">
-                                <mat-icon matSuffix>face</mat-icon>
-                                <mat-error *ngIf="f['lastName'].errors?.['required']">
-                                    {{'Validation.lastnamerequired'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <!-- email name input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.email'|translate}}</mat-label>
-                                <input matInput placeholder="{{'Labels.email'|translate}}" formControlName="email">
-                                <mat-icon matSuffix>alternate_email</mat-icon>
-                                <mat-error *ngIf="f['email'].errors?.['required']">
-                                    {{'Validation.emailrequired'|translate}}
-                                </mat-error>
-                                <mat-error *ngIf="f['email'].errors?.['email']">
-                                    {{'Validation.emailpattern'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <!-- password input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.password'|translate}}</mat-label>
-                                <input matInput placeholder="{{'Labels.password'|translate}}" type="password"
-                                    formControlName="password">
-                                <mat-icon matSuffix>password</mat-icon>
-                                <mat-error *ngIf="f['password'].errors?.['required']">
-                                    {{'Validation.passwordrequired'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <!-- confirm password input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.confirmpassword'|translate}}</mat-label>
-                                <input matInput placeholder="{{'Labels.confirmpassword'|translate}}"
-                                    formControlName="confirmPassword" type="password">
-                                <mat-icon matSuffix>password</mat-icon>
-                                <mat-error *ngIf="f['confirmPassword'].errors?.['required']">
-                                    {{'Validation.confirmPasswordrequired'|translate}}
-                                </mat-error>
-                                <mat-error *ngIf="f['confirmPassword'].errors?.['confirmedValidator']">
-                                    {{'Validation.confirmpassword'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <!-- mobile number input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.mobile'|translate}}</mat-label>
-                                <input matInput placeholder="{{'Labels.mobile'|translate}}" formControlName="mobile">
-                                <mat-icon matSuffix>phone</mat-icon>
-                                <mat-error *ngIf="f['mobile'].errors?.['required']">
-                                    {{'Validation.mobilerequired'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <!-- gender input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.gender'|translate}}</mat-label>
-                                <mat-select placeholder="{{'Labels.gender'|translate}}" formControlName="gender">
-                                    <mat-option *ngFor="let gender of genders" [value]="gender.value">
-                                        <mat-icon>{{gender.iconvalue}}</mat-icon>
-                                        {{gender.viewValue}}
-                                    </mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="f['gender'].errors?.['required']">
-                                    {{'Validation.genderrequired'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <!-- gender input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.country'|translate}}</mat-label>
-                                <mat-select placeholder="{{'Labels.country'|translate}}" formControlName="countryId">
-                                    <mat-option *ngFor="let country of countries" [value]="country.id">
-                                        <span class='{{country.countryIcon}}'></span>
-                                        {{country.name}} ({{country.countryCode}})
-                                    </mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="f['countryId'].errors?.['required']">
-                                    {{'Validation.genderrequired'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <!-- role input -->
-                            <mat-form-field fxFlexFill class="form-field mb-2">
-                                <mat-label>{{'Labels.role'|translate}}</mat-label>
-                                <mat-select placeholder="{{'Labels.role'|translate}}" formControlName="roleId">
-                                    <mat-option *ngFor="let role of roles" [value]="role.id">
-                                        {{role.name}}
-                                    </mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="f['roleId'].errors?.['required']">
-                                    {{'Validation.genderrequired'|translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                    </mat-grid-list>
-                </mat-card-content>
-
-                <mat-card-footer class="text-center mb-3">
-                    <button mat-raised-button color="primary" type="submit">Submit</button>
-                    <button mat-raised-button color="accent" type="reset" (click)="onReset()">Reset</button>
-                </mat-card-footer>
-            </mat-card>
-        </form>
-    </div>
-</div>
+    <mat-dialog-content class="mat-typography">
+        <div class="row">
+            <div class="col">
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.firstname'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.firstname'|translate}}" formControlName="firstName">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="f['firstName'].errors?.['required']">
+                        {{'Validation.firstnamerequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.lastname'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.lastname'|translate}}" formControlName="lastName">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="f['lastName'].errors?.['required']">
+                        {{'Validation.lastnamerequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.email'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.email'|translate}}" formControlName="email">
+                    <mat-icon matSuffix>alternate_email</mat-icon>
+                    <mat-error *ngIf="f['email'].errors?.['required']">
+                        {{'Validation.emailrequired'|translate}}
+                    </mat-error>
+                    <mat-error *ngIf="f['email'].errors?.['email']">
+                        {{'Validation.emailpattern'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.mobile'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.mobile'|translate}}" formControlName="mobile">
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <mat-error *ngIf="f['mobile'].errors?.['required']">
+                        {{'Validation.mobilerequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!-- password input -->
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.password'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.password'|translate}}" type="password"
+                        formControlName="password">
+                    <mat-icon matSuffix>password</mat-icon>
+                    <mat-error *ngIf="f['password'].errors?.['required']">
+                        {{'Validation.passwordrequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <!-- confirm password input -->
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.confirmpassword'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.confirmpassword'|translate}}"
+                        formControlName="confirmPassword" type="password">
+                    <mat-icon matSuffix>password</mat-icon>
+                    <mat-error *ngIf="f['confirmPassword'].errors?.['required']">
+                        {{'Validation.confirmPasswordrequired'|translate}}
+                    </mat-error>
+                    <mat-error *ngIf="f['confirmPassword'].errors?.['confirmedValidator']">
+                        {{'Validation.confirmpassword'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!-- gender input -->
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.ukareatelephone'|translate}}</mat-label>
+                    <mat-select placeholder="{{'Labels.ukareatelephone'|translate}}" formControlName="ukAreaTelephone">
+                        <mat-option *ngFor="let telephone of ukareatelephone" [value]="telephone.phoneCode">
+                            {{telephone.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f['ukAreaTelephone'].errors?.['required']">
+                        {{'Validation.genderrequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.country'|translate}}</mat-label>
+                    <mat-select placeholder="{{'Labels.country'|translate}}" formControlName="countryId">
+                        <mat-option *ngFor="let country of countries" [value]="country.id">
+                            <span class='{{country.countryIcon}}'></span>
+                            {{country.name}} ({{country.countryCode}})
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f['countryId'].errors?.['required']">
+                        {{'Validation.genderrequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field fxFlexFill class="form-field mb-2">
+                    <mat-label>{{'Labels.role'|translate}}</mat-label>
+                    <mat-select placeholder="{{'Labels.role'|translate}}" formControlName="roleId">
+                        <mat-option *ngFor="let role of roles" [value]="role.id">
+                            {{role.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f['roleId'].errors?.['required']">
+                        {{'Validation.genderrequired'|translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+        <button type="submit" mat-button mat-raised-button color="primary" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
+</form>

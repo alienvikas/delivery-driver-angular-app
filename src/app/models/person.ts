@@ -1,15 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
+import { BaseEntity } from '../entity/base-entity';
 
-export class Person {
-    Id: string = uuidv4();
-    IntroducerId: String = uuidv4();
+export class Person extends BaseEntity {
+    id: string = uuidv4();
+    introducerId: String = uuidv4();
     DDHomeBaseId: String = uuidv4();
-    NationalityId: string = uuidv4();
-    VehicleMaker: string = uuidv4();
-    KnownAs: string = "";
-    OfficalName: string = "";
-    DateOfBirth!: Date;
-    PersonPhoto!: Uint8Array;
-    MobileNumber: number = 0;
-    EmailId: string = "";
+    nationalityId: string = uuidv4();
+    vehicleMaker: string = uuidv4();
+    knownAs: string = "";
+    officalName: string = "";
+    dateOfBirth!: Date;
+    personPhoto!: Uint8Array;
+    mobileNumber: number = 0;
+    emailId: string = "";
 };

@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Hi {{data.firstName}} {{data.lastName}},</h1>
+<div mat-dialog-content>
+    What would you like to do ?
+    <!-- <mat-chip-set class="example-chip" cdkDropList cdkDropListOrientation="horizontal">
+        <mat-chip class="example-box" cdkDrag *ngFor="let box of chipBoxs">
+            <mat-icon matTooltip="{{box.name}}" class="icon-display">{{box.iconName}}</mat-icon>
+            {{box.name}}
+        </mat-chip>
+    </mat-chip-set> -->
+
+    <mat-chip-listbox aria-label="Action selection">
+        <mat-chip-option color="primary" *ngFor="let box of chipBoxs" (click)="onSelect(box.path)">
+            <mat-icon matTooltip="{{box.name}}" class="icon-display">{{box.iconName}}</mat-icon>
+            {{box.name}}
+        </mat-chip-option>
+    </mat-chip-listbox>
+</div>

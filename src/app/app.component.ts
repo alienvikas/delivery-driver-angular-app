@@ -21,7 +21,7 @@ export const MY_DATE_FORMATS = {
 export class AppComponent {
   title = 'DeliveryDriverSystem';
   constructor(translate: TranslateService) {
-
+    
   }
 
   isLoggedIn() {

@@ -8,6 +8,10 @@ import { CountyService } from 'src/app/services/county/county.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AddCountyComponent } from '../../popup-dialog/add-county/add-county.component';
 import { EditCountyComponent } from '../../popup-dialog/edit-county/edit-county.component';
+import { UploadDataComponent } from '../../popup-dialog/upload-data/upload-data.component';
+import { ConfirmationDialogComponent } from '../../popup-dialog/confirmation-dialog/confirmation-dialog.component';
+import { NotificationService } from 'src/app/services/notification/notification.service';
+import { CommonService } from 'src/app/services/common/common.service';
 
 @Component({
   selector: 'app-county-list',
@@ -21,7 +25,10 @@ export class CountyListComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private countyService: CountyService,
-    private dialog: MatDialog, private spinner: NgxSpinnerService) {
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+    private notification: NotificationService,
+    public commonService: CommonService) {
   }
 
   ngAfterViewInit() {
@@ -35,7 +42,7 @@ export class CountyListComponent {
     //   this.spinner.hide();
     // }, 5000);
     this.spinner.show();
-    this.getCounties();
+    this.getAllCounties();
   }
 
   applyFilter(event: Event) {
@@ -49,8 +56,8 @@ export class CountyListComponent {
     }
   }
 
-  getCounties() {
-    this.countyService.getAllCounties().subscribe((res: Country[]) => {
+  getAllCounties() {
+    this.countyService.findAll().subscribe((res) => {
       this.countyDataSource.data = res;
       this.spinner.hide();
     })
@@ -64,7 +71,7 @@ export class CountyListComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getCounties();
+      this.getAllCounties();
     });
   }
 
@@ -73,11 +80,41 @@ export class CountyListComponent {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'custom-dialog-panel-class',
       disableClose: true,
-      data: { country: form }
+      data: { country: form, headerTitle: "Upload Country" }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getCounties();
+      this.getAllCounties();
+    });
+  }
+
+  uploadCounty() {
+    const dialogRef = this.dialog.open(UploadDataComponent, {
+      backdropClass: 'custom-dialog-backdrop-class',
+      panelClass: 'custom-dialog-panel-class',
+      disableClose: true,
+      data: { component: CountyListComponent, serviceType: this.countyService, headerTitle: "Upload County" }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getAllCounties();
+    });
+  }
+
+  deleteCounty(dataRow: any) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      backdropClass: 'custom-dialog-backdrop-class',
+      panelClass: 'custom-dialog-panel-class',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe((isDelete) => {
+      if (isDelete) {
+        this.countyService.delete(dataRow.id).subscribe(() => {
+          this.notification.showSuccess("Deleted county successfully!!!", "Delete County");
+          this.getAllCounties();
+        })
+      }
     });
   }
 

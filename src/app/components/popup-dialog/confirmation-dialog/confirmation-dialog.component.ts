@@ -14,8 +14,6 @@ export class ConfirmationDialogComponent {
     private countryService: CountryService) { }
 
   onConfirm() {
-    this.countryService.deleteCountry(this.data.country.id).subscribe(() => {
-      this.dialogRef.close(true);
-    })
+    this.dialogRef.close(true);
   }
 }

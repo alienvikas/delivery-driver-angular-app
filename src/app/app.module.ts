@@ -31,13 +31,18 @@ import { CountyListComponent } from './components/admin-view/county-list/county-
 import { AddCountyComponent } from './components/popup-dialog/add-county/add-county.component';
 import { EditCountyComponent } from './components/popup-dialog/edit-county/edit-county.component';
 import { PassportListComponent } from './components/admin-view/passport-list/passport-list.component';
-
+import { AddPassportListComponent } from './components/popup-dialog/add-passport-list/add-passport-list.component';
+import { RoleListComponent } from './components/admin-view/role-list/role-list.component';
+import { EditPassportComponent } from './components/popup-dialog/edit-passport/edit-passport.component';
+import { HomeComponent } from './components/popup-dialog/home/home.component';
+import { UkAreaTelephoneListComponent } from './components/admin-view/uk-area-telephone-list/uk-area-telephone-list.component';
 /* Translate */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth/auth.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { AppHttpInterceptor } from './commonMethods/httpInterceptor';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -60,7 +65,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     CountyListComponent,
     AddCountyComponent,
     EditCountyComponent,
-    PassportListComponent
+    PassportListComponent,
+    AddPassportListComponent,
+    RoleListComponent,
+    EditPassportComponent,
+    HomeComponent,
+    UkAreaTelephoneListComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +99,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     AuthService,
-    { provide: MAT_DATE_LOCALE, useValue: MY_DATE_FORMATS }],
+    { provide: MAT_DATE_LOCALE, useValue: MY_DATE_FORMATS },
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
