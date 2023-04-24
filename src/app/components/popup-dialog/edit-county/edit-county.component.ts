@@ -36,9 +36,8 @@ export class EditCountyComponent {
 
   onUpdate(form: any) {
     this.spinner.show();
-    if (this.countyForm.invalid)
-    { this.spinner.hide(); return; }// stop here if form is invalid
-    this.countyService.updateCounty(form).subscribe((res) => {
+    if (this.countyForm.invalid) { this.spinner.hide(); return; }// stop here if form is invalid
+    this.countyService.update(this.countyForm.value.id, form).subscribe((res) => {
       this.dialogRef.close();
       this.spinner.hide();
     })

@@ -4,14 +4,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RoleType } from 'src/app/enums/role-type-enum';
 import { GlobalComponent } from 'src/app/global-component';
-import { CountyService } from 'src/app/services/county/county.service';
-import { NotificationService } from 'src/app/services/notification/notification.service';
 import * as XLSX from 'xlsx';
-import { CountryListComponent } from '../../admin-view/country-list/country-list.component';
-import { CountyListComponent } from '../../admin-view/county-list/county-list.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { PassportListComponent } from '../../admin-view/passport-list/passport-list.component';
-import { PassportService } from 'src/app/services/passport/passport.service';
 //import * as FileSaver from 'file-saver';
 
 @Component({
@@ -33,11 +27,9 @@ export class UploadDataComponent {
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private countyService: CountyService,
-    private passportService: PassportService,
     private spinner: NgxSpinnerService,
     private dialogRef: MatDialogRef<UploadDataComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) private data: any
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.component = data.component;
   }
@@ -59,33 +51,22 @@ export class UploadDataComponent {
     const formData = new FormData();
     formData.append('file', this.file);
     formData.append('roleType', roleTypeVal);
-    switch (this.component) {
-      case CountryListComponent:
-        this.countyService.uploadCounty(formData).subscribe((res) => {
-          this.spinner.hide();
-        });
-        break;
-      case CountyListComponent:
-        break;
-      case PassportListComponent:
-        this.passportService.uploadPassportList(formData).subscribe((res) => {
-          this.spinner.hide();
-          this.dialogRef.close();
-        })
-        break;
-    }
 
+    this.data.serviceType.upload(formData).subscribe((res: any) => {
+      this.spinner.hide();
+      this.dialogRef.close(true);
+    });
   }
-
+  
   readAsJson() {
     this.jsonData = XLSX.utils.sheet_to_json(this.worksheet, { raw: false });
     //this.jsonData = JSON.stringify(this.jsonData);
     const formData = new FormData();
     formData.append('counties', this.jsonData);
     formData.append('roleType', this.roleType.toString());
-    this.countyService.uploadCounty(formData).subscribe((res) => {
-      alert(res);
-    })
+    // this.countyService.uploadCounty(formData).subscribe((res) => {
+    //   alert(res);
+    // })
   }
 
   readExcel() {

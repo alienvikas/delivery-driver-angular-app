@@ -36,7 +36,7 @@ export class AuthService implements CanActivate {
     //     return userObj;
     //   }));
 
-    return this.http.post<any>(environment.baseUrl + "User/InsertUserDetails/",
+    return this.http.post<any>(environment.baseUrl + "/User/InsertUserDetails/",
       user, this.httpOptions)
       .pipe(
         map(() => {
@@ -53,22 +53,18 @@ export class AuthService implements CanActivate {
   }
 
   authenicateUser(user: any): Observable<any> {
-    //let queryParams = { "email": user.email, "password": user.password };
-    return this.http.post<any>(environment.baseUrl + "User/Authorize/",
-      user, this.httpOptions)
-      .pipe(map((res) => {
-        const userObj = res.user as User;
-        const roleObj = res.role as Role;
-        GlobalComponent.loggedUser = userObj;
-        const strEnum = roleObj.name as unknown as RoleType;
-        GlobalComponent.roleType = strEnum;
-        localStorage.setItem('user', JSON.stringify(res.user))
-        localStorage.setItem('userRole', JSON.stringify(res.role));
-      }))
-      .pipe(catchError(err => {
-        const error = err.error?.error_description || err.error?.message || err.statusText;
-        return throwError(error);
-      }));
+    // return this.http.post<any>(environment.baseUrl + "/User/Authorize/",
+    //   user, this.httpOptions)
+    //   .pipe(map((res) => {
+    //     localStorage.setItem('user', JSON.stringify(res.user))
+    //     localStorage.setItem('userRole', JSON.stringify(res.role));
+    //   }))
+    //   .pipe(catchError(err => {
+    //     const error = err.error?.error_description || err.error?.message || err.statusText;
+    //     return throwError(error);
+    //   }));
+    return this.http.post<any>(environment.baseUrl + "/User/Authorize/",
+      user);
   }
 
   getAuthStatus(): boolean {

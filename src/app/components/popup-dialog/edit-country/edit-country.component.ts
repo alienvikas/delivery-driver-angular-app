@@ -41,7 +41,7 @@ export class EditCountryComponent {
   onUpdate(form: any) {
     this.spinner.show();
     if (this.countryForm.invalid) { this.spinner.hide(); return; } // stop here if form is invalid
-    this.countryService.updateCountry(form).subscribe((res) => {
+    this.countryService.update(this.countryForm.value.id, form).subscribe((res) => {
       this.dialogRef.close();
       this.spinner.hide();
     })

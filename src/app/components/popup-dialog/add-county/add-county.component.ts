@@ -49,7 +49,7 @@ export class AddCountyComponent {
   onSubmit(form: any) {
     if (this.countyForm.invalid) return; // stop here if form is invalid
     this.spinner.show();
-    this.countyService.saveCounty(form).subscribe((res) => {
+    this.countyService.save(form).subscribe((res) => {
       this.spinner.hide();
     })
   }
