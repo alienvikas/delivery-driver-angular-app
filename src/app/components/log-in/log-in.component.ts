@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription, filter } from 'rxjs';
 import { GlobalComponent } from 'src/app/global-component';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommonService } from 'src/app/services/common/common.service';
 import { LoginService } from 'src/app/services/login/login.service';
-import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from "ngx-spinner";
 import { HomeComponent } from '../popup-dialog/home/home.component';
 import { MatDialog } from '@angular/material/dialog';

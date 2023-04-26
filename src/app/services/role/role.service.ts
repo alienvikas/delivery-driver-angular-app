@@ -1,11 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { NotificationService } from '../notification/notification.service';
 import { Role } from 'src/app/models/role';
-import { GlobalComponent } from 'src/app/global-component';
-import { RoleType } from 'src/app/enums/role-type-enum';
 import { CrudService } from '../generic-service/crud.service';
 
 @Injectable({

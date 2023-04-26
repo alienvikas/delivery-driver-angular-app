@@ -1,10 +1,8 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { GlobalComponent } from 'src/app/global-component';
 import { LoginService } from 'src/app/services/login/login.service';
-import { faCoffee, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { HomeComponent } from '../popup-dialog/home/home.component';
 import { MatDialog } from '@angular/material/dialog';
 
