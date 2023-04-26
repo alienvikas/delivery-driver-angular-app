@@ -1,17 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatAccordion } from '@angular/material/expansion';
 import { MatSelect } from '@angular/material/select';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { connect } from 'rxjs';
-import { DDHomeBase } from 'src/app/models/ddhomebase';
-import { Introducer } from 'src/app/models/introducer';
 import { CountryService } from 'src/app/services/country/country.service';
 import { CountyService } from 'src/app/services/county/county.service';
 import { HomeBaseService } from 'src/app/services/home-base/home-base.service';
 import { IntroducerService } from 'src/app/services/introducer/introducer.service';
 import { PassportService } from 'src/app/services/passport/passport.service';
-import { validate } from 'uuid';
 
 @Component({
   selector: 'app-person-form',
@@ -136,5 +131,4 @@ export class PersonFormComponent implements OnInit {
     this.personForm.markAsUntouched();
   }
   get f() { return this.personForm.controls; }
-  //@ViewChild(MatAccordion) accordion!: MatAccordion;
 }

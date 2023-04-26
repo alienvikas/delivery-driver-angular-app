@@ -1,11 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { NotificationService } from '../notification/notification.service';
 import { Role } from 'src/app/models/role';
-import { GlobalComponent } from 'src/app/global-component';
-import { RoleType } from 'src/app/enums/role-type-enum';
 import { CrudService } from '../generic-service/crud.service';
 
 @Injectable({
@@ -35,10 +31,10 @@ export class RoleService extends CrudService<Role, number> {
   // }
 
   constructor(protected override _http: HttpClient) {
-    super(_http, `${environment.baseUrl}/Role`);
+    super(_http, `${environment.baseUrl}/role`);
   }
 
   findNameBasedRole(roleName: string) {
-    return this._http.get<Role>(environment.baseUrl + '/Role/RoleName?role=' + roleName);
+    return this._http.get<Role>(environment.baseUrl + '/role/RoleName?role=' + roleName);
   }
 }

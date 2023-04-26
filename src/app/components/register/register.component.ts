@@ -1,20 +1,17 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { validateBasis } from '@angular/flex-layout';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ConfirmedValidator } from 'src/app/commonMethods/confirmedValidator';
-import { MustMatch } from 'src/app/helper/must-match.validator';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountryService } from 'src/app/services/country/country.service';
 import { RoleService } from 'src/app/services/role/role.service';
-import { SnackBarComponent } from '../popup-dialog/snack-bar/snack-bar.component';
 import { UkTelephoneService } from 'src/app/services/uk-area-telephone/uk-telephone.service';
 import { UkAreaTelephone } from 'src/app/models/ukAreaTelephone';
-import { A11yModule } from '@angular/cdk/a11y';
 import { LetterAutoIncrement } from 'src/app/commonMethods/letterAutoIncrement';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -39,6 +36,7 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService,
     private roleService: RoleService, private countryService: CountryService,
     private ukAreaTelephoneService: UkTelephoneService,
+    private dialogRef: MatDialogRef<RegisterComponent>,
     private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
@@ -69,11 +67,6 @@ export class RegisterComponent implements OnInit {
       { value: 'female', viewValue: 'Female', iconvalue: "female" },
     ];
 
-    // this.countries = [
-    //   { value: 'india', viewValue: 'India', iconvalue: "fi fi-in", countrycode: "(+91)" },
-    //   { value: 'usa', viewValue: 'USA', iconvalue: "fi fi-us", countrycode: "(+1)" },
-    //   { value: 'uk', viewValue: 'United Kingdom', iconvalue: "fi fi-gb", countrycode: "(+44)" },
-    // ];
     this.getAllCountries();
     this.getAllRoles();
     this.getAllUKAreaTelephone();
@@ -91,32 +84,15 @@ export class RegisterComponent implements OnInit {
       if (res.Id != "") {
         this.openSnackBar(message, action);
         this.router.navigate(['login']);
+        this.dialogRef.close();
       }
       else {
         this.openSnackBar(message, action);
       }
-      console.log(res);
     });
-
-    // this.authService.register(form).subscribe(
-    //   data => { 
-    //     console.log('success', alert(data.Id)) 
-    //   },
-    //   err => { 
-    //     console.log('oops', alert(err.error)) 
-    //   }      
-    // );
-    //this.onReset();
-  }
-
-  onReset() {
-    this.registerForm.reset();
   }
 
   getAllRoles() {
-    // this.roleService.getAllRoles().subscribe((res) => {
-    //   this.roles = res;
-    // });
     this.roleService.findAll().subscribe((res) => {
       this.roles = res;
     })
