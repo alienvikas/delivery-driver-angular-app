@@ -103,7 +103,7 @@
                     <mat-select placeholder="{{'Labels.countrylivesin'|translate}}" formControlName="countryId">
                         <mat-option *ngFor="let country of countries" [value]="country.id">
                             <span class='{{country.countryIcon}}'></span>
-                            {{country.name}} ({{country.countryCode}})
+                            {{country.name}}
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="f['countryId'].errors?.['required']">
