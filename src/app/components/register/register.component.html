@@ -57,8 +57,8 @@
             <div class="col">
                 <!-- password input -->
                 <mat-form-field fxFlexFill class="form-field mb-2">
-                    <mat-label>{{'Labels.password'|translate}}</mat-label>
-                    <input matInput placeholder="{{'Labels.password'|translate}}" type="password"
+                    <mat-label>{{'Labels.createownpassword'|translate}}</mat-label>
+                    <input matInput placeholder="{{'Labels.createownpassword'|translate}}" type="password"
                         formControlName="password">
                     <mat-icon matSuffix>password</mat-icon>
                     <mat-error *ngIf="f['password'].errors?.['required']">
@@ -130,7 +130,8 @@
     </mat-dialog-content>
     <mat-divider></mat-divider>
     <mat-dialog-actions align="end">
-        <button mat-button mat-raised-button mat-dialog-close color="warn">Cancel</button>
-        <button type="submit" mat-button mat-raised-button color="primary" cdkFocusInitial>Save</button>
+        <button mat-button mat-raised-button mat-dialog-close color="warn">{{'Labels.cancel'|translate}}</button>
+        <button type="submit" mat-button mat-raised-button color="primary"
+            cdkFocusInitial>{{'Labels.create'|translate}}</button>
     </mat-dialog-actions>
 </form>

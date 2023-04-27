@@ -49,7 +49,11 @@
         "uploadukareatelephone": "Upload UK Area Telephone",
         "nodatamatching": "No data matching the filter",
         "ukareatelephone": "Home Town / City",
-        "countrylivesin": "Country where you live"
+        "countrylivesin": "Country where you live",
+        "cancel": "Cancel",
+        "save": "Save",
+        "create": "Create",
+        "createownpassword": "Create your own password"
     },
     "Validation": {
         "emailrequired": "Email is required",
