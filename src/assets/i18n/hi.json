@@ -42,7 +42,9 @@
         "filter": "छानना",
         "name": "नाम",
         "uploadukareatelephone":"यूके क्षेत्र टेलीफोन अपलोड करें",
-        "nodatamatching": "फ़िल्टर से मेल खाने वाला कोई डेटा नहीं"
+        "nodatamatching": "फ़िल्टर से मेल खाने वाला कोई डेटा नहीं",
+        "ukareatelephone": "होम टाउन / शहर",
+        "countrylivesin": "देश जहां आप रहते हैं"
     },
     "Validation": {
         "emailrequired": "ईमेल की जरूरत है",

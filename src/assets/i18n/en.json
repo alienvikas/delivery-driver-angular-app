@@ -46,9 +46,10 @@
         "exportpassport": "Export passport",
         "filter": "filter",
         "name": "Name",
-        "uploadukareatelephone":"Upload UK Area Telephone",
+        "uploadukareatelephone": "Upload UK Area Telephone",
         "nodatamatching": "No data matching the filter",
-        "ukareatelephone":"UK Area Telephone"
+        "ukareatelephone": "Home Town / City",
+        "countrylivesin": "Country where you live"
     },
     "Validation": {
         "emailrequired": "Email is required",
