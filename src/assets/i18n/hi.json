@@ -48,7 +48,8 @@
         "cancel": "रद्द करना",
         "save": "रक्षा कर",
         "create": "बनाना",
-        "createownpassword": "अपना खुद का पासवर्ड बनाएँ"
+        "createownpassword": "अपना खुद का पासवर्ड बनाएँ",
+        "deleteallconfirmation": "क्या आप वाकई सभी रिकॉर्ड हटाना चाहते हैं? ?"
     },
     "Validation": {
         "emailrequired": "ईमेल की जरूरत है",

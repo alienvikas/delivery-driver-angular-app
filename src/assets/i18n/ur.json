@@ -40,7 +40,8 @@
         "cancel": "منسوخ",
         "save": "بچانا",
         "create": "تخلیق",
-        "createownpassword": "اپنا پاس ورڈ بنائیں"
+        "createownpassword": "اپنا پاس ورڈ بنائیں",
+        "deleteallconfirmation": "کیا آپ واقعی تمام ریکارڈ حذف کرنا چاہتے ہیں ?"
     },
     "Validation": {
         "emailrequired": "ای میل کی ضرورت ہے",

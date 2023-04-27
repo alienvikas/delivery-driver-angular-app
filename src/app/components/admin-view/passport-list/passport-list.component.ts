@@ -12,6 +12,7 @@ import { Passport } from 'src/app/models/passport';
 import { ConfirmationDialogComponent } from '../../popup-dialog/confirmation-dialog/confirmation-dialog.component';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { CommonService } from 'src/app/services/common/common.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-passport-list',
@@ -30,7 +31,8 @@ export class PassportListComponent implements AfterViewInit, OnInit {
     private dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private notification: NotificationService,
-    public commonService: CommonService) { }
+    public commonService: CommonService,
+    private translation: TranslateService) { }
 
   ngAfterViewInit() {
     this.passportDataSource.paginator = this.paginator;
@@ -95,7 +97,8 @@ export class PassportListComponent implements AfterViewInit, OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'custom-dialog-panel-class',
-      disableClose: true
+      disableClose: true,
+      data: { message: this.translation.instant('Labels.confirmmessage') }
     });
     dialogRef.afterClosed().subscribe((isDelete) => {
       alert(isDelete);

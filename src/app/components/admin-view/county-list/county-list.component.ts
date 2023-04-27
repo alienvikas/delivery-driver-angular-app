@@ -12,6 +12,7 @@ import { UploadDataComponent } from '../../popup-dialog/upload-data/upload-data.
 import { ConfirmationDialogComponent } from '../../popup-dialog/confirmation-dialog/confirmation-dialog.component';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { CommonService } from 'src/app/services/common/common.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-county-list',
@@ -28,7 +29,8 @@ export class CountyListComponent {
     private dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private notification: NotificationService,
-    public commonService: CommonService) {
+    public commonService: CommonService,
+    private translation: TranslateService) {
   }
 
   ngAfterViewInit() {
@@ -105,7 +107,8 @@ export class CountyListComponent {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'custom-dialog-panel-class',
-      disableClose: true
+      disableClose: true,
+      data: { message: this.translation.instant('Labels.confirmmessage') }
     });
 
     dialogRef.afterClosed().subscribe((isDelete) => {

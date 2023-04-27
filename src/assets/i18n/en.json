@@ -27,11 +27,11 @@
         "countryname": "Country name",
         "countryicon": "Country icon",
         "countrydelete": "Country delete",
-        "confirmmessage": "Are you sure you want to delete?",
+        "confirmmessage": "Are you sure you want to delete ?",
         "confirm": "Confirm",
         "editcountry": "Edit Country",
-        "edit": "edit",
-        "delete": "delete",
+        "edit": "Edit",
+        "delete": "Delete",
         "addcountry": "Add new country",
         "uploadcountry": "Upload country",
         "exportcountry": "Export country",
@@ -53,7 +53,8 @@
         "cancel": "Cancel",
         "save": "Save",
         "create": "Create",
-        "createownpassword": "Create your own password"
+        "createownpassword": "Create your own password",
+        "deleteallconfirmation": "Are you sure you want to delete all records ?"
     },
     "Validation": {
         "emailrequired": "Email is required",
