@@ -34,7 +34,9 @@
         "filter": "فلٹر",
         "name": "نام",
         "uploadukareatelephone":"یو کے ایریا ٹیلی فون اپ لوڈ کریں",
-        "nodatamatching": "فلٹر سے میل کھاتا کوئی ڈیٹا نہیں"
+        "nodatamatching": "فلٹر سے میل کھاتا کوئی ڈیٹا نہیں",
+        "ukareatelephone": "ہوم ٹاؤن / شہر",
+        "countrylivesin": "ملک جہاں آپ رہتے ہیں"
     },
     "Validation": {
         "emailrequired": "ای میل کی ضرورت ہے",

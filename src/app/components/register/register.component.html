@@ -99,8 +99,8 @@
             </div>
             <div class="col">
                 <mat-form-field fxFlexFill class="form-field mb-2">
-                    <mat-label>{{'Labels.country'|translate}}</mat-label>
-                    <mat-select placeholder="{{'Labels.country'|translate}}" formControlName="countryId">
+                    <mat-label>{{'Labels.countrylivesin'|translate}}</mat-label>
+                    <mat-select placeholder="{{'Labels.countrylivesin'|translate}}" formControlName="countryId">
                         <mat-option *ngFor="let country of countries" [value]="country.id">
                             <span class='{{country.countryIcon}}'></span>
                             {{country.name}} ({{country.countryCode}})
