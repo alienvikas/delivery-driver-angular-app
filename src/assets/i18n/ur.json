@@ -33,10 +33,15 @@
         "exportpassport": "ایکسپورٹ پاسپورٹ",
         "filter": "فلٹر",
         "name": "نام",
-        "uploadukareatelephone":"یو کے ایریا ٹیلی فون اپ لوڈ کریں",
+        "uploadukareatelephone": "یو کے ایریا ٹیلی فون اپ لوڈ کریں",
         "nodatamatching": "فلٹر سے میل کھاتا کوئی ڈیٹا نہیں",
         "ukareatelephone": "ہوم ٹاؤن / شہر",
-        "countrylivesin": "ملک جہاں آپ رہتے ہیں"
+        "countrylivesin": "ملک جہاں آپ رہتے ہیں",
+        "cancel": "منسوخ",
+        "save": "بچانا",
+        "create": "تخلیق",
+        "createownpassword": "اپنا پاس ورڈ بنائیں",
+        "deleteallconfirmation": "کیا آپ واقعی تمام ریکارڈ حذف کرنا چاہتے ہیں ?"
     },
     "Validation": {
         "emailrequired": "ای میل کی ضرورت ہے",

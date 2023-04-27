@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { RoleType } from 'src/app/enums/role-type-enum';
 import { GlobalComponent } from 'src/app/global-component';
@@ -15,7 +16,8 @@ export class AuthService implements CanActivate {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,
+    private spinner: NgxSpinnerService) { }
   canActivate(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | Promise<boolean> {
     var isAuthenticated = this.getAuthStatus();

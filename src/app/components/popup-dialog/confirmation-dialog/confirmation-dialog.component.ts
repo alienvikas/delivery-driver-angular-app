@@ -10,7 +10,7 @@ import { CountryService } from 'src/app/services/country/country.service';
 export class ConfirmationDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) private data: any,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private countryService: CountryService) { }
 
   onConfirm() {

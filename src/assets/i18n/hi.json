@@ -41,10 +41,15 @@
         "exportpassport": "पासपोर्ट निर्यात करें",
         "filter": "छानना",
         "name": "नाम",
-        "uploadukareatelephone":"यूके क्षेत्र टेलीफोन अपलोड करें",
+        "uploadukareatelephone": "यूके क्षेत्र टेलीफोन अपलोड करें",
         "nodatamatching": "फ़िल्टर से मेल खाने वाला कोई डेटा नहीं",
         "ukareatelephone": "होम टाउन / शहर",
-        "countrylivesin": "देश जहां आप रहते हैं"
+        "countrylivesin": "देश जहां आप रहते हैं",
+        "cancel": "रद्द करना",
+        "save": "रक्षा कर",
+        "create": "बनाना",
+        "createownpassword": "अपना खुद का पासवर्ड बनाएँ",
+        "deleteallconfirmation": "क्या आप वाकई सभी रिकॉर्ड हटाना चाहते हैं? ?"
     },
     "Validation": {
         "emailrequired": "ईमेल की जरूरत है",

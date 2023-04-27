@@ -13,6 +13,7 @@ import { UploadDataComponent } from '../../popup-dialog/upload-data/upload-data.
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { Export } from 'src/app/commonMethods/export';
 import { CommonService } from 'src/app/services/common/common.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-country-list',
@@ -28,7 +29,8 @@ export class CountryListComponent {
   constructor(private countryService: CountryService,
     private dialog: MatDialog, private spinner: NgxSpinnerService,
     private notification: NotificationService,
-    public commonService: CommonService) { }
+    public commonService: CommonService,
+    private translation: TranslateService) { }
 
   ngAfterViewInit() {
     this.countryDataSource.paginator = this.paginator;
@@ -87,7 +89,8 @@ export class CountryListComponent {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'custom-dialog-panel-class',
-      disableClose: true
+      disableClose: true,
+      data: { message: this.translation.instant('Labels.confirmmessage') }
     });
     dialogRef.afterClosed().subscribe((isDelete) => {
       if (isDelete) {
@@ -135,4 +138,22 @@ export class CountryListComponent {
 
     Export.JsonToExcel(data, 'Country - Delivery Driver', exportColObj);
   }
+
+  deleteAllCountry() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      backdropClass: 'custom-dialog-backdrop-class',
+      panelClass: 'custom-dialog-panel-class',
+      disableClose: true,
+      data: { message: this.translation.instant('Labels.deleteallconfirmation') }
+    });
+    dialogRef.afterClosed().subscribe((isDelete) => {
+      if (isDelete) {
+        this.countryService.deleteAll().subscribe(() => {
+          this.notification.showSuccess("All country deleted successfully!!!", "Delete Country");
+          this.getCountries();
+        })
+      }
+    });
+  }
+
 }

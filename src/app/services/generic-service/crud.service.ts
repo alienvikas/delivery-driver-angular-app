@@ -45,6 +45,10 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
       .delete<T>(this._base + '/' + id);
   }
 
+  deleteAll(): Observable<any> {
+    return this._http.delete<any>(this._base + '/deleteall');
+  }
+
   upload(data: FormData): Observable<T> {
     return this._http.post<T>(this._base + '/upload', data);
   }
