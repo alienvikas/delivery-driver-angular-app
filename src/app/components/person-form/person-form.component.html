@@ -105,10 +105,17 @@
                         <mat-form-field appearance="fill">
                             <mat-label>{{'Labels.choosenationality'|translate}}</mat-label>
                             <mat-select formControlName="nationalityId">
-                                <mat-option *ngFor="let nationality of nationalityOption" [value]="nationality.id">
-                                    <span class="fi fi-{{nationality.countryISO | lowercase}}">
-                                    </span>
-                                    {{nationality.countryName}}
+                                <mat-form-field appearance="fill" class="select-element">
+                                    <input matInput #countySearch placeholder="Search nationality"
+                                        (input)="filterNationality(countySearch.value)" />
+                                </mat-form-field>
+                                <mat-option *ngFor="let nationality of nationalityOption;let i = index;"
+                                    [value]="nationality.id">
+                                    <mat-checkbox [checked]="selected === i" (change)="selected = i">
+                                        <span class="fi fi-{{nationality.countryISO | lowercase}}">
+                                        </span>
+                                        {{nationality.countryName}}
+                                    </mat-checkbox>
                                 </mat-option>
                             </mat-select>
                             <mat-error *ngIf="f['nationalityId'].hasError('required')">Select nationality</mat-error>
@@ -161,7 +168,7 @@
 
                 <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <ng-multiselect-dropdown appearance="fill" [placeholder]="'custom placeholder'"
+                        <!-- <ng-multiselect-dropdown appearance="fill" [placeholder]="'custom placeholder'"
                             [settings]="dropdownSettings" [data]="countyOptions" formControlName="countyId">
                             <ng-template #optionsTemplate let-item let-option="option" let-id="id"
                                 let-isSelected="isSelected">
@@ -172,7 +179,19 @@
                                     </span>
                                 </div>
                             </ng-template>
-                        </ng-multiselect-dropdown>
+                        </ng-multiselect-dropdown> -->
+                        <mat-form-field appearance="fill" class="select-element">
+                            <mat-label>County</mat-label>
+                            <mat-select formControlName="countyId" [multiple]="true">
+                                <mat-form-field appearance="fill" class="select-element">
+                                    <input matInput #countySearch placeholder="Search County"
+                                        (input)="filterCounty(countySearch.value)" />
+                                </mat-form-field>
+                                <mat-option *ngFor="let county of countyOptions; index as i" [value]="county.id">
+                                    {{county.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                         <!-- <mat-form-field appearance="fill">
                             <mat-label>County</mat-label>
                             <mat-select formControlName="countyId">

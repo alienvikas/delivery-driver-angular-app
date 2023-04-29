@@ -21,7 +21,7 @@ export class PersonFormComponent implements OnInit {
     private passportService: PassportService,
     private countyService: CountyService) { }
 
-
+  selected = -1;
   isPersonFormSubmitted: boolean = false;
   personForm!: FormGroup;
   selectedNationality!: string;
@@ -130,5 +130,18 @@ export class PersonFormComponent implements OnInit {
   onBlur() {
     this.personForm.markAsUntouched();
   }
+
+  filterCounty(filter: string): void {
+    this.countyService.findAll().subscribe((res) => {
+      this.countyOptions = res.filter((c: any) => c.name.toLowerCase().trim().includes(filter.toLowerCase().trim()));
+    })
+  }
+
+  filterNationality(filter: string): void {
+    this.passportService.findAll().subscribe((res) => {
+      this.nationalityOption = res.filter((c: any) => c.countryName.toLowerCase().trim().includes(filter.toLowerCase().trim()));
+    });
+  }
+
   get f() { return this.personForm.controls; }
 }
