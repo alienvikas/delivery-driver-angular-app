@@ -14,7 +14,7 @@
 
                 <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>{{'Labels.chooseintroducer'|translate}}</mat-label>
                             <mat-select formControlName="introducerId">
                                 <mat-option *ngFor="let introducer of introducerOptions" [value]="introducer">
@@ -28,7 +28,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Select home base </mat-label>
                             <mat-select formControlName="ddHomeBaseId">
                                 <mat-option *ngFor="let homebase of ddHomeBaseOptions" [value]="homebase">
@@ -42,7 +42,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Known as</mat-label>
                             <input matInput (blur)="onBlur()" formControlName="knownAs">
                             <mat-hint>
@@ -60,7 +60,7 @@
 
                 <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Offical name</mat-label>
                             <input matInput (blur)="onBlur()" formControlName="officialName">
                             <mat-hint>
@@ -75,7 +75,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>{{'Labels.mobile'|translate}}</mat-label>
                             <input matInput (blur)="onBlur()" formControlName="mobileNumber"
                                 placeholder="+xxx xxxx xxxxxx">
@@ -90,7 +90,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Date of birth</mat-label>
                             <input matInput (blur)="onBlur()" [matDatepicker]="picker" formControlName="dateOfBirth"
                                 placeholder="DD/MM/YYYY">
@@ -102,7 +102,7 @@
 
                 <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>{{'Labels.choosenationality'|translate}}</mat-label>
                             <mat-select formControlName="nationalityId">
                                 <mat-form-field appearance="fill" class="select-element">
@@ -126,7 +126,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>{{'Labels.email'|translate}}</mat-label>
                             <input matInput (blur)="onBlur()" formControlName="emailAddress"
                                 placeholder="example@abc.com">
@@ -135,7 +135,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Telegram Number / Username</mat-label>
                             <input matInput (blur)="onBlur()" formControlName="usernameOrTelegramNumber"
                                 placeholder="+xx xxx-xxx-xxxx">
@@ -148,21 +148,21 @@
 
                 <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Street</mat-label>
                             <input matInput formControlName="street">
                             <mat-error *ngIf="f['street'].hasError('required')">Street required</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Area</mat-label>
                             <input matInput formControlName="area">
                             <mat-error *ngIf="f['area'].hasError('required')">Area required</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Town or City</mat-label>
                             <input matInput formControlName="towncity">
                             <mat-error *ngIf="f['towncity'].hasError('required')">Town or City required</mat-error>
@@ -184,7 +184,7 @@
                                 </div>
                             </ng-template>
                         </ng-multiselect-dropdown> -->
-                        <mat-form-field appearance="fill" class="select-element">
+                        <mat-form-field appearance="outline" class="select-element">
                             <mat-label>County</mat-label>
                             <mat-select formControlName="countyId" [multiple]="true">
                                 <mat-form-field appearance="fill" class="select-element">
@@ -225,7 +225,7 @@
 
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Post Code</mat-label>
                             <input matInput (blur)="onBlur()" formControlName="postcode">
                             <mat-error *ngIf="f['postcode'].hasError('required')">Post code
@@ -282,10 +282,12 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Country</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Birth Certificate</label>
+                        <input type="file" class="file-input" #fileUpload>
+                    </div>
+                </div>
 
                 <mat-action-row>
                     <button mat-button color="warn" (click)="prevStep()">Previous</button>

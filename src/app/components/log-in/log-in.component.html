@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-                <mat-form-field fxFlexFill class="form-field mb-2">
+                <mat-form-field fxFlexFill class="form-field mb-2" appearance="outline">
                     <mat-label>{{'Labels.email'|translate}}</mat-label>
                     <input matInput placeholder="{{'Labels.email'|translate}}" formControlName="email">
                     <mat-icon matPrefix>email</mat-icon>
@@ -33,7 +33,7 @@
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field fxFlexFill class="form-field">
+                <mat-form-field fxFlexFill class="form-field" appearance="outline">
                     <mat-label>{{'Labels.password'|translate}}</mat-label>
                     <input matInput placeholder="{{'Labels.password'|translate}}" type="password"
                         formControlName="password">
