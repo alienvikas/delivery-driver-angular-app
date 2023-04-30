@@ -8,6 +8,7 @@ import { GlobalComponent } from 'src/app/global-component';
 import { Role } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService implements CanActivate {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   constructor(private http: HttpClient, private router: Router,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService, private notificationService: NotificationService) { }
   canActivate(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | Promise<boolean> {
     var isAuthenticated = this.getAuthStatus();
@@ -46,6 +47,7 @@ export class AuthService implements CanActivate {
           return userObj;
         }))
       .pipe(catchError(err => {
+        this.notificationService.showError(err.error, "User creation failed");
         const error = err.error?.error_description || err.error?.message || err.statusText;
         return throwError(error);
       }));

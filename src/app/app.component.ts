@@ -21,7 +21,7 @@ export const MY_DATE_FORMATS = {
 export class AppComponent {
   title = 'DeliveryDriverSystem';
   constructor(translate: TranslateService) {
-    
+    this.clearLocalStorage();
   }
 
   isLoggedIn() {
@@ -32,5 +32,14 @@ export class AppComponent {
     alert('closed');
     localStorage.clear();
     GlobalComponent.isloggedIn = false;
+  }
+
+  clearLocalStorage() {
+    window.onbeforeunload = function (e) {
+      window.onunload = function () {
+        localStorage.clear();
+      }
+      return undefined;
+    };
   }
 }

@@ -36,6 +36,8 @@ import { RoleListComponent } from './components/admin-view/role-list/role-list.c
 import { EditPassportComponent } from './components/popup-dialog/edit-passport/edit-passport.component';
 import { HomeComponent } from './components/popup-dialog/home/home.component';
 import { UkAreaTelephoneListComponent } from './components/admin-view/uk-area-telephone-list/uk-area-telephone-list.component';
+import { WebCamComponent } from './components/popup-dialog/web-cam/web-cam.component';
+
 /* Translate */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -70,7 +72,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RoleListComponent,
     EditPassportComponent,
     HomeComponent,
-    UkAreaTelephoneListComponent
+    UkAreaTelephoneListComponent,
+    WebCamComponent
   ],
   imports: [
     BrowserModule,
