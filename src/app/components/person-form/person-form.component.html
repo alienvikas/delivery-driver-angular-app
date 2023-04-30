@@ -106,8 +106,12 @@
                             <mat-label>{{'Labels.choosenationality'|translate}}</mat-label>
                             <mat-select formControlName="nationalityId">
                                 <mat-form-field appearance="fill" class="select-element">
-                                    <input matInput #countySearch placeholder="Search nationality"
-                                        (input)="filterNationality(countySearch.value)" />
+                                    <input matInput #nationalitySearch placeholder="Search nationality"
+                                        (input)="filterNationality(nationalitySearch.value)" />
+                                    <button *ngIf="nationalitySearch.value" matSuffix mat-icon-button aria-label="Clear"
+                                        (click)="nationalitySearch.value=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
                                 </mat-form-field>
                                 <mat-option *ngFor="let nationality of nationalityOption;let i = index;"
                                     [value]="nationality.id">
@@ -186,6 +190,10 @@
                                 <mat-form-field appearance="fill" class="select-element">
                                     <input matInput #countySearch placeholder="Search County"
                                         (input)="filterCounty(countySearch.value)" />
+                                    <button *ngIf="countySearch.value" matSuffix mat-icon-button aria-label="Clear"
+                                        (click)="countySearch.value=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
                                 </mat-form-field>
                                 <mat-option *ngFor="let county of countyOptions; index as i" [value]="county.id">
                                     {{county.name}}
@@ -224,7 +232,39 @@
                                 required</mat-error>
                         </mat-form-field>
                     </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <!-- <mat-button-toggle-group appearance="legacy">
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" #fileUpload>
+                            </mat-button-toggle>
+                            <mat-button-toggle (click)="takeSelfie()">Take Selfie</mat-button-toggle>
+                        </mat-button-toggle-group>
+                        <webcam *ngIf="showWebCam" [height]="400" [width]="1000"></webcam> -->
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Selfie / Photo</label>
+                        <input type="file" class="file-input" #fileUpload>
+                        <!-- <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <button type="button" class="btn-file-upload" (click)="fileInput.click()">
+                                    <span>Photo Upload</span>
+                                    <mat-icon style="vertical-align: middle;">attach_file</mat-icon>
+                                    <input #fileInput type="file" style="display:none;" />
+                                </button>
+                                <webcam *ngIf="showWebCam" [height]="400" [width]="1000"></webcam>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group> -->
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4"></div>
+                    <div class="col-xl-4 col-md-4 col-sm-4"></div>
+                </div>
+
                 <mat-action-row>
                     <button mat-button type="submit" color="primary">Next</button>
                 </mat-action-row>

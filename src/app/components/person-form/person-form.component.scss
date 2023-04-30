@@ -45,3 +45,9 @@ mat-form-field {
 ::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
     background-color: #673ab7;
 }
+
+.btn-file-upload {
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+}

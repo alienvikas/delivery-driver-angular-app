@@ -12,6 +12,8 @@ import { UkTelephoneService } from 'src/app/services/uk-area-telephone/uk-teleph
 import { UkAreaTelephone } from 'src/app/models/ukAreaTelephone';
 import { LetterAutoIncrement } from 'src/app/commonMethods/letterAutoIncrement';
 import { MatDialogRef } from '@angular/material/dialog';
+import { UserService } from 'src/app/services/user/user.service';
+import { Country } from 'src/app/models/country';
 
 @Component({
   selector: 'app-register',
@@ -31,13 +33,15 @@ export class RegisterComponent implements OnInit {
   durationInSeconds = 5;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-  counter: number = 1252;
+  autoNumberList: any[] = [];
+  disableSelect = new FormControl(true);
 
   constructor(private fb: FormBuilder, private authService: AuthService,
     private roleService: RoleService, private countryService: CountryService,
     private ukAreaTelephoneService: UkTelephoneService,
     private dialogRef: MatDialogRef<RegisterComponent>,
-    private _snackBar: MatSnackBar, private router: Router) { }
+    private _snackBar: MatSnackBar, private router: Router,
+    private userService: UserService) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group(
@@ -48,12 +52,11 @@ export class RegisterComponent implements OnInit {
         email: new FormControl("", [Validators.required, Validators.email]),
         password: new FormControl("", [Validators.required, Validators.minLength(6)]),
         confirmPassword: ['', Validators.required],
-        //gender: new FormControl("", Validators.required),
         mobile: new FormControl("", [Validators.required, Validators.pattern('')]),
-        countryId: new FormControl("", Validators.required),
+        country: new FormControl("", Validators.required),
         memberSience: new FormControl(formatDate(new Date(), 'dd/MM/yyyy HH:mm:ss', 'en-GB')),
         isAccountLocked: new FormControl(false),
-        roleId: new FormControl("", Validators.required),
+        role: new FormControl("", Validators.required),
         ukAreaTelephone: new FormControl("", [Validators.required]),
         uniqueNumber: new FormControl()
       },
@@ -70,6 +73,7 @@ export class RegisterComponent implements OnInit {
     this.getAllCountries();
     this.getAllRoles();
     this.getAllUKAreaTelephone();
+    this.getAllUser();
     this.roleService.findNameBasedRole('DRI').subscribe(res => {
       this.selectedRole = res.id;
     });
@@ -99,7 +103,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getAllCountries() {
-    this.countryService.findAll().subscribe((res) => {
+    this.countryService.findAll().subscribe((res: Country[]) => {
       this.countries = res;
     });
   }
@@ -110,21 +114,30 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  getAllUser() {
+    this.userService.findAll().subscribe(res => {
+      this.autoNumberList = res.map((r: any) => r.uniqueNumber);
+    })
+  }
+
   generateAutoNumber() {
     let numberOfZeros = "000000";
-    const accType = "DRI";
-    const countryISO = "+44";
-    // this.countryService.findOne(this.registerForm.value["countryId"]).subscribe(res => {
-    //   countryISO = res.countryCode;
-    // });
-    const telephoneCode = this.registerForm.value["ukAreaTelephone"];
+    const accType = "POT DRI";
+    const countryISO = this.registerForm.value["country"].countryCode;
+    let counter = 0;
     let alphabets = "AA";
-    let incrementCounter = this.counter + 1;
+    if (this.autoNumberList.length > 0) {
+      counter = Number(this.autoNumberList[0].split(" ")[this.autoNumberList[0].split(" ").length - 1]);
+      alphabets = this.autoNumberList[0].split(" ")[this.autoNumberList[0].split(" ").length - 2];
+    }
+
+    const telephoneCode = this.registerForm.value["ukAreaTelephone"];
+    let incrementCounter = counter + 1;
     if (incrementCounter.toString().length > 6) {
       alphabets = LetterAutoIncrement.nextChar(alphabets);
       incrementCounter = 1;
     }
-    const subStr = numberOfZeros.substr(incrementCounter.toString().length);
+    const subStr = numberOfZeros.substring(incrementCounter.toString().length);
     let result = `${subStr}${incrementCounter}`;
 
     return `${accType} ${countryISO} ${telephoneCode} ${alphabets} ${result}`;
@@ -136,5 +149,13 @@ export class RegisterComponent implements OnInit {
       verticalPosition: this.verticalPosition,
       duration: this.durationInSeconds * 1000,
     });
+  }
+
+  disableCountryOption(country: Country) {
+    let isDisabled = true;
+    if (country.countryIcon.toLowerCase().trim() === "gb")
+      isDisabled = false;
+    return isDisabled;
+
   }
 }

@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelect } from '@angular/material/select';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { WebcamComponent } from 'ngx-webcam';
 import { CountryService } from 'src/app/services/country/country.service';
 import { CountyService } from 'src/app/services/county/county.service';
 import { HomeBaseService } from 'src/app/services/home-base/home-base.service';
@@ -19,7 +21,8 @@ export class PersonFormComponent implements OnInit {
     private introducerService: IntroducerService,
     private ddhomebaseService: HomeBaseService,
     private passportService: PassportService,
-    private countyService: CountyService) { }
+    private countyService: CountyService,
+    private dialog: MatDialog) { }
 
   selected = -1;
   isPersonFormSubmitted: boolean = false;
@@ -36,6 +39,7 @@ export class PersonFormComponent implements OnInit {
   step = 0;
   dropdownSettings: IDropdownSettings = {};
   isSubmitted: boolean = false;
+  showWebCam: boolean = false;
   @ViewChild('multiSelect', { static: true }) multiSelect!: MatSelect;
 
   ngOnInit(): void {
@@ -141,6 +145,25 @@ export class PersonFormComponent implements OnInit {
     this.passportService.findAll().subscribe((res) => {
       this.nationalityOption = res.filter((c: any) => c.countryName.toLowerCase().trim().includes(filter.toLowerCase().trim()));
     });
+  }
+
+  takeSelfie() {
+    this.openWebCamDialog('300ms', '1500ms');
+    //this.showWebCam = !this.showWebCam;
+  }
+
+  openWebCamDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialogRef = this.dialog.open(WebcamComponent, {
+      // width: '640px',
+       height: '600px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    })
   }
 
   get f() { return this.personForm.controls; }

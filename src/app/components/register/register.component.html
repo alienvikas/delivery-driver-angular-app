@@ -100,13 +100,14 @@
             <div class="col">
                 <mat-form-field fxFlexFill class="form-field mb-2">
                     <mat-label>{{'Labels.countrylivesin'|translate}}</mat-label>
-                    <mat-select placeholder="{{'Labels.countrylivesin'|translate}}" formControlName="countryId">
-                        <mat-option *ngFor="let country of countries" [value]="country.id">
+                    <mat-select #country placeholder="{{'Labels.countrylivesin'|translate}}" formControlName="country">
+                        <mat-option *ngFor="let country of countries; let i = index" [value]="country"
+                            [disabled]="disableCountryOption(country)">
                             <span class='{{country.countryIcon}}'></span>
                             {{country.name}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="f['countryId'].errors?.['required']">
+                    <mat-error *ngIf="f['country'].errors?.['required']">
                         {{'Validation.genderrequired'|translate}}
                     </mat-error>
                 </mat-form-field>
@@ -116,12 +117,12 @@
             <div class="col">
                 <mat-form-field fxFlexFill class="form-field mb-2">
                     <mat-label>{{'Labels.role'|translate}}</mat-label>
-                    <mat-select placeholder="{{'Labels.role'|translate}}" formControlName="roleId">
-                        <mat-option *ngFor="let role of roles" [value]="role.id">
+                    <mat-select placeholder="{{'Labels.role'|translate}}" formControlName="role">
+                        <mat-option *ngFor="let role of roles" [value]="role">
                             {{role.name}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="f['roleId'].errors?.['required']">
+                    <mat-error *ngIf="f['role'].errors?.['required']">
                         {{'Validation.genderrequired'|translate}}
                     </mat-error>
                 </mat-form-field>

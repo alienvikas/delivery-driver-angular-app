@@ -39,6 +39,7 @@
     "ngx-mat-select-search": "^7.0.1",
     "ngx-spinner": "^15.0.1",
     "ngx-toastr": "^16.1.0",
+    "ngx-webcam": "^0.4.1",
     "primeflex": "^3.3.0",
     "primeng": "^15.4.1",
     "rxjs": "~7.8.0",
