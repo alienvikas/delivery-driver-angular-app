@@ -16,7 +16,7 @@
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'Labels.chooseintroducer'|translate}}</mat-label>
-                            <mat-select formControlName="introducerId">
+                            <mat-select formControlName="introducer">
                                 <mat-option *ngFor="let introducer of introducerOptions" [value]="introducer">
                                     {{introducer.name}}
                                 </mat-option>
@@ -29,6 +29,19 @@
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="outline">
+                            <mat-label>Offical name</mat-label>
+                            <input matInput (blur)="onBlur()" formControlName="officalName">
+                            <mat-hint>
+                                <mat-icon matTooltip="Full Name as on Your passport
+                                    ">help
+                                    outline
+                                    icon</mat-icon>
+                            </mat-hint>
+                            <mat-error
+                                *ngIf="personForm.hasError('required','officalName') && personDetailForm.submitted">Offical
+                                name required</mat-error>
+                        </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
                             <mat-label>Select home base </mat-label>
                             <mat-select formControlName="ddHomeBaseId">
                                 <mat-option *ngFor="let homebase of ddHomeBaseOptions" [value]="homebase">
@@ -39,7 +52,7 @@
                                 *ngIf="personForm.hasError('required','ddHomeBaseId') && personDetailForm.submitted">Select
                                 home
                                 base</mat-error>
-                        </mat-form-field>
+                        </mat-form-field> -->
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="outline">
@@ -61,36 +74,6 @@
                 <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="outline">
-                            <mat-label>Offical name</mat-label>
-                            <input matInput (blur)="onBlur()" formControlName="officialName">
-                            <mat-hint>
-                                <mat-icon matTooltip="Full Name as on Your passport
-                                    ">help
-                                    outline
-                                    icon</mat-icon>
-                            </mat-hint>
-                            <mat-error
-                                *ngIf="personForm.hasError('required','officialName') && personDetailForm.submitted">Offical
-                                name required</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="outline">
-                            <mat-label>{{'Labels.mobile'|translate}}</mat-label>
-                            <input matInput (blur)="onBlur()" formControlName="mobileNumber"
-                                placeholder="+xxx xxxx xxxxxx">
-                            <mat-hint>
-                                <mat-icon matTooltip="it should be in the format +*** **** ******">help
-                                    outline
-                                    icon</mat-icon>
-                            </mat-hint>
-                            <mat-error *ngIf="f['mobileNumber'].hasError('required')">Mobile number required</mat-error>
-                            <mat-error *ngIf="f['mobileNumber'].hasError('pattern')">Only numbers are
-                                allowed</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-md-4 col-sm-4">
-                        <mat-form-field appearance="outline">
                             <mat-label>Date of birth</mat-label>
                             <input matInput (blur)="onBlur()" [matDatepicker]="picker" formControlName="dateOfBirth"
                                 placeholder="DD/MM/YYYY">
@@ -98,13 +81,10 @@
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
                     </div>
-                </div>
-
-                <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'Labels.choosenationality'|translate}}</mat-label>
-                            <mat-select formControlName="nationalityId">
+                            <mat-select formControlName="nationality">
                                 <mat-form-field appearance="fill" class="select-element">
                                     <input matInput #nationalitySearch placeholder="Search nationality"
                                         (input)="filterNationality(nationalitySearch.value)" />
@@ -114,7 +94,7 @@
                                     </button>
                                 </mat-form-field>
                                 <mat-option *ngFor="let nationality of nationalityOption;let i = index;"
-                                    [value]="nationality.id">
+                                    [value]="nationality">
                                     <mat-checkbox [checked]="selected === i" (change)="selected = i">
                                         <span class="fi fi-{{nationality.countryISO | lowercase}}">
                                         </span>
@@ -122,7 +102,35 @@
                                     </mat-checkbox>
                                 </mat-option>
                             </mat-select>
-                            <mat-error *ngIf="f['nationalityId'].hasError('required')">Select nationality</mat-error>
+                            <mat-error *ngIf="f['nationality'].hasError('required')">Select nationality</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'Labels.mobile'|translate}}</mat-label>
+                            <input matInput (blur)="onBlur()" formControlName="phoneNumber"
+                                placeholder="+xxx xxxx xxxxxx">
+                            <mat-hint>
+                                <mat-icon matTooltip="it should be in the format +*** **** ******">help
+                                    outline
+                                    icon</mat-icon>
+                            </mat-hint>
+                            <mat-error *ngIf="f['phoneNumber'].hasError('required')">Mobile number required</mat-error>
+                            <mat-error *ngIf="f['phoneNumber'].hasError('pattern')">Only numbers are
+                                allowed</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Telegram Number / Username</mat-label>
+                            <input matInput (blur)="onBlur()" formControlName="usernameOrTelegramNumber"
+                                placeholder="+xx xxx-xxx-xxxx">
+                            <mat-error *ngIf="f['usernameOrTelegramNumber'].hasError('pattern')">Only numbers are
+                                allowed
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
@@ -136,12 +144,10 @@
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="outline">
-                            <mat-label>Telegram Number / Username</mat-label>
-                            <input matInput (blur)="onBlur()" formControlName="usernameOrTelegramNumber"
-                                placeholder="+xx xxx-xxx-xxxx">
-                            <mat-error *ngIf="f['usernameOrTelegramNumber'].hasError('pattern')">Only numbers are
-                                allowed
-                            </mat-error>
+                            <mat-label>{{'Labels.homenamenumber'|translate}}</mat-label>
+                            <input matInput (blur)="onBlur()" formControlName="residenceNumber">
+                            <mat-error *ngIf="f['residenceNumber'].hasError('required')">Home/Residence name or number
+                                required</mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -164,8 +170,8 @@
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Town or City</mat-label>
-                            <input matInput formControlName="towncity">
-                            <mat-error *ngIf="f['towncity'].hasError('required')">Town or City required</mat-error>
+                            <input matInput formControlName="townOrCity">
+                            <mat-error *ngIf="f['townOrCity'].hasError('required')">Town or City required</mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -186,16 +192,16 @@
                         </ng-multiselect-dropdown> -->
                         <mat-form-field appearance="outline" class="select-element">
                             <mat-label>County</mat-label>
-                            <mat-select formControlName="countyId" [multiple]="true">
-                                <mat-form-field appearance="fill" class="select-element">
+                            <mat-select formControlName="county" [multiple]="false">
+                                <!-- <mat-form-field appearance="fill" class="select-element">
                                     <input matInput #countySearch placeholder="Search County"
                                         (input)="filterCounty(countySearch.value)" />
                                     <button *ngIf="countySearch.value" matSuffix mat-icon-button aria-label="Clear"
                                         (click)="countySearch.value=''">
                                         <mat-icon>close</mat-icon>
                                     </button>
-                                </mat-form-field>
-                                <mat-option *ngFor="let county of countyOptions; index as i" [value]="county.id">
+                                </mat-form-field> -->
+                                <mat-option *ngFor="let county of countyOptions; index as i" [value]="county">
                                     {{county.name}}
                                 </mat-option>
                             </mat-select>
@@ -233,6 +239,22 @@
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Country</mat-label>
+                            <mat-select formControlName="country" [multiple]="false">
+                                <!-- <mat-form-field appearance="fill" class="select-element">
+                                    <input matInput #countrySearch placeholder="Search Country"
+                                        (input)="filterCounty(countrySearch.value)" />
+                                    <button *ngIf="countySearch.value" matSuffix mat-icon-button aria-label="Clear"
+                                        (click)="countrySearch.value=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field> -->
+                                <mat-option *ngFor="let country of countryOptions; index as i" [value]="country">
+                                    {{country.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                         <!-- <mat-button-toggle-group appearance="legacy">
                             <mat-button-toggle>
                                 <input type="file" class="file-input" #fileUpload>
@@ -246,7 +268,24 @@
                 <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <label>Selfie / Photo</label>
-                        <input type="file" class="file-input" #fileUpload>
+                        <!-- <input type="file" class="file-input" #fileUpload formControlName="personPhoto"> -->
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="personPhoto"
+                                    [accept]="requiredFileType" (change)="onFileSelected($event,'personPhoto')"
+                                    #fileUpload>
+                                <div class="file-upload">
+                                    {{fileName || "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" (click)="fileUpload.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+
                         <!-- <mat-button-toggle-group #photoUploadGroup appearance="legacy">
                             <mat-button-toggle (click)="takeSelfie()">
                                 Take Selfie <mat-icon>camera_alt</mat-icon>
@@ -261,16 +300,26 @@
                             </mat-button-toggle>
                         </mat-button-toggle-group> -->
                     </div>
-                    <div class="col-xl-4 col-md-4 col-sm-4"></div>
-                    <div class="col-xl-4 col-md-4 col-sm-4"></div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <!-- <input type="file" class="file-input" [accept]="requiredFileType"
+                            (change)="onFileSelected($event)" #fileUpload>
+                        <div class="file-upload">
+                            {{fileName || "No file uploaded yet."}}
+                            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                        </div> -->
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+
+                    </div>
                 </div>
 
-                <mat-action-row>
-                    <button mat-button type="submit" color="primary">Next</button>
-                </mat-action-row>
+                <!-- <mat-action-row>
+                    <button mat-button type="button" color="primary">Next</button>
+                </mat-action-row> -->
 
             </mat-expansion-panel>
-
 
             <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
                 <mat-expansion-panel-header>
@@ -285,14 +334,458 @@
                 <div class="row">
                     <div class="col-xl-4 col-md-4 col-sm-4">
                         <label>Birth Certificate</label>
-                        <input type="file" class="file-input" #fileUpload>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="birthCertificate"
+                                    (change)="onFileSelected($event,'birthCertificate')" [accept]="requiredFileType"
+                                    #fileUploadBirthCertificate>
+                                <div class="file-upload">
+                                    {{fileUploadBirthCertificate.value.
+                                    substring(fileUploadBirthCertificate.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary"
+                                        (click)="fileUploadBirthCertificate.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nationality</mat-label>
+                            <mat-select formControlName="nationalityIdentification">
+                                <mat-option *ngFor="let nationality of nationalityOption;let i = index;"
+                                    [value]="nationality">
+                                    <span class="fi fi-{{nationality.countryISO | lowercase}}">
+                                    </span>
+                                    {{nationality.countryName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Passport I.D.</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="passportId"
+                                    (change)="onFileSelected($event,'passportId')" [accept]="requiredFileType"
+                                    #fileUploadPassportId>
+                                <div class="file-upload">
+                                    {{fileUploadPassportId.value.
+                                    substring(fileUploadPassportId.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" id="btnFileUpload" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadPassportId.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
                     </div>
                 </div>
 
-                <mat-action-row>
-                    <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                    <button mat-button color="primary">Next</button>
-                </mat-action-row>
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Identity Card (Front)</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="identityCardFront"
+                                    (change)="onFileSelected($event,'identityCardFront')" [accept]="requiredFileType"
+                                    #fileUploadIdentityCardFront>
+                                <div class="file-upload">
+                                    {{fileUploadIdentityCardFront.value.
+                                    substring(fileUploadIdentityCardFront.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary"
+                                        (click)="fileUploadIdentityCardFront.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Identity Card (Back)</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="identityCardBack"
+                                    (change)="onFileSelected($event,'identityCardBack')" [accept]="requiredFileType"
+                                    #fileUploadIdentityCardBack>
+                                <div class="file-upload">
+                                    {{fileUploadIdentityCardBack.value.
+                                    substring(fileUploadIdentityCardBack.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary"
+                                        (click)="fileUploadIdentityCardBack.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Visa (Front)</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="visaFront"
+                                    (change)="onFileSelected($event,'visaFront')" [accept]="requiredFileType"
+                                    #fileUploadVisaFront>
+                                <div class="file-upload">
+                                    {{fileUploadVisaFront.value.
+                                    substring(fileUploadVisaFront.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" (click)="fileUploadVisaFront.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Visa (Back)</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="visaBack"
+                                    (change)="onFileSelected($event,'visaBack')" [accept]="requiredFileType"
+                                    #fileUploadVisaBack>
+                                <div class="file-upload">
+                                    {{fileUploadVisaBack.value.
+                                    substring(fileUploadVisaBack.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" (click)="fileUploadVisaBack.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Utility Bill 1</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="firstUtilityBill"
+                                    (change)="onFileSelected($event,'firstUtilityBill')" [accept]="requiredFileType"
+                                    #fileUploadFirstUtilityBill>
+                                <div class="file-upload">
+                                    {{fileUploadFirstUtilityBill.value.
+                                    substring(fileUploadFirstUtilityBill.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary"
+                                        (click)="fileUploadFirstUtilityBill.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Utility Bill 2</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="secondUtilityBill"
+                                    (change)="onFileSelected($event,'secondUtilityBill')" [accept]="requiredFileType"
+                                    #fileUploadSecondUtilityBill>
+                                <div class="file-upload">
+                                    {{fileUploadSecondUtilityBill.value.
+                                    substring(fileUploadSecondUtilityBill.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary"
+                                        (click)="fileUploadSecondUtilityBill.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>HMRC Communication 1</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="firstHMRCCommunication"
+                                    (change)="onFileSelected($event,'firstHMRCCommunication')"
+                                    [accept]="requiredFileType" #fileUploadFirstHMRCCommunication>
+                                <div class="file-upload">
+                                    {{fileUploadFirstHMRCCommunication.value.
+                                    substring(fileUploadFirstHMRCCommunication.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadFirstHMRCCommunication.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>HMRC Communication 2</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="secondHMRCCommunication"
+                                    (change)="onFileSelected($event,'secondHMRCCommunication')"
+                                    [accept]="requiredFileType" #fileUploadSecondHMRCCommunication>
+                                <div class="file-upload">
+                                    {{fileUploadSecondHMRCCommunication.value.
+                                    substring(fileUploadSecondHMRCCommunication.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadSecondHMRCCommunication.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Other 1</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="other1"
+                                    (change)="onFileSelected($event,'other1')" [accept]="requiredFileType"
+                                    #fileUploadOther1>
+                                <div class="file-upload">
+                                    {{fileUploadOther1.value.
+                                    substring(fileUploadOther1.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadOther1.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Other 2</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="other2"
+                                    (change)="onFileSelected($event,'other2')" [accept]="requiredFileType"
+                                    #fileUploadOther2>
+                                <div class="file-upload">
+                                    {{fileUploadOther2.value.
+                                    substring(fileUploadOther2.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadOther2.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Other 3</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="other3"
+                                    (change)="onFileSelected($event,'other3')" [accept]="requiredFileType"
+                                    #fileUploadOther3>
+                                <div class="file-upload">
+                                    {{fileUploadOther3.value.
+                                    substring(fileUploadOther3.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadOther3.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Other 4</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="other4"
+                                    (change)="onFileSelected($event,'other4')" [accept]="requiredFileType"
+                                    #fileUploadOther4>
+                                <div class="file-upload">
+                                    {{fileUploadOther4.value.
+                                    substring(fileUploadOther4.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadOther4.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>UK Driving Licence (Front)</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="ukDrivingLicenceFront"
+                                    (change)="onFileSelected($event,'ukDrivingLicenceFront')"
+                                    [accept]="requiredFileType" #fileUploadUKDrivingLicenceFront>
+                                <div class="file-upload">
+                                    {{fileUploadUKDrivingLicenceFront.value.
+                                    substring(fileUploadUKDrivingLicenceFront.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadUKDrivingLicenceFront.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>UK Driving Licence (Back)</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="ukDrivingLicenceBack"
+                                    (change)="onFileSelected($event,'ukDrivingLicenceBack')" [accept]="requiredFileType"
+                                    #fileUploadUKDrivingLicenceBack>
+                                <div class="file-upload">
+                                    {{fileUploadUKDrivingLicenceBack.value.
+                                    substring(fileUploadUKDrivingLicenceBack.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadUKDrivingLicenceBack.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Foreign Driving Licence (Front)</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="foreignDrivingLicenceFront"
+                                    (change)="onFileSelected($event,'foreignDrivingLicenceFront')"
+                                    [accept]="requiredFileType" #fileUploadForeignDrivingLicenceFront>
+                                <div class="file-upload">
+                                    {{fileUploadForeignDrivingLicenceFront.value.
+                                    substring(fileUploadForeignDrivingLicenceFront.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadForeignDrivingLicenceFront.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Foreign Driving Licence (Back)</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="foreignDrivingLicenceBack"
+                                    (change)="onFileSelected($event,'foreignDrivingLicenceBack')"
+                                    [accept]="requiredFileType" #fileUploadForeignDrivingLicenceBack>
+                                <div class="file-upload">
+                                    {{fileUploadForeignDrivingLicenceBack.value.
+                                    substring(fileUploadForeignDrivingLicenceBack.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadForeignDrivingLicenceBack.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4">
+                        <label>Origin of Foreign Licence</label>
+                        <mat-button-toggle-group #photoUploadGroup appearance="legacy">
+                            <mat-button-toggle (click)="takeSelfie()">
+                                Take Selfie <mat-icon>camera_alt</mat-icon>
+                            </mat-button-toggle>
+                            <mat-button-toggle>
+                                <input type="file" class="file-input" formControlName="originForeignDrivingLicence"
+                                    (change)="onFileSelected($event,'originForeignDrivingLicence')"
+                                    [accept]="requiredFileType" #fileUploadOriginForeignDrivingLicence>
+                                <div class="file-upload">
+                                    {{fileUploadOriginForeignDrivingLicence.value.
+                                    substring(fileUploadOriginForeignDrivingLicence.value
+                                    .lastIndexOf("\\")).replace("\\","")|| "No file uploaded yet."}}
+                                    <button type="button" mat-icon-button color="primary" class="btn-upload"
+                                        (click)="fileUploadOriginForeignDrivingLicence.click()">
+                                        <mat-icon>cloud_upload</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-4"></div>
+                </div>
+
+                <!-- <mat-action-row>
+                    <button type="button" mat-button color="warn" (click)="prevStep()">Previous</button>
+                    <button type="button" mat-button color="primary">Next</button>
+                </mat-action-row> -->
             </mat-expansion-panel>
 
             <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
@@ -339,10 +832,10 @@
                     </div>
                 </div>
 
-                <mat-action-row>
+                <!-- <mat-action-row>
                     <button mat-button color="warn" (click)="prevStep()">Previous</button>
                     <button mat-button color="primary">End</button>
-                </mat-action-row>
+                </mat-action-row> -->
             </mat-expansion-panel>
 
             <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
@@ -377,6 +870,9 @@
                     </div>
                 </div>
             </mat-expansion-panel>
+
+            <button type="submit" mat-raised-button color="primary">Save</button>
+            <button type="reset" mat-raised-button color="warn">Cancel</button>
         </form>
     </mat-accordion>
 </div>
