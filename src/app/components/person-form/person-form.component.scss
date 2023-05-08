@@ -54,14 +54,30 @@ mat-form-field {
 
 .file-input {
     display: none;
-    //visibility: hidden;
 }
 
-// .file-upload {
-//     display: flex;
-// }
+.txt {
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.6);
+}
 
-// .btn-upload {
-//     position: relative;
-//     bottom: 0.5rem;
-// }
+.file-upload-btn {
+    border: none;
+    background: transparent;
+}
+
+.material-icons {
+    vertical-align: top;
+}
+
+.horizontal-mat-list-item {
+    //height: auto;
+}
+
+.mat-list {
+    //display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    border-radius: 4px;
+    height: 55px !important;
+}

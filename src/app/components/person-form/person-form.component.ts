@@ -6,7 +6,6 @@ import { MatSelect } from '@angular/material/select';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { WebcamComponent } from 'ngx-webcam';
 import { Observable, ReplaySubject } from 'rxjs';
-import { ConvertFile } from 'src/app/commonMethods/convertFileToBinary';
 import { FormInitialize } from 'src/app/form-initialization';
 import { CountryService } from 'src/app/services/country/country.service';
 import { CountyService } from 'src/app/services/county/county.service';
@@ -18,7 +17,8 @@ import { PersonalDetailService } from 'src/app/services/personal-detail/personal
 @Component({
   selector: 'app-person-form',
   templateUrl: './person-form.component.html',
-  styleUrls: ['./person-form.component.scss']
+  styleUrls: ['./person-form.component.scss',
+    '../../../../node_modules/bootstrap/dist/css/bootstrap.css']
 })
 export class PersonFormComponent implements OnInit {
 
@@ -77,9 +77,9 @@ export class PersonFormComponent implements OnInit {
     this.step = index;
   }
 
-  // nextStep() {
-  //   this.step++;
-  // }
+  nextStep() {
+    this.step++;
+  }
 
   prevStep() {
     this.step--;
