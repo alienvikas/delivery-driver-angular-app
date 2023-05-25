@@ -1,0 +1,66 @@
+<!-- #region filter town/city -->
+<div class="row">
+    <div class="col">
+        <mat-form-field appearance="fill">
+            <mat-label>{{'Labels.filter'|translate}}</mat-label>
+            <input matInput placeholder="Ex. Mia" #input>
+        </mat-form-field>
+    </div>
+</div>
+<!-- #endregion -->
+
+<!-- #region CRUD operation on table -->
+<div class="mat-elevation-z8">
+    <div class="container-fluid divAction">
+        <div class="row">
+            <div class="col">
+                <button mat-flat-button>
+                    <mat-icon>add</mat-icon>
+                    {{'Labels.addtownorcity'|translate}}
+                </button>
+                <button mat-flat-button (click)="uploadTownOrCityList()">
+                    <mat-icon>attachment</mat-icon>
+                    {{'Labels.uploadtown'|translate}}
+                </button>
+                <button mat-flat-button
+                    (click)="commonService.exportFile(townOrCityDataSource,displayedColumns,'Countrt list - Delivery Driver')">
+                    <mat-icon>import_export</mat-icon>
+                    {{'Labels.exportcountry'|translate}}
+                </button>
+                <button mat-flat-button style="float: right;" >
+                    <mat-icon class="red-icon">delete</mat-icon>
+                    {{'Labels.delete'|translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <table #countryMatTable mat-table [dataSource]="townOrCityDataSource" matSort>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+                <a>
+                    <mat-icon class="darkblue-icon">edit</mat-icon>
+                </a>
+                <a>
+                    <mat-icon class="red-icon">delete</mat-icon>
+                </a>
+            </td>
+        </ng-container>
+
+        <ng-container matSortDisabled matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Labels.name'|translate}} </th>
+            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">{{'Labels.nodatamatching'|translate}} "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+<!-- #endregion -->

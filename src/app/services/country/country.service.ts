@@ -10,9 +10,9 @@ import { CrudService } from '../generic-service/crud.service';
   providedIn: 'root'
 })
 export class CountryService extends CrudService<Country, string>{
-  // httpOptions = {
-  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  // };
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   // constructor(private http: HttpClient,
   //   private notificationService: NotificationService) { }
 
@@ -84,5 +84,8 @@ export class CountryService extends CrudService<Country, string>{
 
   constructor(protected override _http: HttpClient) {
     super(_http, `${environment.baseUrl}/country`);
+  }
+  getCountryBasedOnArea(areaName: string) {
+    return this._http.post<Country>(environment.baseUrl + '/country/getCountryBasedOnArea?areaName=' + areaName, this.httpOptions);
   }
 }

@@ -11,9 +11,9 @@ import { CrudService } from '../generic-service/crud.service';
   providedIn: 'root'
 })
 export class CountyService extends CrudService<County, string> {
-  // httpOptions = {
-  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  // };
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   // constructor(private http: HttpClient,
   //   private notificationService: NotificationService) { }
 
@@ -70,7 +70,11 @@ export class CountyService extends CrudService<County, string> {
   //     }));
   // }
 
-  constructor(protected override _http: HttpClient){
+  constructor(protected override _http: HttpClient) {
     super(_http, `${environment.baseUrl}/county`);
+  }
+
+  getCountyBasedOnArea(areaName: string) {
+    return this._http.post<any>(environment.baseUrl + '/county/getCountyBasedOnArea?areaName=' + areaName, this.httpOptions);
   }
 }

@@ -11,6 +11,9 @@ import { PassportListComponent } from './components/admin-view/passport-list/pas
 import { RoleListComponent } from './components/admin-view/role-list/role-list.component';
 import { HomeComponent } from './components/popup-dialog/home/home.component';
 import { UkAreaTelephoneListComponent } from './components/admin-view/uk-area-telephone-list/uk-area-telephone-list.component';
+import { VehicleTypeComponent } from './components/admin-view/vehicle-type/vehicle-type.component';
+import { VehicleManufactureComponent } from './components/admin-view/vehicle-manufacture/vehicle-manufacture.component';
+import { TownCityListComponent } from './components/admin-view/town-city-list/town-city-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -23,7 +26,10 @@ const routes: Routes = [
   { path: 'passportList', component: PassportListComponent, canActivate: [AuthService] },
   { path: 'roleList', component: RoleListComponent, canActivate: [AuthService] },
   { path: 'welcome', component: HomeComponent, canActivate: [AuthService] },
-  { path: 'ukareatelephone', component: UkAreaTelephoneListComponent, canActivate: [AuthService] }
+  { path: 'ukareatelephone', component: UkAreaTelephoneListComponent, canActivate: [AuthService] },
+  { path: 'vehicletype', component: VehicleTypeComponent, canActivate: [AuthService] },
+  { path: 'vehiclemanufacture', component: VehicleManufactureComponent, canActivate: [AuthService] },
+  { path: 'townorcity', component: TownCityListComponent, canActivate: [AuthService] },
 ];
 
 @NgModule({

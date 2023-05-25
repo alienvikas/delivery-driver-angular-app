@@ -51,8 +51,8 @@ export class UkAreaTelephoneListComponent {
       this.spinner.hide();
     })
   }
-  editUKPhoneCode(dataRow: any) {
-
+  editUKArea(dataRow: any) {
+    
   }
 
   deleteConfirm(dataRow: any) {

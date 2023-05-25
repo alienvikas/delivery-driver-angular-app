@@ -18,7 +18,8 @@ import { NotificationService } from 'src/app/services/notification/notification.
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.scss']
+  styleUrls: ['./log-in.component.scss',
+  '../../../../node_modules/bootstrap/dist/css/bootstrap.css']
 })
 export class LogInComponent implements OnInit {
   stateOptions: any;

@@ -1,3 +1,4 @@
+import { group } from "@angular/animations";
 import { Injectable } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 
@@ -10,7 +11,7 @@ export class FormInitialize {
                 introducer: new FormControl(null, [Validators.required]),
                 knownAs: new FormControl(null, [Validators.required]),
                 dateOfBirth: new FormControl(null, [Validators.required]),
-                personPhoto: new FormControl(null, [Validators.required]),
+                personPhoto: new FormControl(null, [Validators.nullValidator]),
                 nationality: new FormControl(null, [Validators.required]),
                 usernameOrTelegramNumber: new FormControl(null, [Validators.pattern("^[+][0-9]{12}$")]),
                 emailAddress: new FormControl(null, [Validators.required, Validators.email]),
@@ -46,8 +47,35 @@ export class FormInitialize {
                 foreignDrivingLicenceBack: new FormControl(null),
                 originForeignDrivingLicence: new FormControl(null),
                 // ---------------VEHICLE DETAIL----------------------
+                vehicleType: new FormControl(null, [Validators.required]),
+                vehicleManufacture: new FormControl(null, [Validators.required]),
+                vehicleModel: new FormControl(null, [Validators.required]),
+                vehicleRegistrationNumber: new FormControl(null, [Validators.required]),
+                vehicleEngineSize: new FormControl(null, [Validators.required]),
+                vehiclePowerSource: new FormControl(null, [Validators.required]),
+                v5FrontImage: new FormControl(null),
+                v5BackImage: new FormControl(null),
+                vehicleInsuranceCompany: new FormControl(null, [Validators.required]),
+                vehicleInsuranceCompanyPhoto: new FormControl(null),
+                nextMOTDue: new FormControl(null, [Validators.required]),
+                MOTPhoto: new FormControl(null)
                 //workingCountry: new FormControl(null, [Validators.required])
             }
         )
+    }
+
+    public static initializeWebCamForm(fb: FormBuilder) {
+        return fb.group({
+            fileName: new FormControl(null, [Validators.required])
+        })
+    }
+
+    public static initializeUKAreaForm(fb: FormBuilder) {
+        return fb.group({
+            name: new FormControl(null, [Validators.required]),
+            phoneCode: new FormControl(null, [Validators.required]),
+            county: new FormControl(null, [Validators.required]),
+            country: new FormControl(null, [Validators.required])
+        })
     }
 }

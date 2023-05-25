@@ -38,6 +38,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { WebcamModule } from 'ngx-webcam';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 // Available options
 interface NgxSpinnerConfig {
@@ -83,7 +84,8 @@ const materialModules = [
   MatDialogModule,
   NgxMatSelectSearchModule,
   NgMultiSelectDropDownModule,
-  WebcamModule
+  WebcamModule,
+  AutocompleteLibModule
 ];
 
 @NgModule({
