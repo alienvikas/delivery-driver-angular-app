@@ -1,0 +1,66 @@
+<h2 class="divAction" mat-dialog-title>
+    Take photo
+</h2>
+<mat-divider></mat-divider>
+<form [formGroup]="webCamForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="mat-typography">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm">
+                    <mat-form-field appearance="outline" style="width: 25rem;">
+                        <mat-label>Create File Name</mat-label>
+                        <input #fileNameTxt matInput formControlName="fileName">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="video-container" *ngIf="!error">
+                        <video [class.show]="!isCaptured" [class.hide]="isCaptured" #video id="video" [width]="WIDTH"
+                            [height]="HEIGHT" autoplay></video>
+                        <canvas [class.show]="isCaptured" [class.hide]="!isCaptured" #canvas id="canvas" [width]="WIDTH"
+                            [height]="HEIGHT"></canvas>
+                    </div>
+
+                    <div class="snap-container">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <!-- <div class="col-sm" *ngIf="!isCaptured">
+                                    <button type="submit" [disabled]="fileNameTxt.value==''" mat-raised-button
+                                        (click)="capture()">Snap
+                                        Photo</button>
+                                </div>
+                                <div class="col-sm" *ngIf="isCaptured">
+                                    <button mat-raised-button (click)="removeCurrent()">Take
+                                        Another ?</button>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div *ngIf="error" class="text-danger mt-4">
+                            {{ error }}. Please click refresh on stackblitz
+                            <div class="mt-5">
+                                <img src="https://trungk18.com/7e0976255739e721501803ee074f1f94/camera.gif" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <img [src]="src" *ngFor="let src of captures; let idx = index" height="50"
+                        (click)="setPhoto(idx)" />
+                </div>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="submit" *ngIf="!isCaptured" [disabled]="fileNameTxt.value==''" mat-raised-button
+            (click)="capture()">Snap
+            Photo</button>
+        <button *ngIf="isCaptured" mat-raised-button (click)="removeCurrent()">Take
+            Another ?</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!isCaptured">Submit</button>
+        <button type="button" mat-button mat-raised-button mat-dialog-close color="warn"
+            (click)="stopCamera()">Cancel</button>
+    </mat-dialog-actions>
+</form>

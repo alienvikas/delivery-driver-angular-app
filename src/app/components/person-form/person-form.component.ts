@@ -1,18 +1,27 @@
 import { JsonPipe } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelect } from '@angular/material/select';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { WebcamComponent } from 'ngx-webcam';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, map, startWith } from 'rxjs';
 import { FormInitialize } from 'src/app/form-initialization';
 import { CountryService } from 'src/app/services/country/country.service';
 import { CountyService } from 'src/app/services/county/county.service';
 import { HomeBaseService } from 'src/app/services/home-base/home-base.service';
 import { IntroducerService } from 'src/app/services/introducer/introducer.service';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 import { PassportService } from 'src/app/services/passport/passport.service';
 import { PersonalDetailService } from 'src/app/services/personal-detail/personal-detail.service';
+import { VehicleManufactureService } from 'src/app/services/vehicle-manufacture/vehicle-manufacture.service';
+import { VehicleTypeService } from 'src/app/services/vehicle-type/vehicle-type.service';
+import { WebCamComponent } from '../popup-dialog/web-cam/web-cam.component';
+import { UkTelephoneService } from 'src/app/services/uk-area-telephone/uk-telephone.service';
+import { UkAreaTelephone } from 'src/app/models/ukAreaTelephone';
+import { VehicleEngineService } from 'src/app/services/vehicle-engine/vehicle-engine.service';
+import { VehicleInsuranceCompanyService } from 'src/app/services/vehicle-insurance-company/vehicle-insurance-company.service';
+import { VehicleModelService } from 'src/app/services/vehicle-model/vehicle-model.service';
 
 @Component({
   selector: 'app-person-form',
@@ -20,33 +29,39 @@ import { PersonalDetailService } from 'src/app/services/personal-detail/personal
   styleUrls: ['./person-form.component.scss',
     '../../../../node_modules/bootstrap/dist/css/bootstrap.css']
 })
-export class PersonFormComponent implements OnInit {
+export class PersonFormComponent implements OnInit, AfterViewInit {
 
-  constructor(private fb: FormBuilder, private countryService: CountryService,
-    private introducerService: IntroducerService,
-    private ddhomebaseService: HomeBaseService,
-    private passportService: PassportService,
-    private countyService: CountyService,
-    private personalDetailService: PersonalDetailService,
-    private dialog: MatDialog) { }
-
-  selected = -1;
-  isPersonFormSubmitted: boolean = false;
-  personForm!: FormGroup;
-  selectedNationality!: string;
+  /* #region Properties */
+  ukAreaOptions: any[] = [];
   nationalityOption: any = [];
   ddHomeBaseOptions: any = [];
   countyOptions: any = [];
   countryOptions: any = [];
-  selectedHomeBase!: string;
   introducerOptions: any = [];
+  vehicleTypeOption: any[] = [];
+  vehicleManufactureOption: any[] = [];
+  vehicleEngineOption: any[] = [];
+  vehicleInsuranceCompanyOptions: any[] = [];
+  vehicleModelOptions: any[] = [];
+  vehiclePowerSource: string[] = ['Diesel', 'Petrol', 'LPG', 'Electric', 'Hydrogen', 'Pedal'];;
+  vehicleType: string[] = ['Van', 'Car', 'Motor Cycle', 'Bicycle'];
+
+  isPersonFormSubmitted: boolean = false;
+  isSubmitted: boolean = false;
+  showWebCam: boolean = false;
+
+  selected = -1;
+  personForm!: FormGroup;
+  selectedNationality!: string;
+  selectedHomeBase!: string;
   selectedIntroducer!: string;
   workingCountryList = ['U.K', 'France'];
   workingCountrys = new FormControl('', [Validators.required]);
   step = 0;
   dropdownSettings: IDropdownSettings = {};
-  isSubmitted: boolean = false;
-  showWebCam: boolean = false;
+  filteredArea: Observable<UkAreaTelephone[]>;
+  keyword = 'name';
+
   @ViewChild('multiSelect', { static: true }) multiSelect!: MatSelect;
 
   fileName = '';
@@ -54,14 +69,52 @@ export class PersonFormComponent implements OnInit {
   formData = new FormData();
   personPhoto!: File;
   fileList: any[] = [];
+  /* #endregion */
+
+  constructor(private fb: FormBuilder, private notificationService: NotificationService,
+    private countryService: CountryService,
+    private introducerService: IntroducerService,
+    private ddhomebaseService: HomeBaseService,
+    private passportService: PassportService,
+    private countyService: CountyService,
+    private personalDetailService: PersonalDetailService,
+    private vehicleTypeService: VehicleTypeService,
+    private vehicleManufactureService: VehicleManufactureService,
+    private ukAreaService: UkTelephoneService,
+    private vehicleEngineService: VehicleEngineService,
+    private vehicleInsuranceCompanyService: VehicleInsuranceCompanyService,
+    private vehicleModelService: VehicleModelService,
+    private eleRef: ElementRef,
+    private dialog: MatDialog) {
+    /* #region Form Initialization */
+    this.personForm = FormInitialize.initializePersonalForm(this.fb);
+    /* #endregion */
+    this.filteredArea = this.personForm.controls["townOrCity"].valueChanges.pipe(
+      startWith(''),
+      map(area =>
+        (area ? this._filterArea(area) : this.ukAreaOptions.slice())),
+    );
+  }
+  ngAfterViewInit(): void {
+    let ele = this.eleRef.nativeElement.querySelector("data-isDisabled");
+  }
 
   ngOnInit(): void {
+    /* #region Calling Get Methods */
+    this.getVehicleManufacture();
+    this.getVehicleType();
     this.getAllNationality();
     this.getAllIntroducer();
     this.getAllDdHomeBase();
     this.getAllCounties();
-    this.getAllCountries();
-    this.personForm = FormInitialize.initializePersonalForm(this.fb);
+    //this.getAllCountries();
+    this.getAllUkArea();
+    this.getAllVehicleEngine();
+    this.getAllVehicleInsuranceCompany();
+    this.getAllVehicleModel();
+    /* #endregion */
+
+    /* #region Multi-Select Dropdown Initialization */
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -71,9 +124,10 @@ export class PersonFormComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+    /* #endregion */
   }
 
-  setStep(index: number) {
+  setStep(index: number, item?: any) {
     this.step = index;
   }
 
@@ -83,6 +137,20 @@ export class PersonFormComponent implements OnInit {
 
   prevStep() {
     this.step--;
+  }
+
+  /* #region Get Methods */
+  getVehicleManufacture() {
+    this.vehicleManufactureService.findAll().subscribe({
+      next: (res) => { this.vehicleManufactureOption = res; },
+      error: (err) => { this.notificationService.showError("Something went wrong. Please try again later. !!!", "Error") }
+    })
+  }
+
+  getVehicleType() {
+    this.vehicleTypeService.findAll().subscribe(res => {
+      this.vehicleTypeOption = res;
+    })
   }
 
   getAllNationality() {
@@ -115,6 +183,31 @@ export class PersonFormComponent implements OnInit {
     })
   }
 
+  getAllUkArea() {
+    this.ukAreaService.findAll().subscribe(res => {
+      this.ukAreaOptions = res;
+    })
+  }
+
+  getAllVehicleEngine() {
+    this.vehicleEngineService.findAll().subscribe(res => {
+      this.vehicleEngineOption = res;
+    })
+  }
+
+  getAllVehicleInsuranceCompany() {
+    this.vehicleInsuranceCompanyService.findAll().subscribe(res => {
+      this.vehicleInsuranceCompanyOptions = res;
+    })
+  }
+
+  getAllVehicleModel() {
+    this.vehicleModelService.findAll().subscribe(res => {
+      this.vehicleModelOptions = res;
+    })
+  }
+  /* #endregion */
+
   onClick() {
     this.isSubmitted = true;
   }
@@ -135,43 +228,37 @@ export class PersonFormComponent implements OnInit {
     });
   }
 
-  takeSelfie() {
-    this.openWebCamDialog('300ms', '1500ms');
-    //this.showWebCam = !this.showWebCam;
+  takeSelfie(fileUploadElement: any) {
+    this.openWebCamDialog(fileUploadElement);
   }
 
-  openWebCamDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    const dialogRef = this.dialog.open(WebcamComponent, {
-      // width: '640px',
-      height: '600px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-      disableClose: true
+  openWebCamDialog(fileUploadElement: any): void {
+    const dialogRef = this.dialog.open(WebCamComponent, {
+      width: '37rem',
+      disableClose: true,
+      data: fileUploadElement
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      const dataTransfer = new DataTransfer();
+      let file = new File([result.fileUploadProp.base64String],
+        result.fileUploadProp.fileName + '.png', {
+        type: "image/png",
+        lastModified: new Date().getTime()
+      });
+      dataTransfer.items.add(file);
+      fileUploadElement.files = dataTransfer.files;
+      this.fileList.push({
+        "propName": fileUploadElement.getAttribute("formcontrolname"),
+        "base64": result.fileUploadProp.base64String.replace(/^data:image\/[a-z]+;base64,/, "")
+      })
     })
   }
 
-  // onFileSelected(event: any, formControlName: string) {
-  //   let file: File = event.target.files[0];
-  //   let reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onload = () => {
-  //     let base64String = reader.result as string;
-  //     this.personForm.value[formControlName] = base64String.substring(base64String.indexOf(',')).replace(',', "");
-  //   };
-  //   if (file) {
-  //     this.fileName = file.name;
-  //   }
-
-  // }
   onFileSelected(event: any, formControlName: string) {
     let file: File = event.target.files[0];
     this.convertFile(file).subscribe(base64 => {
       this.fileList.push({ "propName": formControlName, "base64": base64 });
-      //this.personForm.value[formControlName] = base64;
     })
     if (file) {
       this.fileName = file.name;
@@ -186,24 +273,72 @@ export class PersonFormComponent implements OnInit {
   }
 
   onPersonDetailSubmit(formGroup: any) {
+    this.setFilesIntoFormControls();
     if (this.personForm.valid) {
-      //const reader = new FileReader();
-      //this.personForm.value["personPhoto"] = this.personPhoto;
-      // let keys = Object.keys(this.personForm.value);
-      // let values = [] = Object.values(this.personForm.value);
-      // let formData = new FormData();
-      // for (let i = 0; i <= keys.length - 1; i++) {
-      //   formData.append(keys[i], values[i]);
-      // }
-      for (let index = 0; index < this.fileList.length; index++) {
-        this.personForm.value[this.fileList[index].propName] = this.fileList[index].base64;
-      }
       this.personalDetailService.save(this.personForm.value).subscribe(res => {
         console.log('saved');
       })
-      //this.step++;
     }
   }
+
+  setFilesIntoFormControls() {
+    for (let index = 0; index < this.fileList.length; index++) {
+      this.personForm.value[this.fileList[index].propName] = this.fileList[index].base64;
+    }
+  }
+
+  private _filterArea(value: any): UkAreaTelephone[] {
+    let filterValue = "";
+    if (value.name != undefined)
+      filterValue = value.name.toLowerCase();
+    else
+      filterValue = value.toLowerCase();
+
+    let result = this.ukAreaOptions.filter(area => area.name.toLowerCase().includes(filterValue));
+    return result;
+  }
+
+  onTownChange($event: any, item?: any[]) {
+    if (this.personForm.value['county'] == null) {
+      this.countyService.getCountyBasedOnArea($event.source.value).subscribe((res: any) => {
+        this.countyOptions = res;
+        // const toSelect = this.countyOptions.find((c: any) => c.id == res[0].id);
+        // this.personForm.get('county')?.setValue(toSelect);
+      })
+    }
+    // this.countryService.getCountryBasedOnArea($event.source.value).subscribe((res: any) => {
+    //   this.countryOptions = res;
+    //   const toSelect = this.countryOptions.find((c: any) => c.id == res[0].id);
+    //   this.personForm.get('country')?.setValue(toSelect);
+    // })
+  }
+
+  onCountyChange(data: any) {
+    if (data.value.country != null) {
+      let countryArr = new Array(data.value.country);
+      this.countryOptions = countryArr;
+      this.personForm.get('country')?.setValue(data.value.country);
+    }
+
+    if (this.personForm.value['townOrCity'] == null || this.personForm.value['townOrCity'] == "") {
+      this.ukAreaService.getAreaBasedOnCounty(data.value.id).subscribe((res: any) => {
+        this.ukAreaOptions = res;
+        // this.countryOptions = res;
+        // const toSelect = this.countryOptions.find((c: any) => c.id == res[0].id);
+        // this.personForm.get('country')?.setValue(toSelect);
+      })
+    }
+  }
+
+  getVehicleModelBasedManufacture($event: any) {
+    this.vehicleModelService.getVehicleModelBasedOnManufacturer($event.source.value.id).subscribe(res => {
+      this.vehicleModelOptions = res;
+    })
+  }
+
+  // setFormControlProp(ele: any) {
+  //   ele.forEach((e: any) => e.disabled = true);
+  // }
 
   get f() { return this.personForm.controls; }
 }

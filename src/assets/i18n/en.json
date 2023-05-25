@@ -54,7 +54,9 @@
         "save": "Save",
         "create": "Create",
         "createownpassword": "Create your own password",
-        "deleteallconfirmation": "Are you sure you want to delete all records ?"
+        "deleteallconfirmation": "Are you sure you want to delete all records ?",
+        "addtownorcity": "Add new town/city",
+        "uploadtown": "Upload town/city"
     },
     "Validation": {
         "emailrequired": "Email is required",

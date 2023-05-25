@@ -37,6 +37,10 @@ import { EditPassportComponent } from './components/popup-dialog/edit-passport/e
 import { HomeComponent } from './components/popup-dialog/home/home.component';
 import { UkAreaTelephoneListComponent } from './components/admin-view/uk-area-telephone-list/uk-area-telephone-list.component';
 import { WebCamComponent } from './components/popup-dialog/web-cam/web-cam.component';
+import { VehicleTypeComponent } from './components/admin-view/vehicle-type/vehicle-type.component';
+import { VehicleManufactureComponent } from './components/admin-view/vehicle-manufacture/vehicle-manufacture.component';
+import { TownCityListComponent } from './components/admin-view/town-city-list/town-city-list.component';
+import { AddEditUkAreaComponent } from './components/popup-dialog/add-edit-uk-area/add-edit-uk-area.component';
 
 /* Translate */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -73,7 +77,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditPassportComponent,
     HomeComponent,
     UkAreaTelephoneListComponent,
-    WebCamComponent
+    WebCamComponent,
+    VehicleTypeComponent,
+    VehicleManufactureComponent,
+    TownCityListComponent,
+    AddEditUkAreaComponent
   ],
   imports: [
     BrowserModule,
