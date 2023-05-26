@@ -22,7 +22,16 @@ import { UkAreaTelephone } from 'src/app/models/ukAreaTelephone';
 import { VehicleEngineService } from 'src/app/services/vehicle-engine/vehicle-engine.service';
 import { VehicleInsuranceCompanyService } from 'src/app/services/vehicle-insurance-company/vehicle-insurance-company.service';
 import { VehicleModelService } from 'src/app/services/vehicle-model/vehicle-model.service';
-
+import { VehicleManufacture } from 'src/app/models/vehicle-manufacture';
+import { VehicleTypeEnum, VehicleTypeLabel } from 'src/app/enums/vehicle-type-enum';
+export interface VehicleType {
+  id: number,
+  value: string
+}
+export interface VehiclePowerSource {
+  id: number,
+  text: string
+}
 @Component({
   selector: 'app-person-form',
   templateUrl: './person-form.component.html',
@@ -43,8 +52,15 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
   vehicleEngineOption: any[] = [];
   vehicleInsuranceCompanyOptions: any[] = [];
   vehicleModelOptions: any[] = [];
-  vehiclePowerSource: string[] = ['Diesel', 'Petrol', 'LPG', 'Electric', 'Hydrogen', 'Pedal'];;
-  vehicleType: string[] = ['Van', 'Car', 'Motor Cycle', 'Bicycle'];
+  //vehiclePowerSource: string[] = ['Diesel', 'Petrol', 'LPG', 'Electric', 'Hydrogen', 'Pedal'];;
+  vehicleType: VehicleType[] = [
+    { id: 1, value: 'Van' }, { id: 2, value: 'Car' },
+    { id: 3, value: 'Motor Cycle' }, { id: 4, value: 'Bicycle' }];
+  vehiclePowerSource: VehiclePowerSource[] = [
+    { id: 1, text: "Diesel" }, { id: 2, text: "Petrol" },
+    { id: 3, text: "LPG" }, { id: 4, text: "Electric" },
+    { id: 5, text: "Hydrogen" }, { id: 6, text: "Pedal" }]
+  //vehicleType = VehicleTypeLabel
 
   isPersonFormSubmitted: boolean = false;
   isSubmitted: boolean = false;
@@ -60,6 +76,7 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
   step = 0;
   dropdownSettings: IDropdownSettings = {};
   filteredArea: Observable<UkAreaTelephone[]>;
+  filteredVehicleManufactureOptions: Observable<VehicleManufacture[]>;
   keyword = 'name';
 
   @ViewChild('multiSelect', { static: true }) multiSelect!: MatSelect;
@@ -94,6 +111,9 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
       map(area =>
         (area ? this._filterArea(area) : this.ukAreaOptions.slice())),
     );
+    this.filteredVehicleManufactureOptions = this.personForm.controls["vehicleManufacture"].valueChanges
+      .pipe(startWith(''),
+        map(vehicleManu => vehicleManu ? this._filterVehicleManufacture(vehicleManu) : this.vehicleManufactureOption.slice()))
   }
   ngAfterViewInit(): void {
     let ele = this.eleRef.nativeElement.querySelector("data-isDisabled");
@@ -298,6 +318,17 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
     return result;
   }
 
+  private _filterVehicleManufacture(value: any): VehicleManufacture[] {
+    let filterValue = "";
+    if (value.name != undefined)
+      filterValue = value.name.toLowerCase();
+    else
+      filterValue = value.toLowerCase();
+
+    let result = this.vehicleManufactureOption.filter(v => v.name.toLowerCase().includes(filterValue));
+    return result;
+  }
+
   onTownChange($event: any, item?: any[]) {
     if (this.personForm.value['county'] == null) {
       this.countyService.getCountyBasedOnArea($event.source.value).subscribe((res: any) => {
@@ -314,19 +345,26 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
   }
 
   onCountyChange(data: any) {
-    if (data.value.country != null) {
-      let countryArr = new Array(data.value.country);
-      this.countryOptions = countryArr;
-      this.personForm.get('country')?.setValue(data.value.country);
-    }
+    if (data.value != undefined || data.value != null) {
+      if (data.value.country != null) {
+        let countryArr = new Array(data.value.country);
+        this.countryOptions = countryArr;
+        this.personForm.get('country')?.setValue(data.value.country);
+      }
 
-    if (this.personForm.value['townOrCity'] == null || this.personForm.value['townOrCity'] == "") {
-      this.ukAreaService.getAreaBasedOnCounty(data.value.id).subscribe((res: any) => {
-        this.ukAreaOptions = res;
-        // this.countryOptions = res;
-        // const toSelect = this.countryOptions.find((c: any) => c.id == res[0].id);
-        // this.personForm.get('country')?.setValue(toSelect);
-      })
+      if (this.personForm.value['townOrCity'] == null ||
+        this.personForm.value['townOrCity'] == "") {
+        this.ukAreaService.getAreaBasedOnCounty(data.value.id).subscribe((res: any) => {
+          this.ukAreaOptions = res;
+          // this.countryOptions = res;
+          // const toSelect = this.countryOptions.find((c: any) => c.id == res[0].id);
+          // this.personForm.get('country')?.setValue(toSelect);
+        })
+      }
+    }
+    else {
+      this.getAllUkArea();
+      this.countryOptions = [];
     }
   }
 
@@ -336,6 +374,7 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
     })
   }
 
+  // get enumValue(vehicleTypeEnum: VehicleTypeEnum) { return VehicleTypeLabel.get(vehicleTypeEnum); }
   // setFormControlProp(ele: any) {
   //   ele.forEach((e: any) => e.disabled = true);
   // }
