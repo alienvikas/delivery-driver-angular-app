@@ -206,6 +206,7 @@
                             <mat-select #matCountySelect (selectionChange)="onCountyChange($event)"
                                 placeholder="County - Please choose from dropdown" data-isDisable="true"
                                 [multiple]="false" formControlName="county">
+                                <mat-option>Please select...</mat-option>
                                 <mat-option *ngFor="let county of countyOptions; index as i" [value]="county">
                                     {{county.name}}
                                 </mat-option>
@@ -483,7 +484,7 @@
                             </mat-list-item>
                             <mat-divider [vertical]="true"></mat-divider>
                             <mat-list-item class="horizontal-mat-list-item">
-                                <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadVisaFront)">
+                                <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadVisaBack)">
                                     <mat-icon>camera_alt</mat-icon>
                                 </button>
                             </mat-list-item>
@@ -906,8 +907,8 @@
                         <label id="example-radio-group-label">Pick your vehicle type</label>
                         <mat-radio-group class="example-radio-group" formControlName="vehicleType">
                             <mat-radio-button class="example-radio-button" *ngFor="let type of vehicleType"
-                                [value]="type">
-                                {{type}}
+                                [value]="type.id">
+                                {{type.value}}
                             </mat-radio-button>
                         </mat-radio-group>
 
@@ -915,12 +916,20 @@
                     <div class="col col-sm col-md">
                         <mat-form-field appearance="outline">
                             <mat-label>Vehicle Manufacturer</mat-label>
-                            <mat-select placeholder="Vehicle manufacturer" formControlName="vehicleManufacture">
+                            <!-- <mat-select placeholder="Vehicle manufacturer" formControlName="vehicleManufacture">
                                 <mat-option (onSelectionChange)="getVehicleModelBasedManufacture($event)"
                                     *ngFor="let manufacture of vehicleManufactureOption" [value]="manufacture">
                                     {{manufacture.name}}
                                 </mat-option>
-                            </mat-select>
+                            </mat-select> -->
+                            <input matInput type="text" placeholder="Pick your manufacture"
+                                formControlName="vehicleManufacture" [matAutocomplete]="vehicleManufactureAuto">
+                            <mat-autocomplete #vehicleManufactureAuto="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredVehicleManufactureOptions | async"
+                                    [value]="option.name">
+                                    {{option.name}}
+                                </mat-option>
+                            </mat-autocomplete>
                         </mat-form-field>
                     </div>
                     <div class="col col-sm col-md">
@@ -949,9 +958,9 @@
                         </div>
                     </div>
                     <div class="col col-sm col-md">
-                        <mat-form-field appearance="outline" formControlName="vehicleEngineSize">
+                        <mat-form-field appearance="outline">
                             <mat-label>Engine size</mat-label>
-                            <mat-select placeholder="Engine size">
+                            <mat-select placeholder="Engine size" formControlName="vehicleEngineSize">
                                 <mat-option *ngFor="let engine of vehicleEngineOption" [value]="engine">
                                     {{engine.size}}
                                 </mat-option>
@@ -965,8 +974,8 @@
                         <label id="example-radio-group-label">Pick your vehicle power source</label>
                         <mat-radio-group class="example-radio-group" formControlName="vehiclePowerSource">
                             <mat-radio-button class="example-radio-button"
-                                *ngFor="let powerSourceType of vehiclePowerSource" [value]="powerSourceType">
-                                {{powerSourceType}}
+                                *ngFor="let powerSourceType of vehiclePowerSource" [value]="powerSourceType.id">
+                                {{powerSourceType.text}}
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
@@ -1001,10 +1010,10 @@
                         </mat-list>
                     </div>
                     <div class="col col-sm col-md">
-                        <label>V5(Back)</label>
+                        <label>V5(Inside)</label>
                         <mat-list class="mat-list d-flex" style="padding: 0;">
                             <mat-list-item class="horizontal-mat-list-item">
-                                <input type="file" class="file-input" formControlName="v5BackImage"
+                                <input type="file" class="file-input" formControlName="v5InsideImage"
                                     [accept]="requiredFileType" (change)="onFileSelected($event,'v5BackImage')"
                                     #fileUploadV5BackPhoto>
                                 <button type="button" class="file-upload-btn" mat-raise-button color="primary"

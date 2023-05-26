@@ -26,7 +26,7 @@ export class FormInitialize {
                 street: new FormControl(null, [Validators.required]),
 
                 // ---------------IDENTIFICATION----------------------
-                birthCertificate: new FormControl(null, [Validators.required]),
+                birthCertificate: new FormControl(null),
                 nationalityIdentification: new FormControl(null, [Validators.required]),
                 passportId: new FormControl(null),
                 identityCardFront: new FormControl(null),
@@ -54,11 +54,12 @@ export class FormInitialize {
                 vehicleEngineSize: new FormControl(null, [Validators.required]),
                 vehiclePowerSource: new FormControl(null, [Validators.required]),
                 v5FrontImage: new FormControl(null),
-                v5BackImage: new FormControl(null),
+                v5InsideImage: new FormControl(null),
                 vehicleInsuranceCompany: new FormControl(null, [Validators.required]),
                 vehicleInsuranceCompanyPhoto: new FormControl(null),
                 nextMOTDue: new FormControl(null, [Validators.required]),
                 MOTPhoto: new FormControl(null)
+                //------------------WORKING AREA
                 //workingCountry: new FormControl(null, [Validators.required])
             }
         )
