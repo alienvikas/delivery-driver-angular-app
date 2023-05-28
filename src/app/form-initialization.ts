@@ -58,9 +58,12 @@ export class FormInitialize {
                 vehicleInsuranceCompany: new FormControl(null, [Validators.required]),
                 vehicleInsuranceCompanyPhoto: new FormControl(null),
                 nextMOTDue: new FormControl(null, [Validators.required]),
-                MOTPhoto: new FormControl(null)
+                MOTPhoto: new FormControl(null),
                 //------------------WORKING AREA
-                //workingCountry: new FormControl(null, [Validators.required])
+                workingCountry: new FormControl(null, [Validators.required]),
+                workingDDArea: new FormControl(null, [Validators.required]),
+                workingTown: new FormControl(null, [Validators.required]),
+                workingStatus: new FormControl(null)
             }
         )
     }

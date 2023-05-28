@@ -15,36 +15,36 @@ mat-form-field {
     width: 100%;
 }
 
-::ng-deep .example-headers-align .mat-accordion .mat-expansion-panel:last-of-type {
-    border-bottom-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-}
+// ::ng-deep .example-headers-align .mat-accordion .mat-expansion-panel:last-of-type {
+//     border-bottom-right-radius: 0 !important;
+//     border-bottom-left-radius: 0 !important;
+// }
 
-::ng-deep .example-headers-align .mat-accordion .mat-expansion-panel:first-of-type {
-    border-top-right-radius: 0 !important;
-    border-top-left-radius: 0 !important;
-}
+// ::ng-deep .example-headers-align .mat-accordion .mat-expansion-panel:first-of-type {
+//     border-top-right-radius: 0 !important;
+//     border-top-left-radius: 0 !important;
+// }
 
 .example-additional-selection {
     opacity: 0.75;
     font-size: 0.75em;
 }
 
-::ng-deep .mat-expansion-panel-body {
-    overflow: visible;
-}
+// ::ng-deep .mat-expansion-panel-body {
+//     overflow: visible;
+// }
 
-::ng-deep .mdc-menu-surface.mat-mdc-select-panel {
-    padding: 0 !important;
-}
+// ::ng-deep .mdc-menu-surface.mat-mdc-select-panel {
+//     padding: 0 !important;
+// }
 
-::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-    color: unset !important;
-}
+// ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+//     color: unset !important;
+// }
 
-::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
-    background-color: #673ab7;
-}
+// ::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
+//     background-color: #673ab7;
+// }
 
 .btn-file-upload {
     background-color: transparent;
@@ -95,7 +95,6 @@ mat-form-field {
     -webkit-tap-highlight-color: transparent;
 }
 
-/** Styles to make the demo look better. */
 .example-ripple-checkbox {
     margin: 6px 12px 6px 0;
 }

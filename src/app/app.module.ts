@@ -55,6 +55,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+//#region shared component
+import { SharedModule } from './shared/shared.module';
+//#endregion
 
 @NgModule({
   declarations: [
@@ -94,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FlexLayoutModule,
     FontAwesomeModule,
     ToastrModule,
+    SharedModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
