@@ -24,14 +24,11 @@ import { VehicleInsuranceCompanyService } from 'src/app/services/vehicle-insuran
 import { VehicleModelService } from 'src/app/services/vehicle-model/vehicle-model.service';
 import { VehicleManufacture } from 'src/app/models/vehicle-manufacture';
 import { VehicleTypeEnum, VehicleTypeLabel } from 'src/app/enums/vehicle-type-enum';
-export interface VehicleType {
-  id: number,
-  value: string
-}
-export interface VehiclePowerSource {
-  id: number,
-  text: string
-}
+import { IVehicleType } from 'src/app/interface/vehicle-type-interface';
+import { IVehiclePowerSource } from 'src/app/interface/vehicle-power-source-interface';
+import { IWorkingDDArea } from 'src/app/interface/dd-working-area';
+import { ICountryWorking } from 'src/app/interface/country-working';
+
 @Component({
   selector: 'app-person-form',
   templateUrl: './person-form.component.html',
@@ -52,16 +49,19 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
   vehicleEngineOption: any[] = [];
   vehicleInsuranceCompanyOptions: any[] = [];
   vehicleModelOptions: any[] = [];
-  //vehiclePowerSource: string[] = ['Diesel', 'Petrol', 'LPG', 'Electric', 'Hydrogen', 'Pedal'];;
-  vehicleType: VehicleType[] = [
+  vehicleType: IVehicleType[] = [
     { id: 1, value: 'Van' }, { id: 2, value: 'Car' },
     { id: 3, value: 'Motor Cycle' }, { id: 4, value: 'Bicycle' }];
-  vehiclePowerSource: VehiclePowerSource[] = [
+  vehiclePowerSource: IVehiclePowerSource[] = [
     { id: 1, text: "Diesel" }, { id: 2, text: "Petrol" },
     { id: 3, text: "LPG" }, { id: 4, text: "Electric" },
-    { id: 5, text: "Hydrogen" }, { id: 6, text: "Pedal" }]
-  //vehicleType = VehicleTypeLabel
-
+    { id: 5, text: "Hydrogen" }, { id: 6, text: "Pedal" }];
+  workingCountry: ICountryWorking[] = [
+    { id: 1, value: "U.K" }, { id: 2, value: "France" }]
+  ddWorkingArea: IWorkingDDArea[] = [
+    { id: 1, value: "DD MK" }, { id: 2, value: "DD Luton" },
+    { id: 3, value: "DD Cardiff" }, { id: 4, value: "DD Areas" }
+  ]
   isPersonFormSubmitted: boolean = false;
   isSubmitted: boolean = false;
   showWebCam: boolean = false;
@@ -284,6 +284,7 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
       this.fileName = file.name;
     }
   }
+
   convertFile(file: File): Observable<string> {
     const result = new ReplaySubject<string>(1);
     const reader = new FileReader();
