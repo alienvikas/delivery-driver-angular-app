@@ -44,7 +44,7 @@
         "addpassport": "Add new passport",
         "uploadpassport": "Upload passport",
         "exportpassport": "Export passport",
-        "filter": "filter",
+        "filter": "Filter",
         "name": "Name",
         "uploadukareatelephone": "Upload UK Area Telephone",
         "nodatamatching": "No data matching the filter",
@@ -56,7 +56,8 @@
         "createownpassword": "Create your own password",
         "deleteallconfirmation": "Are you sure you want to delete all records ?",
         "addtownorcity": "Add new town/city",
-        "uploadtown": "Upload town/city"
+        "uploadtown": "Upload town/city",
+        "header": "Delivery Driver"
     },
     "Validation": {
         "emailrequired": "Email is required",

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+import { VehiclePowerSource } from 'src/app/models/VehiclePowerSource';
 import { CrudService } from '../generic-service/crud.service';
-import { VehicleModel } from 'src/app/models/vehicle-model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VehicleModelService extends CrudService<VehicleModel, number>{
+export class VehiclePowerSourceService extends CrudService<VehiclePowerSource, number>{
+
   headers = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -15,10 +16,6 @@ export class VehicleModelService extends CrudService<VehicleModel, number>{
   }
 
   constructor(protected override _http: HttpClient) {
-    super(_http, `${environment.baseUrl}/vehiclemodel`);
-  }
-
-  getVehicleModelBasedOnManufacturer(id: any) {
-    return this._http.post<VehicleModel[]>(environment.baseUrl + "/vehiclemodel/GetVehicleModelBasedOnManufacture?id=" + id, this.headers);
+    super(_http, `${environment.baseUrl}/vehiclePowerSource`);
   }
 }

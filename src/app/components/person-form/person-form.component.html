@@ -172,10 +172,11 @@
                             <mat-label>Town or City</mat-label>
                             <input #matTown matInput placeholder="Please type to choose the town/city"
                                 [matAutocomplete]="auto" formControlName="townOrCity">
-                            <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let area of filteredArea |async" [value]="area.name"
-                                    (onSelectionChange)="onTownChange($event)">
-                                    <span>{{area.name}}</span>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onTownChange($event)"
+                                [displayWith]="displayFn">
+                                <mat-option *ngFor="let area of filteredArea |async" [value]="area">
+                                    <!-- <span>{{area.name}}</span> -->
+                                    <span>{{displayFn(area)}}</span>
                                 </mat-option>
                             </mat-autocomplete>
                             <mat-error *ngIf="f['townOrCity'].hasError('required')">Town or City
@@ -924,10 +925,12 @@
                             </mat-select> -->
                             <input matInput type="text" placeholder="Pick your manufacture"
                                 formControlName="vehicleManufacture" [matAutocomplete]="vehicleManufactureAuto">
-                            <mat-autocomplete #vehicleManufactureAuto="matAutocomplete">
+                            <mat-autocomplete #vehicleManufactureAuto="matAutocomplete"
+                                (optionSelected)="getVehicleModelBasedManufacture($event)" [displayWith]="displayFn">
                                 <mat-option *ngFor="let option of filteredVehicleManufactureOptions | async"
-                                    [value]="option.name">
-                                    {{option.name}}
+                                    [value]="option">
+                                    <!-- {{option.name}} -->
+                                    {{displayFn(option)}}
                                 </mat-option>
                             </mat-autocomplete>
                         </mat-form-field>
@@ -971,13 +974,21 @@
 
                 <div class="row">
                     <div class="col col-sm col-md">
-                        <label id="example-radio-group-label">Pick your vehicle power source</label>
+                        <!-- <label id="example-radio-group-label">Pick your vehicle power source</label>
                         <mat-radio-group class="example-radio-group" formControlName="vehiclePowerSource">
                             <mat-radio-button class="example-radio-button"
                                 *ngFor="let powerSourceType of vehiclePowerSource" [value]="powerSourceType.id">
                                 {{powerSourceType.text}}
                             </mat-radio-button>
-                        </mat-radio-group>
+                        </mat-radio-group> -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Vehicle Power Source</mat-label>
+                            <mat-select placeholder="Pick your vehicle power source"
+                                formControlName="vehiclePowerSources" multiple>
+                                <mat-option *ngFor="let powerSourceType of vehiclePowerSourceOption"
+                                    [value]="powerSourceType">{{powerSourceType.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                     <div class="col col-sm col-md">
                         <label>V5(Front)</label>
@@ -1150,33 +1161,40 @@
 
                 <div class="row">
                     <div class="col-xl col-md col-sm">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Working country</mat-label>
-                            <mat-select [formControl]="workingCountrys" multiple>
-                                <mat-select-trigger>
-                                    {{workingCountrys.value?.[0] || ''}}
-                                    <span *ngIf="(workingCountrys.value?.length || 0) > 1"
-                                        class="example-additional-selection">
-                                        (+{{(workingCountrys.value?.length || 0) - 1}}
-                                        {{workingCountrys.value?.length
-                                        === 2 ? 'other'
-                                        : 'others'}})
-                                    </span>
-                                </mat-select-trigger>
-                                <mat-option *ngFor="let country of workingCountryList"
-                                    [value]="country">{{country}}</mat-option>
+                            <mat-select placeholder="Country working in" formControlName="workingCountry" multiple>
+                                <mat-option *ngFor="let country of nationalityOption"
+                                    [value]="country">{{country.countryName}}</mat-option>
                             </mat-select>
                             <mat-error *ngIf="f['postcode']"></mat-error>
                         </mat-form-field>
                     </div>
 
-                    <div class="col-xl col-md col-sm"></div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>DD Area Working In</mat-label>
-                        <mat-select>
+                    <div class="col-xl col-md col-sm">
+                        <mat-form-field appearance="outline">
+                            <mat-label>DD Area Working In</mat-label>
+                            <mat-select formControlName="workingDDArea" multiple>
+                                <mat-option *ngFor="let area of ukAreaOptions" [value]="area">{{area.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
 
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="col-xl col-md col-sm">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Town working in</mat-label>
+                            <mat-select formControlName="workingTown" multiple>
+                                <mat-option *ngFor="let area of ukAreaOptions" [value]="area">{{area.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl col-md col-sm">
+                        <mat-slide-toggle formControlName="workingStatus" color="primary">Enable Wifi</mat-slide-toggle>
+                    </div>
+                    <div class="col-xl col-md col-sm"></div>
                     <div class="col-xl col-md col-sm"></div>
                 </div>
 

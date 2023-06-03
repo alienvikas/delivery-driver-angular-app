@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { VehicleManufacture } from 'src/app/models/vehicle-manufacture';
 import { environment } from 'src/environments/environment';
 import { CrudService } from '../generic-service/crud.service';
+import { VehicleModel } from 'src/app/models/vehicle-model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +22,8 @@ export class VehicleManufactureService extends CrudService<VehicleManufacture, n
   getVehicleManufactureBasedOnModel(id: string) {
     this._http.post<VehicleManufacture>(environment.baseUrl + "/vehiclemanufacture/id=" + id, this.headers);
   }
+
+  // getVehicleManufactureBasedVehicleModel(id: any) {
+  //   this._http.post<VehicleModel[]>(environment.baseUrl + "/GetVehicleModelsBasedOnManufacture/id=" + id, this.headers);
+  // }
 }

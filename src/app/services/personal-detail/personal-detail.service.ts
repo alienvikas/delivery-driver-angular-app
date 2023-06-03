@@ -18,6 +18,6 @@ export class PersonalDetailService extends CrudService<PersonalDetail, number> {
   }
 
   savePersonalDetail(formData: any) {
-    return this._http.post<any>(environment.baseUrl + '/personaldetail', JSON.stringify(formData), this.headers);
+    return this._http.post<any>(environment.baseUrl + '/personaldetail', formData, this.headers);
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { RoleType } from 'src/app/enums/role-type-enum';
@@ -13,7 +13,7 @@ import { NotificationService } from '../notification/notification.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements CanActivate {
+export class AuthService  {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

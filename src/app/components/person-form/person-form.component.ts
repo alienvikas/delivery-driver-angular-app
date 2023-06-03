@@ -28,6 +28,7 @@ import { IVehicleType } from 'src/app/interface/vehicle-type-interface';
 import { IVehiclePowerSource } from 'src/app/interface/vehicle-power-source-interface';
 import { IWorkingDDArea } from 'src/app/interface/dd-working-area';
 import { ICountryWorking } from 'src/app/interface/country-working';
+import { VehiclePowerSourceService } from 'src/app/services/vehicle-power-source/vehicle-power-source.service';
 
 @Component({
   selector: 'app-person-form',
@@ -49,13 +50,14 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
   vehicleEngineOption: any[] = [];
   vehicleInsuranceCompanyOptions: any[] = [];
   vehicleModelOptions: any[] = [];
+  vehiclePowerSourceOption: any[] = [];
   vehicleType: IVehicleType[] = [
     { id: 1, value: 'Van' }, { id: 2, value: 'Car' },
     { id: 3, value: 'Motor Cycle' }, { id: 4, value: 'Bicycle' }];
-  vehiclePowerSource: IVehiclePowerSource[] = [
-    { id: 1, text: "Diesel" }, { id: 2, text: "Petrol" },
-    { id: 3, text: "LPG" }, { id: 4, text: "Electric" },
-    { id: 5, text: "Hydrogen" }, { id: 6, text: "Pedal" }];
+  // vehiclePowerSourceOption: IVehiclePowerSource[] = [
+  //   { id: 1, text: "Diesel" }, { id: 2, text: "Petrol" },
+  //   { id: 3, text: "LPG" }, { id: 4, text: "Electric" },
+  //   { id: 5, text: "Hydrogen" }, { id: 6, text: "Pedal" }];
   workingCountry: ICountryWorking[] = [
     { id: 1, value: "U.K" }, { id: 2, value: "France" }]
   ddWorkingArea: IWorkingDDArea[] = [
@@ -78,7 +80,8 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
   filteredArea: Observable<UkAreaTelephone[]>;
   filteredVehicleManufactureOptions: Observable<VehicleManufacture[]>;
   keyword = 'name';
-
+  vehiclePowerSources = new FormControl();
+  selectedVehiclePowerSource: any;
   @ViewChild('multiSelect', { static: true }) multiSelect!: MatSelect;
 
   fileName = '';
@@ -101,6 +104,7 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
     private vehicleEngineService: VehicleEngineService,
     private vehicleInsuranceCompanyService: VehicleInsuranceCompanyService,
     private vehicleModelService: VehicleModelService,
+    private vehiclePowerSource: VehiclePowerSourceService,
     private eleRef: ElementRef,
     private dialog: MatDialog) {
     /* #region Form Initialization */
@@ -131,7 +135,8 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
     this.getAllUkArea();
     this.getAllVehicleEngine();
     this.getAllVehicleInsuranceCompany();
-    this.getAllVehicleModel();
+    //this.getAllVehicleModel();
+    this.getAllVehiclePowerSource();
     /* #endregion */
 
     /* #region Multi-Select Dropdown Initialization */
@@ -221,9 +226,15 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
     })
   }
 
-  getAllVehicleModel() {
-    this.vehicleModelService.findAll().subscribe(res => {
-      this.vehicleModelOptions = res;
+  // getAllVehicleModel() {
+  //   this.vehicleModelService.findAll().subscribe(res => {
+  //     this.vehicleModelOptions = res;
+  //   })
+  // }
+
+  getAllVehiclePowerSource() {
+    this.vehiclePowerSource.findAll().subscribe(res => {
+      this.vehiclePowerSourceOption = res;
     })
   }
   /* #endregion */
@@ -332,7 +343,7 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
 
   onTownChange($event: any, item?: any[]) {
     if (this.personForm.value['county'] == null) {
-      this.countyService.getCountyBasedOnArea($event.source.value).subscribe((res: any) => {
+      this.countyService.getCountyBasedOnArea($event.option.value.id).subscribe((res: any) => {
         this.countyOptions = res;
         // const toSelect = this.countyOptions.find((c: any) => c.id == res[0].id);
         // this.personForm.get('county')?.setValue(toSelect);
@@ -370,14 +381,25 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
   }
 
   getVehicleModelBasedManufacture($event: any) {
-    this.vehicleModelService.getVehicleModelBasedOnManufacturer($event.source.value.id).subscribe(res => {
+    this.vehicleModelService.getVehicleModelBasedOnManufacturer($event.option.value.id).subscribe(res => {
       this.vehicleModelOptions = res;
     })
+  }
+
+  displayFn(option: any) {
+    if (option != null)
+      return option.name;
   }
 
   // get enumValue(vehicleTypeEnum: VehicleTypeEnum) { return VehicleTypeLabel.get(vehicleTypeEnum); }
   // setFormControlProp(ele: any) {
   //   ele.forEach((e: any) => e.disabled = true);
+  // }
+
+  // onVehicleManufactureChange($event: any) {
+  //   this.vehicleManufactureService.getVehicleManufactureBasedVehicleModel($event.source.value.id).subscribe(res => {
+  //     this.vehicleModelOptions = res;
+  //   })
   // }
 
   get f() { return this.personForm.controls; }
