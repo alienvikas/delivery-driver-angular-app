@@ -36,9 +36,10 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+//import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { WebcamModule } from 'ngx-webcam';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // Available options
 interface NgxSpinnerConfig {
@@ -83,16 +84,17 @@ const materialModules = [
   NgxSpinnerModule,
   MatDialogModule,
   NgxMatSelectSearchModule,
-  NgMultiSelectDropDownModule,
+  //NgMultiSelectDropDownModule,
   WebcamModule,
-  AutocompleteLibModule
+  AutocompleteLibModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     NgxSpinnerModule.forRoot({ type: 'la-square-jelly-box' }),
-    NgMultiSelectDropDownModule.forRoot(),
+    //NgMultiSelectDropDownModule.forRoot(),
     ...materialModules
   ],
   exports: [

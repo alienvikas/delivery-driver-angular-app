@@ -97,7 +97,7 @@ import { SharedModule } from './shared/shared.module';
     FlexLayoutModule,
     FontAwesomeModule,
     ToastrModule,
-    SharedModule,
+    //SharedModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',

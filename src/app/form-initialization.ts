@@ -52,18 +52,18 @@ export class FormInitialize {
                 vehicleModel: new FormControl(null, [Validators.required]),
                 vehicleRegistrationNumber: new FormControl(null, [Validators.required]),
                 vehicleEngineSize: new FormControl(null, [Validators.required]),
-                vehiclePowerSource: new FormControl(null, [Validators.required]),
+                vehiclePowerSources: new FormControl(null, [Validators.required]),
                 v5FrontImage: new FormControl(null),
                 v5InsideImage: new FormControl(null),
                 vehicleInsuranceCompany: new FormControl(null, [Validators.required]),
                 vehicleInsuranceCompanyPhoto: new FormControl(null),
                 nextMOTDue: new FormControl(null, [Validators.required]),
                 MOTPhoto: new FormControl(null),
-                //------------------WORKING AREA
+                //------------------WORKING AREA--------------------
                 workingCountry: new FormControl(null, [Validators.required]),
                 workingDDArea: new FormControl(null, [Validators.required]),
                 workingTown: new FormControl(null, [Validators.required]),
-                workingStatus: new FormControl(null)
+                workingStatus: new FormControl('')
             }
         )
     }

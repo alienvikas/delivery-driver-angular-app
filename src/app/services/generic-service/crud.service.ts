@@ -9,11 +9,11 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     protected _base: string) { }
 
   save(t: T): Observable<T> {
-    return this._http
-      .post<T>(this._base, t);
     // return this._http
-    //   .post<T>(this._base, t)
-    //   .pipe(retry(1), catchError(this.handleError));
+    //   .post<T>(this._base, t);
+    return this._http
+      .post<T>(this._base, t)
+      .pipe(retry(1), catchError(this.handleError));
   }
 
   update(id: ID, t: T): Observable<T> {

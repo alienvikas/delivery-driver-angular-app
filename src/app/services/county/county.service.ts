@@ -74,7 +74,7 @@ export class CountyService extends CrudService<County, string> {
     super(_http, `${environment.baseUrl}/county`);
   }
 
-  getCountyBasedOnArea(areaName: string) {
-    return this._http.post<any>(environment.baseUrl + '/county/getCountyBasedOnArea?areaName=' + areaName, this.httpOptions);
+  getCountyBasedOnArea(id: any) {
+    return this._http.post<any>(environment.baseUrl + '/county/getCountyBasedOnArea?id=' + id, this.httpOptions);
   }
 }

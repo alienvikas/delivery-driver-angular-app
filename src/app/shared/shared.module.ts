@@ -9,7 +9,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ],
     imports: [
         CommonModule,
-        NgMultiSelectDropDownModule
+        //NgMultiSelectDropDownModule
     ],
     exports: [
         SharedMultiSelectComponent
