@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationStart, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,12 +14,13 @@ import { Role } from 'src/app/models/role';
 import { Location } from '@angular/common';
 import { RegisterComponent } from '../register/register.component';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import { UserTypeEnum } from 'src/app/enums/user-type-enum';
+import { EnumHelper } from 'src/app/commonMethods/enumHelper';
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.scss',
-  '../../../../node_modules/bootstrap/dist/css/bootstrap.css']
+  styleUrls: ['./log-in.component.scss']
 })
 export class LogInComponent implements OnInit {
   stateOptions: any;
@@ -28,9 +29,9 @@ export class LogInComponent implements OnInit {
   showWelcomePage: boolean = false;
   user!: User;
   role!: Role;
-  /**
-   Constructor
-   */
+  @Input() userTypeControl: any;
+  isFormSubmitted: boolean = false;
+
   constructor(private loginService: LoginService,
     private authService: AuthService, private location: Location,
     private translateService: TranslateService,
@@ -47,10 +48,7 @@ export class LogInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   /** spinner ends after 5 seconds */
-    //   this.spinner.hide();
-    // }, 5000);
+    //this.toggleTab(true);
     this.stateOptions = this.loginService.getAllLanguage();
     this.loginForm = this.formBulider.group({
       password: new FormControl("", [Validators.required]),
@@ -65,24 +63,15 @@ export class LogInComponent implements OnInit {
     this.translateService.use(selectedLanguage);
   }
 
+  onClick() {
+    this.isFormSubmitted = true;
+    this.loginForm.markAllAsTouched();
+  }
+
   onLoginSubmit(): any {
     this.spinner.show();
-    this.loginForm.markAsTouched();
+    //this.loginForm.markAsTouched();
     if (this.loginForm.valid) {
-      // return this.authService.authenicateUser(this.loginForm.value).subscribe((res) => {
-      //   const isAuthenticated = this.authService.getAuthStatus();
-      //   if (isAuthenticated) {
-      //     //this.router.navigate(['/']);
-      //     //this.router.navigate(['/person']);
-      //     //this.router.navigate(['/welcome']);
-      //     this.openDialog('3000ms', '1500ms');
-      //     //GlobalComponent.isloggedIn = true;
-      //     this.showWelcomePage = !this.showWelcomePage;
-      //     this.spinner.hide();
-      //   }
-      // }, error => {
-      //   this.spinner.hide();
-      // });
       return this.authService.authenicateUser(this.loginForm.value).subscribe((res) => {
         this.user = res['user'];
         this.role = res['role'];
@@ -124,11 +113,12 @@ export class LogInComponent implements OnInit {
       width: '50rem',
       disableClose: true
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.notificationService.showSuccess("User register successfully !!!", "Success");
-    // })
   }
+
+  displayEnumString(data: any) {
+    return data;
+  }
+
   get Email(): FormControl {
     return this.loginForm.get('email') as FormControl;
   }

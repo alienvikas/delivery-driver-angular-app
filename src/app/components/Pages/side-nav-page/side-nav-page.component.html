@@ -1,0 +1,42 @@
+<img class="avatar mat-elevation-z8" [src]="personalPhoto" />
+
+<h4 class="name"><b>{{fullName|uppercase}}</b></h4>
+<p class="designation">{{uniqueNumber}}</p>
+
+<mat-divider></mat-divider>
+
+<button mat-button class="menu-button" routerLink="/person">
+    <mat-icon>people</mat-icon>
+    <span title="Person">Person</span>
+</button>
+<button mat-button class="menu-button">
+    <mat-icon>person</mat-icon>
+    <span title="Profile">Profile</span>
+</button>
+<button mat-button class="menu-button">
+    <mat-icon>info</mat-icon>
+    <span title="About">About</span>
+</button>
+<button mat-button class="menu-button" routerLink="/retailpremises">
+    <mat-icon svgIcon="shopping-building">
+    </mat-icon>
+    <span title="Retail Premises">Retail Premises</span>
+</button>
+
+<button mat-button class="menu-button" (click)="menuTrigger.openMenu()">Menu
+    <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu"></div>
+</button>
+<mat-menu mat-button #menu="matMenu" yPosition="below" xPosition="before">
+    <button mat-menu-item [matMenuTriggerFor]="aaa">Item 1</button>
+</mat-menu>
+
+<mat-menu #aaa="matMenu" yPosition="above" xPosition="before">
+    <button mat-menu-item>Item 2</button>
+</mat-menu>
+
+<mat-divider></mat-divider>
+
+<button mat-button class="menu-button">
+    <mat-icon>help</mat-icon>
+    <span>Help</span>
+</button>

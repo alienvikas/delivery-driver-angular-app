@@ -1,0 +1,65 @@
+<ng-container *ngTemplateOutlet='group ? reactive : template'></ng-container>
+
+<ng-template #reactive>
+    <form [formGroup]="group" class="example-form">
+        <mat-form-field [appearance]="inputAppearanceType" class="example-full-width">
+
+            <mat-label>{{inputPlaceholderKey}}</mat-label>
+
+            <input matInput *ngIf="inputType=='text'" [placeholder]="inputPlaceholderKey"
+                [formControlName]="controlName" (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
+
+            <input matInput *ngIf="inputType=='email'" placeholder="{{inputPlaceholderKey|translate}}" type="email"
+                [formControlName]="controlName" (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
+
+            <input matInput *ngIf="inputType=='password'" [type]="hide ? 'password' : 'text'"
+                placeholder="{{inputPlaceholderKey|translate}}" type="password" [formControlName]="controlName"
+                (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
+
+            <input matInput *ngIf="inputType=='number'" placeholder="{{inputPlaceholderKey|translate}}" type="number"
+                [formControlName]="controlName" (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
+
+            <textarea matInput *ngIf="inputType=='textarea'" placeholder="Ex. 100 Main St"
+                [formControlName]="controlName" (blur)="onBlur()" [readonly]="isReadOnly"
+                [disabled]="isInputDisabled"></textarea>
+
+            <mat-icon *ngIf="inputType=='password'" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                'visibility'}}</mat-icon>
+            <mat-icon matPrefix>{{iconType}}</mat-icon>
+            <mat-icon matSuffix class="icon-error" *ngIf="errorMessage != ''">error</mat-icon>
+            <mat-error *ngIf="errorMessage != ''">
+                {{errorMessage}}
+            </mat-error>
+            <!-- <button *ngIf="controlName" matSuffix mat-icon-button aria-label="Clear" (click)="controlName=''">
+                <mat-icon>close</mat-icon>
+            </button> -->
+            <!-- <mat-hint [style.font-size]="'20px'" *ngIf="isMatHint">
+                <mat-icon matTooltip="{{matHintTooltip}}">help outline icon</mat-icon>
+            </mat-hint> -->
+        </mat-form-field>
+    </form>
+</ng-template>
+
+<ng-template #template>
+    <div class="example-form">
+        <mat-form-field [appearance]="inputAppearanceType" class="example-full-width">
+            <mat-label>{{inputPlaceholderKey|translate}}</mat-label>
+            <input matInput *ngIf="inputType=='text'" placeholder="{{inputPlaceholderKey|translate}}" type="text"
+                formControlName="controlName" [readonly]="isReadOnly" [disabled]="isInputDisabled">
+            <input matInput *ngIf="inputType=='email'" placeholder="{{inputPlaceholderKey|translate}}" type="email"
+                formControlName="controlName" [readonly]="isReadOnly" [disabled]="isInputDisabled">
+            <input matInput *ngIf="inputType=='password'" [type]="hide ? 'password' : 'text'"
+                placeholder="{{inputPlaceholderKey|translate}}" type="password" formControlName="controlName"
+                [readonly]="isReadOnly" [disabled]="isInputDisabled">
+
+            <button *ngIf="inputType=='password'" mat-icon-button matSuffix (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <!-- <button *ngIf='controlName !=""' matSuffix mat-icon-button aria-label="Clear" (click)='controlName=""'>
+                <mat-icon>close</mat-icon>
+            </button> -->
+            <mat-icon matPrefix>{{iconType}}</mat-icon>
+        </mat-form-field>
+    </div>
+</ng-template>

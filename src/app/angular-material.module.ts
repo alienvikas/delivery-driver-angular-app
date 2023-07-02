@@ -9,7 +9,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
+import { MatRippleModule, MatNativeDateModule, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -40,6 +40,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { WebcamModule } from 'ngx-webcam';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgFor } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Available options
 interface NgxSpinnerConfig {
@@ -87,7 +90,11 @@ const materialModules = [
   //NgMultiSelectDropDownModule,
   WebcamModule,
   AutocompleteLibModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatStepperModule,
+  MatDatepickerModule,
+  FontAwesomeModule,
+  NgFor
 ];
 
 @NgModule({

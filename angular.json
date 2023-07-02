@@ -31,13 +31,16 @@
               "src/web.config"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.scss",              
-              "./node_modules/flag-icons/css/flag-icons.min.css",
-              "./node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "./node_modules/font-awesome/css/font-awesome.min.css"
+              "src/styles.scss",
+              "node_modules/flag-icons/css/flag-icons.min.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {

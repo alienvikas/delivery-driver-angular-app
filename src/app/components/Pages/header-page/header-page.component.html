@@ -1,0 +1,37 @@
+<!-- <mat-toolbar class="mat-elevation-z8" color="primary">
+    <button mat-icon-button>
+        <mat-icon> menu </mat-icon>
+    </button> {{"Labels.header"|translate}}
+</mat-toolbar> -->
+
+<mat-toolbar class="example-toolbar">
+    <button mat-icon-button (click)="matSideNav.toggle();toggleIcon();">
+        <mat-icon *ngIf="!closeIconVisibilty">menu</mat-icon>
+        <mat-icon *ngIf="closeIconVisibilty">close</mat-icon>
+    </button>
+    <h1 class="example-app-name">{{"Labels.header"|translate}}</h1>
+    <span style="flex: 1 1 auto;"></span>
+    <div>
+        <button mat-icon-button matTooltip="Switch Apps">
+            <mat-icon>apps</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Notifications">
+            <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="accountMenu">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
+            <button mat-menu-item routerLink="#">
+                <mat-icon>person</mat-icon><span>My Account</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>help</mat-icon><span>Help</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>Logout
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>

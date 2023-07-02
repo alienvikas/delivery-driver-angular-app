@@ -1,0 +1,131 @@
+.example-action-buttons {
+    padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
+    margin-left: 8px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+// ::ng-deep .example-headers-align .mat-accordion .mat-expansion-panel:last-of-type {
+//     border-bottom-right-radius: 0 !important;
+//     border-bottom-left-radius: 0 !important;
+// }
+
+// ::ng-deep .example-headers-align .mat-accordion .mat-expansion-panel:first-of-type {
+//     border-top-right-radius: 0 !important;
+//     border-top-left-radius: 0 !important;
+// }
+
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+// ::ng-deep .mat-expansion-panel-body {
+//     overflow: visible;
+// }
+
+// ::ng-deep .mdc-menu-surface.mat-mdc-select-panel {
+//     padding: 0 !important;
+// }
+
+// ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+//     color: unset !important;
+// }
+
+// ::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
+//     background-color: #673ab7;
+// }
+
+.btn-file-upload {
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+}
+
+.file-input {
+    display: none;
+}
+
+.txt {
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.file-upload-btn {
+    border: none;
+    background: transparent;
+}
+
+.material-icons {
+    vertical-align: top;
+}
+
+.horizontal-mat-list-item {
+    width: auto;
+}
+
+.mat-list {
+    //display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    border-radius: 4px;
+    height: 55px !important;
+}
+
+//---------------------- Mat Ripple Button -------------------
+.example-ripple-container {
+    cursor: pointer;
+    text-align: center;
+    height: 6vh;
+    line-height: 6vh;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.example-ripple-checkbox {
+    margin: 6px 12px 6px 0;
+}
+
+.example-ripple-form-field {
+    margin: 0 12px 0 0;
+}
+
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+.matVerticalStepper .mat-stepper-next {
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    color: #ffffff;
+}
+
+.matVerticalStepper .mat-stepper-previous {
+    background: -webkit-linear-gradient(left, #3931af, #f44336);
+    color: #ffffff;
+}
+
+.checkmark::after {
+    content: '\2713';
+    font-family: arial;
+    display: inline-block;
+    vertical-align: top;
+    width: 1em;
+    margin-right: 0.3em;
+    position: absolute;
+    right: 0;
+    font-size: x-large;
+}

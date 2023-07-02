@@ -1,0 +1,44 @@
+<div class="container register" *ngIf="!isWelcomeMessage">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+            <h3>Welcome</h3>
+            <p>You are 30 seconds away from earning your own money!</p>
+            <button mat-raised-button class="rounded-4"
+                (click)="openRegisterDialog()">{{'Labels.register'|translate}}</button>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                <div class="col">
+                    <mat-menu #appMenu="matMenu">
+                        <ng-template matMenuContent>
+                            <div *ngFor="let item of stateOptions; index as i;">
+                                <button mat-menu-item (click)="onLanguageChange(item.value)">{{item.label}}</button>
+                            </div>
+                        </ng-template>
+                    </mat-menu>
+
+                    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+                        <mat-icon class="icon-display">g_translate</mat-icon>
+                    </button>
+                </div>
+                <div class="col">
+                    <mat-button-toggle-group class="rounded-pill" [formControl]="userTypeControl" appearance="legacy">
+                        <mat-button-toggle *ngFor="let enum of userTypeEnum|keyvalue"
+                            value="{{displayEnumString(enum.value)}}">{{
+                            enum.value}}</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+
+            </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Login as a {{userTypeControl.value}}</h3>
+                    <!-- <app-log-in></app-log-in> -->
+                    <app-login-page></app-login-page>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

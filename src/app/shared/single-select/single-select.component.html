@@ -1,0 +1,23 @@
+<ng-container *ngTemplateOutlet='group ? reactive : template'></ng-container>
+
+<ng-template #reactive>
+    <form [formGroup]="group" #ngForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>{{dropdownPlaceholder|translate}}</mat-label>
+            <mat-select [formControlName]="controlName" [placeholder]="dropdownPlaceholder" [value]="selectedData">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let option of dropdownData;let i = index;" [value]="option">
+                    {{option[displayProp]}}
+                </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>{{iconType}}</mat-icon>
+            <!-- <mat-error *ngIf="group.hasError('required')">{{requiredErrorMessageKey|translate}}</mat-error> -->
+            <mat-error
+                *ngIf="group.hasError('required',controlName) && ngForm.submitted">{{requiredErrorMessageKey|translate}}
+            </mat-error>
+        </mat-form-field>
+    </form>
+</ng-template>
+
+<ng-template #template>
+</ng-template>

@@ -1,17 +1,19 @@
-<h1 mat-dialog-title>Hi {{data.firstName}} {{data.lastName}},</h1>
+<h1 mat-dialog-title>
+    Hi <b>{{data.firstName|uppercase}} {{data.lastName|uppercase}}</b>
+</h1>
+<!-- <mat-divider></mat-divider> -->
 <div mat-dialog-content>
     What would you like to do ?
-    <!-- <mat-chip-set class="example-chip" cdkDropList cdkDropListOrientation="horizontal">
-        <mat-chip class="example-box" cdkDrag *ngFor="let box of chipBoxs">
-            <mat-icon matTooltip="{{box.name}}" class="icon-display">{{box.iconName}}</mat-icon>
-            {{box.name}}
-        </mat-chip>
-    </mat-chip-set> -->
-
-    <mat-chip-listbox aria-label="Action selection">
+    <!-- <mat-chip-listbox aria-label="Action selection">
         <mat-chip-option color="primary" *ngFor="let box of chipBoxs" (click)="onSelect(box.path)">
             <mat-icon matTooltip="{{box.name}}" class="icon-display">{{box.iconName}}</mat-icon>
             {{box.name}}
         </mat-chip-option>
-    </mat-chip-listbox>
+    </mat-chip-listbox> -->
+    <div class="d-flex">
+        <span [style.cursor]="'pointer'" *ngFor="let box of chipBoxs" class="badge rounded-pill bg-info text-dark"
+            (click)="onSelect(box.path)">
+            {{box.name}}
+        </span>
+    </div>
 </div>

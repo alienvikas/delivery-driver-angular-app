@@ -50,14 +50,24 @@ import { AuthService } from './services/auth/auth.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { AppHttpInterceptor } from './commonMethods/httpInterceptor';
 
+/* SharedModule */
+import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LandingPageComponent } from './components/Pages/landing-page/landing-page.component';
+import { LayoutPageComponent } from './components/Pages/layout-page/layout-page.component';
+import { HeaderPageComponent } from './components/Pages/header-page/header-page.component';
+import { FooterPageComponent } from './components/Pages/footer-page/footer-page.component';
+import { SideNavPageComponent } from './components/Pages/side-nav-page/side-nav-page.component';
+import { RegisterPageComponent } from './components/Pages/register-page/register-page.component';
+import { LoginPageComponent } from './components/Pages/login-page/login-page.component';
+import { PersonPageComponent } from './components/Pages/person-page/person-page.component';
+import { RetailPremisesViewComponent } from './components/Pages/retail-premises-view/retail-premises-view.component';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
-//#region shared component
-import { SharedModule } from './shared/shared.module';
-//#endregion
 
 @NgModule({
   declarations: [
@@ -84,7 +94,18 @@ import { SharedModule } from './shared/shared.module';
     VehicleTypeComponent,
     VehicleManufactureComponent,
     TownCityListComponent,
-    AddEditUkAreaComponent
+    AddEditUkAreaComponent,
+    HeaderComponent,
+    FooterComponent,
+    LandingPageComponent,
+    LayoutPageComponent,
+    HeaderPageComponent,
+    FooterPageComponent,
+    SideNavPageComponent,
+    RegisterPageComponent,
+    LoginPageComponent,
+    PersonPageComponent,
+    RetailPremisesViewComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +118,7 @@ import { SharedModule } from './shared/shared.module';
     FlexLayoutModule,
     FontAwesomeModule,
     ToastrModule,
-    //SharedModule,
+    SharedModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',

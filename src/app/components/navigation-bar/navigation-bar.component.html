@@ -93,7 +93,7 @@
 <router-outlet *ngIf="!loginService.isLoggedIn()"></router-outlet> -->
 
 <!-- ------------------------------------------------------------------------- -->
-<mat-toolbar class="mat-elevation-z8">
+<!-- <mat-toolbar class="mat-elevation-z8" *ngIf="loginService.isLoggedIn()">
     <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
         <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
         <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
@@ -123,7 +123,7 @@
     </div>
 </mat-toolbar>
 
-<mat-sidenav-container>
+<mat-sidenav-container *ngIf="loginService.isLoggedIn()">
 
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
         <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
@@ -146,15 +146,11 @@
             <span>About</span>
         </button>
 
-        <!-- #docregion mat-menu-trigger-for -->
         <button mat-button class="menu-button" (click)="menuTrigger.openMenu()">Menu
             <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu"></div>
         </button>
-        <!-- #enddocregion mat-menu-trigger-for -->
         <mat-menu mat-button #menu="matMenu" yPosition="below" xPosition="before">
             <button mat-menu-item [matMenuTriggerFor]="aaa">Item 1</button>
-            <!-- <button mat-menu-item>Item 2</button> -->
-
         </mat-menu>
 
         <mat-menu #aaa="matMenu" yPosition="above" xPosition="before">
@@ -173,4 +169,64 @@
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
+
+<!-- <router-outlet *ngIf="!loginService.isLoggedIn()"></router-outlet> -->
+
+<ng-container>
+    <mat-toolbar class="example-header" *ngIf="loginService.isLoggedIn()">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon> menu </mat-icon>
+        </button> {{"Labels.header"|translate}}
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-container" *ngIf="loginService.isLoggedIn()">
+        <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
+            [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom">
+            <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+
+            <h4 class="name">John Smith</h4>
+            <p class="designation">Software Engineer</p>
+
+            <mat-divider></mat-divider>
+
+            <button mat-button class="menu-button" routerLink="/person">
+                <mat-icon>people</mat-icon>
+                <span>Person</span>
+            </button>
+            <button mat-button class="menu-button">
+                <mat-icon>person</mat-icon>
+                <span>Profile</span>
+            </button>
+            <button mat-button class="menu-button">
+                <mat-icon>info</mat-icon>
+                <span>About</span>
+            </button>
+
+            <button mat-button class="menu-button" (click)="menuTrigger.openMenu()">Menu
+                <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu"></div>
+            </button>
+            <mat-menu mat-button #menu="matMenu" yPosition="below" xPosition="before">
+                <button mat-menu-item [matMenuTriggerFor]="aaa">Item 1</button>
+            </mat-menu>
+
+            <mat-menu #aaa="matMenu" yPosition="above" xPosition="before">
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+
+            <mat-divider></mat-divider>
+
+            <button mat-button class="menu-button">
+                <mat-icon>help</mat-icon>
+                <span>Help</span>
+            </button>
+        </mat-sidenav>
+
+        <mat-sidenav-content [formGroup]="options">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <mat-toolbar class="example-footer" *ngIf="loginService.isLoggedIn()">Footer</mat-toolbar>
+    <router-outlet *ngIf="!loginService.isLoggedIn()"></router-outlet>
+</ng-container>

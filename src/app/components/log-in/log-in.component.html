@@ -1,7 +1,8 @@
 <!-- <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
     <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner> -->
-<div class="container-fluid h-custom" *ngIf="!showWelcomePage">
+
+<!-- <div class="container-fluid h-custom" *ngIf="!showWelcomePage">
     <div class="text-end">
         <mat-menu #appMenu="matMenu">
             <ng-template matMenuContent>
@@ -59,11 +60,33 @@
                         {{'Labels.login'|translate}}
                     </button>
                     <p class="small fw-bold mt-2 pt-1 mb-0">{{'Labels.noaccount'|translate}}?
-                        <!-- <a [routerLink]="['/register']" class="link-danger">{{'Labels.register'|translate}}</a> -->
                         <a (click)="openRegisterDialog()" class="link-danger">{{'Labels.register'|translate}}</a>
                     </p>
                 </div>
             </form>
         </div>
     </div>
-</div>
+</div> -->
+
+<form [formGroup]="loginForm" class="register-form" #ngForm="ngForm" (ngSubmit)="onLoginSubmit()">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <app-input inputAppearanceType="fill" [inputType]="'email'" [iconType]="'email'"
+                    [inputPlaceholderKey]="'Labels.email'" [group]="loginForm" [controlName]="'email'"
+                    [isFormSubmitted]="isFormSubmitted"></app-input>
+            </div>
+            <div class="col-sm">
+                <app-input inputAppearanceType="fill" [inputType]="'password'" [iconType]="'lock'"
+                    [inputPlaceholderKey]="'Labels.password'" [group]="loginForm" [controlName]="'password'"
+                    [isFormSubmitted]="isFormSubmitted"></app-input>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <button mat-raised-button type="submit" class="rounded-4"
+                (click)="onClick()">{{'Labels.login'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</form>
