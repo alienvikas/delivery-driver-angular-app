@@ -1,0 +1,1167 @@
+<div class="example-input-wrapper" hidden>
+    <label for="duration">Animation duration:</label>
+    <input id="duration" value="1000" type="number" min="0" step="100" #duration>
+</div>
+<form #personDetailForm="ngForm" [formGroup]="personForm" (ngSubmit)="onPersonDetailSubmit(personForm)">
+    <mat-vertical-stepper class="matVerticalStepper" [linear]="false" #stepper [animationDuration]="duration.value">
+        <mat-step class="mb-2">
+            <ng-template matStepLabel>{{'Labels.personaldetails'|translate}}</ng-template>
+            <div class="row">
+                <div class="col">
+                    <!-- <app-single-select [group]="personForm" [controlName]="'introducer'"
+                        [requiredErrorMessageKey]="'introducerrequired'" dropdownAppearanceType="fill"
+                        [dropdownData]="introducerOptions" [dropdownPlaceholder]="'Labels.chooseintroducer'"
+                        [displayProp]="'name'">
+                    </app-single-select> -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Labels.chooseintroducer'|translate}}</mat-label>
+                        <mat-select formControlName="introducer">
+                            <mat-option *ngFor="let introducer of introducerOptions" [value]="introducer">
+                                {{introducer.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="personForm.hasError('required','introducerId') && personDetailForm.submitted">Select
+                            introducer
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <app-input [group]="personForm" [controlName]="'officalName'" inputPlaceholderKey="Offical name"
+                        [inputType]="'text'"></app-input>
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>Offical name</mat-label>
+                        <input matInput (blur)="onBlur()" formControlName="officalName">
+                        <mat-hint>
+                            <mat-icon matTooltip="Full Name as on Your passport
+                                ">help
+                                outline
+                                icon</mat-icon>
+                        </mat-hint>
+                        <mat-error
+                            *ngIf="personForm.hasError('required','officalName') && personDetailForm.submitted">Offical
+                            name required</mat-error>
+                    </mat-form-field> -->
+                </div>
+                <div class="col">
+                    <app-input [group]="personForm" [controlName]="'knownAs'" inputPlaceholderKey="Known as"
+                        [inputType]="'text'"></app-input>
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>Known as</mat-label>
+                        <input matInput (blur)="onBlur()" formControlName="knownAs">
+                        <mat-hint>
+                            <mat-icon
+                                matTooltip="What you would like to be Known As (Christian Name, + Surname or Family name)">help
+                                outline
+                                icon</mat-icon>
+                        </mat-hint>
+                        <mat-error
+                            *ngIf="personForm.hasError('required','knownAs') && personDetailForm.submitted">KnownAs
+                            required</mat-error>
+                    </mat-form-field> -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date of birth</mat-label>
+                        <input matInput (blur)="onBlur()" [matDatepicker]="picker" formControlName="dateOfBirth"
+                            placeholder="DD/MM/YYYY">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Labels.choosenationality'|translate}}</mat-label>
+                        <mat-select formControlName="nationality">
+                            <mat-form-field appearance="fill" class="select-element">
+                                <input matInput #nationalitySearch placeholder="Search nationality"
+                                    (input)="filterNationality(nationalitySearch.value)" />
+                                <button *ngIf="nationalitySearch.value" matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="nationalitySearch.value=''">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-option *ngFor="let nationality of nationalityOption;let i = index;"
+                                [value]="nationality">
+                                <mat-checkbox [checked]="selected === i" (change)="selected = i">
+                                    <span class="fi fi-{{nationality.countryISO | lowercase}}">
+                                    </span>
+                                    {{nationality.countryName}}
+                                </mat-checkbox>
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f['nationality'].hasError('required')">Select nationality</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Labels.mobile'|translate}}</mat-label>
+                        <input matInput (blur)="onBlur()" formControlName="phoneNumber" placeholder="+xxx xxxx xxxxxx">
+                        <mat-hint>
+                            <mat-icon matTooltip="it should be in the format +*** **** ******">help
+                                outline
+                                icon</mat-icon>
+                        </mat-hint>
+                        <mat-error *ngIf="f['phoneNumber'].hasError('required')">Mobile number
+                            required</mat-error>
+                        <mat-error *ngIf="f['phoneNumber'].hasError('pattern')">Only numbers are
+                            allowed</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Telegram Number / Username</mat-label>
+                        <input matInput (blur)="onBlur()" formControlName="usernameOrTelegramNumber"
+                            placeholder="+xx xxx-xxx-xxxx">
+                        <mat-error *ngIf="f['usernameOrTelegramNumber'].hasError('pattern')">Only numbers are
+                            allowed
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Labels.email'|translate}}</mat-label>
+                        <input matInput (blur)="onBlur()" formControlName="emailAddress" placeholder="example@abc.com">
+                        <mat-error *ngIf="f['emailAddress'].hasError('required')">Mobile number
+                            required</mat-error>
+                        <mat-error *ngIf="f['emailAddress'].hasError('email')">Invalid email</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Labels.homenamenumber'|translate}}</mat-label>
+                        <input matInput (blur)="onBlur()" formControlName="residenceNumber">
+                        <mat-error *ngIf="f['residenceNumber'].hasError('required')">Home/Residence name or
+                            number
+                            required</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>Town or City</mat-label>
+                        <input matInput formControlName="townOrCity">
+                        <mat-error *ngIf="f['townOrCity'].hasError('required')">Town or City
+                            required</mat-error>
+                    </mat-form-field> -->
+                    <!-- <div class="ng-autocomplete" [style.width]="'auto'">
+                        <ng-autocomplete [data]="ukAreaOptions" formControlName="townOrCity"
+                            [searchKeyword]="keyword" placeholder="Town or City" [itemTemplate]="itemTemplate"
+                            [notFoundTemplate]="notFoundTemplate" (selected)='selectEvent($event)'>
+                        </ng-autocomplete>
+
+                        <ng-template #itemTemplate let-item>
+                            <a [innerHTML]="item.name"></a>
+                        </ng-template>
+
+                        <ng-template #notFoundTemplate let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                        </ng-template>
+                    </div> -->  
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Town or City</mat-label>
+                        <input #matTown matInput placeholder="Please type to choose the town/city"
+                            [matAutocomplete]="auto" formControlName="townOrCity">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onTownChange($event)"
+                            [displayWith]="displayFn">
+                            <mat-option *ngFor="let area of filteredArea |async" [value]="area">
+                                <!-- <span>{{area.name}}</span> -->
+                                <span>{{displayFn(area)}}</span>
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-error *ngIf="f['townOrCity'].hasError('required')">Town or City
+                            required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Street</mat-label>
+                        <input matInput formControlName="street">
+                        <mat-error *ngIf="f['street'].hasError('required')">Street required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Area</mat-label>
+                        <input matInput formControlName="area">
+                        <mat-error *ngIf="f['area'].hasError('required')">Area required</mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="select-element">
+                        <mat-label>County</mat-label>
+                        <mat-select #matCountySelect (selectionChange)="onCountyChange($event)"
+                            placeholder="County - Please choose from dropdown" data-isDisable="true" [multiple]="false"
+                            formControlName="county">
+                            <mat-option>Please select...</mat-option>
+                            <mat-option *ngFor="let county of countyOptions; index as i" [value]="county">
+                                {{county.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Post Code</mat-label>
+                        <input matInput (blur)="onBlur()" formControlName="postcode">
+                        <mat-error *ngIf="f['postcode'].hasError('required')">Post code
+                            required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <mat-select #matCountrySelect placeholder="Country" [multiple]="false"
+                            formControlName="country">
+                            <mat-option *ngFor="let country of countryOptions; index as i" [value]="country">
+                                {{country.name}}
+                                <span class="fi fi-{{country.countryIcon| lowercase}}"></span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Personal Photo</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="personPhoto"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'personPhoto')"
+                                #fileUploadPersonalPhoto>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadPersonalPhoto.click()" [matTooltip]='fileUploadPersonalPhoto.value.
+                                substring(fileUploadPersonalPhoto.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadPersonalPhoto)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>
+                                {{fileUploadPersonalPhoto.value.
+                                substring(fileUploadPersonalPhoto.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
+                            </label>
+                        </mat-list-item>
+                    </mat-list>
+                    <mat-error
+                        *ngIf="personForm.hasError('nullValidator','personPhoto') && personDetailForm.submitted">Please
+                        upload your photo</mat-error>
+                </div>
+                <div class="col">
+                    <!-- <input type="file" class="file-input" [accept]="requiredFileType"
+                        (change)="onFileSelected($event)" #fileUpload>
+                    <div class="file-upload">
+                        {{fileName || "No file uploaded yet."}}
+                        <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                    </div> -->
+                </div>
+                <div class="col">
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <button type="button" mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Identification</ng-template>
+
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <label>Birth Certificate</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="birthCertificate"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'birthCertificate')"
+                                #fileUploadBirthCertificate>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadBirthCertificate.click()" [matTooltip]='fileUploadBirthCertificate.value.
+                                substring(fileUploadBirthCertificate.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                                <!-- <span class="txt"> {{fileUploadBirthCertificate.value.
+                                    substring(fileUploadBirthCertificate.value
+                                    .lastIndexOf("\\")).replace("\\","") || "No file uploaded yet."}} </span> -->
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadBirthCertificate)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>
+                                {{fileUploadBirthCertificate.value.
+                                substring(fileUploadBirthCertificate.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
+                            </label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Nationality</label>
+                    <mat-form-field appearance="outline">
+                        <!-- <mat-label>Nationality</mat-label> -->
+                        <mat-select formControlName="nationalityIdentification" placeholder="Nationality">
+                            <mat-option *ngFor="let nationality of nationalityOption;let i = index;"
+                                [value]="nationality">
+                                <span class="fi fi-{{nationality.countryISO | lowercase}}">
+                                </span>
+                                {{nationality.countryName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Passport I.D.</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="passportId"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'passportId')"
+                                #fileUploadPassportId>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadPassportId.click()" [matTooltip]='fileUploadPassportId.value.
+                                substring(fileUploadPassportId.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadPassportId)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>
+                                {{fileUploadPassportId.value.
+                                substring(fileUploadPassportId.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
+                            </label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <label>Identity Card (Front)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="identityCardFront"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'identityCardFront')"
+                                #fileUploadIdentityCardFront>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadIdentityCardFront.click()" [matTooltip]='fileUploadIdentityCardFront.value.
+                                substring(fileUploadIdentityCardFront.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadIdentityCardFront)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadIdentityCardFront.value.
+                                substring(fileUploadIdentityCardFront.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Identity Card (Back)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="identityCardBack"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'identityCardBack')"
+                                #fileUploadIdentityCardBack>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadIdentityCardBack.click()" [matTooltip]='fileUploadIdentityCardBack.value.
+                                substring(fileUploadIdentityCardBack.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadIdentityCardBack)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadIdentityCardBack.value.
+                                substring(fileUploadIdentityCardBack.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Visa (Front)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="visaFront"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'visaFront')"
+                                #fileUploadVisaFront>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadVisaFront.click()" [matTooltip]='fileUploadVisaFront.value.
+                                substring(fileUploadVisaFront.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadVisaFront)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadVisaFront.value.
+                                substring(fileUploadVisaFront.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <label>Visa (Back)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="visaBack" [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'visaBack')" #fileUploadVisaBack>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadVisaBack.click()" [matTooltip]='fileUploadVisaBack.value.
+                                substring(fileUploadVisaBack.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadVisaBack)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadVisaBack.value.
+                                substring(fileUploadVisaBack.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Utility Bill 1</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="firstUtilityBill"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'firstUtilityBill')"
+                                #fileUploadFirstUtilityBill>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadFirstUtilityBill.click()" [matTooltip]='fileUploadFirstUtilityBill.value.
+                                substring(fileUploadFirstUtilityBill.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadFirstUtilityBill)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadFirstUtilityBill.value.
+                                substring(fileUploadFirstUtilityBill.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Utility Bill 2</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="secondUtilityBill"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'secondUtilityBill')"
+                                #fileUploadSecondUtilityBill>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadSecondUtilityBill.click()" [matTooltip]='fileUploadSecondUtilityBill.value.
+                                substring(fileUploadSecondUtilityBill.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadSecondUtilityBill)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadSecondUtilityBill.value.
+                                substring(fileUploadSecondUtilityBill.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <label>HMRC Communication 1</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="firstHMRCCommunication"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'firstHMRCCommunication')"
+                                #fileUploadFirstHMRCCommunication>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadFirstHMRCCommunication.click()" [matTooltip]='fileUploadFirstHMRCCommunication.value.
+                                substring(fileUploadFirstHMRCCommunication.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadFirstHMRCCommunication)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadFirstHMRCCommunication.value.
+                                substring(fileUploadFirstHMRCCommunication.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>HMRC Communication 2</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="secondHMRCCommunication"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'secondHMRCCommunication')"
+                                #fileUploadSecondHMRCCommunication>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadSecondHMRCCommunication.click()" [matTooltip]='fileUploadSecondHMRCCommunication.value.
+                                substring(fileUploadSecondHMRCCommunication.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadSecondHMRCCommunication)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadSecondHMRCCommunication.value.
+                                substring(fileUploadSecondHMRCCommunication.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Other 1</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="other1" [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'other1')" #fileUploadOther1>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadOther1.click()" [matTooltip]='fileUploadOther1.value.
+                                substring(fileUploadOther1.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadOther1)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadOther1.value.
+                                substring(fileUploadOther1.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <label>Other 2</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="other2" [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'other2')" #fileUploadOther2>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadOther2.click()" [matTooltip]='fileUploadOther2.value.
+                                substring(fileUploadOther2.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadOther2)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadOther2.value.
+                                substring(fileUploadOther2.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Other 3</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="other3" [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'other3')" #fileUploadOther3>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadOther3.click()" [matTooltip]='fileUploadOther3.value.
+                                substring(fileUploadOther3.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadOther3)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadOther3.value.
+                                substring(fileUploadOther3.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Other 4</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="other4" [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'other4')" #fileUploadOther4>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadOther4.click()" [matTooltip]='fileUploadOther4.value.
+                                substring(fileUploadOther4.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadOther4)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadOther4.value.
+                                substring(fileUploadOther4.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <label>UK Driving Licence (Front)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="ukDrivingLicenceFront"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'ukDrivingLicenceFront')"
+                                #fileUploadUKDrivingLicenceFront>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadUKDrivingLicenceFront.click()" [matTooltip]='fileUploadUKDrivingLicenceFront.value.
+                                substring(fileUploadUKDrivingLicenceFront.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadUKDrivingLicenceFront)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadUKDrivingLicenceFront.value.
+                                substring(fileUploadUKDrivingLicenceFront.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>UK Driving Licence (Back)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="ukDrivingLicenceBack"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'ukDrivingLicenceBack')"
+                                #fileUploadUKDrivingLicenceBack>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadUKDrivingLicenceBack.click()" [matTooltip]='fileUploadUKDrivingLicenceBack.value.
+                                substring(fileUploadUKDrivingLicenceBack.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadUKDrivingLicenceBack)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadUKDrivingLicenceBack.value.
+                                substring(fileUploadUKDrivingLicenceBack.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Foreign Driving Licence (Front)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="foreignDrivingLicenceFront"
+                                [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'foreignDrivingLicenceFront')"
+                                #fileUploadForeignDrivingLicenceFront>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadForeignDrivingLicenceFront.click()" [matTooltip]='fileUploadForeignDrivingLicenceFront.value.
+                                substring(fileUploadForeignDrivingLicenceFront.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadForeignDrivingLicenceFront)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadForeignDrivingLicenceFront.value.
+                                substring(fileUploadForeignDrivingLicenceFront.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <label>Foreign Driving Licence (Back)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="foreignDrivingLicenceBack"
+                                [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'foreignDrivingLicenceBack')"
+                                #fileUploadForeignDrivingLicenceBack>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadForeignDrivingLicenceBack.click()" [matTooltip]='fileUploadForeignDrivingLicenceBack.value.
+                                substring(fileUploadForeignDrivingLicenceBack.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadForeignDrivingLicenceBack)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadForeignDrivingLicenceBack.value.
+                                substring(fileUploadForeignDrivingLicenceBack.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm">
+                    <label>Origin of Foreign Licence</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="originForeignDrivingLicence"
+                                [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'originForeignDrivingLicence')"
+                                #fileUploadOriginForeignDrivingLicence>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadOriginForeignDrivingLicence.click()" [matTooltip]='fileUploadOriginForeignDrivingLicence.value.
+                                substring(fileUploadOriginForeignDrivingLicence.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadOriginForeignDrivingLicence)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>{{fileUploadOriginForeignDrivingLicence.value.
+                                substring(fileUploadOriginForeignDrivingLicence.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}</label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-xl col-md col-sm"></div>
+            </div>
+
+            <div class="mt-2">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Vehicle Details</ng-template>
+
+            <div class="row">
+                <div class="col col-sm col-md">
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>Vehicle type</mat-label>
+                        <mat-select placeholder="Vehicle type">
+                            <mat-option *ngFor="let type of vehicleTypeOption" [value]="type">
+                                {{type.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                    <label id="example-radio-group-label">Pick your vehicle type</label>
+                    <mat-radio-group class="example-radio-group" formControlName="vehicleType">
+                        <mat-radio-button class="example-radio-button" *ngFor="let type of vehicleType"
+                            [value]="type.id">
+                            {{type.value}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+
+                </div>
+                <div class="col col-sm col-md">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vehicle Manufacturer</mat-label>
+                        <!-- <mat-select placeholder="Vehicle manufacturer" formControlName="vehicleManufacture">
+                            <mat-option (onSelectionChange)="getVehicleModelBasedManufacture($event)"
+                                *ngFor="let manufacture of vehicleManufactureOption" [value]="manufacture">
+                                {{manufacture.name}}
+                            </mat-option>
+                        </mat-select> -->
+                        <input matInput type="text" placeholder="Pick your manufacture"
+                            formControlName="vehicleManufacture" [matAutocomplete]="vehicleManufactureAuto">
+                        <mat-autocomplete #vehicleManufactureAuto="matAutocomplete"
+                            (optionSelected)="getVehicleModelBasedManufacture($event)" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredVehicleManufactureOptions | async"
+                                [value]="option">
+                                <!-- {{option.name}} -->
+                                {{displayFn(option)}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm col-md">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vehicle Model</mat-label>
+                        <mat-select placeholder="Vehicle Model" formControlName="vehicleModel">
+                            <mat-option *ngFor="let model of vehicleModelOptions" [value]="model">
+                                {{model.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm col-md">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Registration Number</mat-label>
+                        <input matInput placeholder="Registration Number" formControlName="vehicleRegistrationNumber">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm col-md">
+                    <div class="example-ripple-container mat-elevation-z4" matRipple [matRippleCentered]="true">
+                        {{'Vehicle Not Found'|translate}}
+                    </div>
+                </div>
+                <div class="col col-sm col-md">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Engine size</mat-label>
+                        <mat-select placeholder="Engine size" formControlName="vehicleEngineSize">
+                            <mat-option *ngFor="let engine of vehicleEngineOption" [value]="engine">
+                                {{engine.size}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm col-md">
+                    <!-- <label id="example-radio-group-label">Pick your vehicle power source</label>
+                    <mat-radio-group class="example-radio-group" formControlName="vehiclePowerSource">
+                        <mat-radio-button class="example-radio-button"
+                            *ngFor="let powerSourceType of vehiclePowerSource" [value]="powerSourceType.id">
+                            {{powerSourceType.text}}
+                        </mat-radio-button>
+                    </mat-radio-group> -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vehicle Power Source</mat-label>
+                        <mat-select placeholder="Pick your vehicle power source" formControlName="vehiclePowerSources"
+                            multiple>
+                            <mat-option *ngFor="let powerSourceType of vehiclePowerSourceOption"
+                                [value]="powerSourceType">{{powerSourceType.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm col-md">
+                    <label>V5(Front)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="v5FrontImage"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'v5FrontImage')"
+                                #fileUploadV5FrontPhoto>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadV5FrontPhoto.click()" [matTooltip]='fileUploadV5FrontPhoto.value.
+                                substring(fileUploadV5FrontPhoto.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadV5FrontPhoto)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>
+                                {{fileUploadV5FrontPhoto.value.
+                                substring(fileUploadV5FrontPhoto.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
+                            </label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col col-sm col-md">
+                    <label>V5(Inside)</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="v5InsideImage"
+                                [accept]="requiredFileType" (change)="onFileSelected($event,'v5BackImage')"
+                                #fileUploadV5BackPhoto>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadV5BackPhoto.click()" [matTooltip]='fileUploadV5BackPhoto.value.
+                                substring(fileUploadV5BackPhoto.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadV5BackPhoto)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>
+                                {{fileUploadV5BackPhoto.value.
+                                substring(fileUploadV5BackPhoto.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
+                            </label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm col-md">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vehicle Insurance Company</mat-label>
+                        <mat-select placeholder="Vehicle Insurance Company" formControlName="vehicleInsuranceCompany">
+                            <mat-option *ngFor="let insurance of vehicleInsuranceCompanyOptions" [value]="insurance">
+                                {{insurance.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm col-md">
+                    <label>Vehicle insurance company</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="vehicleInsuranceCompanyPhoto"
+                                [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'vehicleInsuranceCompanyPhoto')"
+                                #fileUploadVehcileInsuracePhoto>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadVehcileInsuracePhoto.click()" [matTooltip]='fileUploadVehcileInsuracePhoto.value.
+                                substring(fileUploadVehcileInsuracePhoto.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn"
+                                (click)="takeSelfie(fileUploadVehcileInsuracePhoto)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>
+                                {{fileUploadVehcileInsuracePhoto.value.
+                                substring(fileUploadVehcileInsuracePhoto.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
+                            </label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col col-sm col-md"></div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm col-md">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Next M.O.T</mat-label>
+                        <input matInput (blur)="onBlur()" [matDatepicker]="pickerMOT" formControlName="nextMOTDue"
+                            placeholder="DD/MM/YYYY">
+                        <mat-datepicker-toggle matIconSuffix [for]="pickerMOT"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerMOT></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm col-md">
+                    <label>M.O.T</label>
+                    <mat-list class="mat-list d-flex" style="padding: 0;">
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <input type="file" class="file-input" formControlName="MOTPhoto" [accept]="requiredFileType"
+                                (change)="onFileSelected($event,'MOTPhoto')" #fileUploadMOTPhoto>
+                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
+                                (click)="fileUploadMOTPhoto.click()" [matTooltip]='fileUploadMOTPhoto.value.
+                                substring(fileUploadMOTPhoto.value
+                                .lastIndexOf(" \\")).replace("\\","")'>
+                                <mat-icon class="material-icons">cloud_upload</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider [vertical]="true"></mat-divider>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadMOTPhoto)">
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item class="horizontal-mat-list-item">
+                            <label>
+                                {{fileUploadMOTPhoto.value.
+                                substring(fileUploadMOTPhoto.value
+                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
+                            </label>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col col-sm col-md"></div>
+            </div>
+
+            <div class="mt-2">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Working Area</ng-template>
+
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Working country</mat-label>
+                        <mat-select placeholder="Country working in" formControlName="workingCountry" multiple>
+                            <mat-option *ngFor="let country of nationalityOption"
+                                [value]="country">{{country.countryName}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f['postcode']"></mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-xl col-md col-sm">
+                    <mat-form-field appearance="fill">
+                        <mat-label>DD Area Working In</mat-label>
+                        <mat-select formControlName="workingDDArea" multiple>
+                            <mat-option *ngFor="let area of ukAreaOptions" [value]="area">{{area.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-xl col-md col-sm">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Town working in</mat-label>
+                        <mat-select formControlName="workingTown" multiple>
+                            <mat-option *ngFor="let area of ukAreaOptions" [value]="area">{{area.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl col-md col-sm">
+                    <mat-slide-toggle formControlName="workingStatus" color="primary">Working Status</mat-slide-toggle>
+                </div>
+                <div class="col-xl col-md col-sm"></div>
+                <div class="col-xl col-md col-sm"></div>
+            </div>
+
+            <div class="mt-2">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Payment</ng-template>
+            To get more feature please pay the subscription...
+            <div class="mt-2">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button>Reset</button>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</form>

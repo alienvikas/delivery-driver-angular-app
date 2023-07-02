@@ -33,8 +33,7 @@ import { VehiclePowerSourceService } from 'src/app/services/vehicle-power-source
 @Component({
   selector: 'app-person-form',
   templateUrl: './person-form.component.html',
-  styleUrls: ['./person-form.component.scss',
-    '../../../../node_modules/bootstrap/dist/css/bootstrap.css']
+  styleUrls: ['./person-form.component.scss']
 })
 export class PersonFormComponent implements OnInit, AfterViewInit {
 

@@ -27,7 +27,8 @@ export class HomeComponent {
     { name: 'Passport', path: '/passport', iconName: 'country' },
   ]
 
-  onSelect(path:string){
+  onSelect(path: string) {
+    debugger;
     this.dialogRef.close(path);
     //this.route.navigate([path]);
   }

@@ -8,3 +8,11 @@
     //margin: 10px;
     border: 1px solid #555;
 }
+
+.content {
+    height: calc(100vh - 73px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //height: -webkit-fill-available;
+}

@@ -1,0 +1,23 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="loginService.isLoggedIn()">
+    <!--------------------Header section------------------------->
+    <app-header-page [matSideNav]="snav"></app-header-page>
+    <!--------------------Side nav with content section------------------------->
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav class="example-sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'"
+            [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+            <app-side-nav-page></app-side-nav-page>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+            <!-- <app-landing-page></app-landing-page> -->
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <!-------------------Footer section-------------------------------->
+    <footer fxFlexOffset="auto">
+        <p>© 2023 Copyright: <b>Delivery Driver</b></p>
+    </footer>
+</div>
+
+<app-landing-page *ngIf="!loginService.isLoggedIn()"></app-landing-page>

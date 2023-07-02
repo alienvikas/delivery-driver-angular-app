@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalComponent } from './global-component';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from "@angular/platform-browser";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -20,8 +22,13 @@ export const MY_DATE_FORMATS = {
 })
 export class AppComponent {
   title = 'DeliveryDriverSystem';
-  constructor(translate: TranslateService) {
+  constructor(translate: TranslateService, private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer) {
     //this.clearLocalStorage();
+    this.matIconRegistry.addSvgIcon(
+      "shopping-building",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../../../../assets/svg/building.svg")
+    );
   }
 
   isLoggedIn() {

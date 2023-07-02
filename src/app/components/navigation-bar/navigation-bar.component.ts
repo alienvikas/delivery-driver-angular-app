@@ -7,33 +7,32 @@ import { HomeComponent } from '../popup-dialog/home/home.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.scss',
-    '../../../../node_modules/bootstrap/dist/css/bootstrap.css']
+  styleUrls: ['./navigation-bar.component.scss']
 })
 
 export class NavigationBarComponent implements OnInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
+  options!: FormGroup;
+  
   constructor(private route: Router, private observer: BreakpointObserver, public loginService: LoginService,
-    private location: LocationStrategy, public dialog: MatDialog) {
+    private location: LocationStrategy, public dialog: MatDialog, fb: FormBuilder) {
     if (localStorage.getItem('SessionUser') != null)
       GlobalComponent.isloggedIn = true;
+
+    this.options = fb.group({
+      bottom: 0,
+      fixed: false,
+      top: 0
+    });
     //this.openDialog('3000ms', '1500ms');
   }
   ngOnInit(): void { }
   ngAfterViewInit() {
-    this.observer.observe(["(max-width: 800px)"]).subscribe((res) => {
-      if (res.matches) {
-        this.sidenav.mode = "over";
-        this.sidenav.close();
-      } else {
-        this.sidenav.mode = "side";
-        this.sidenav.open();
-      }
-    });
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
@@ -53,4 +52,5 @@ export class NavigationBarComponent implements OnInit {
     localStorage.clear();
     this.route.navigate(['login']);
   }
+
 }

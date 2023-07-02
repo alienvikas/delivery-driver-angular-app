@@ -14,12 +14,16 @@ import { UkAreaTelephoneListComponent } from './components/admin-view/uk-area-te
 import { VehicleTypeComponent } from './components/admin-view/vehicle-type/vehicle-type.component';
 import { VehicleManufactureComponent } from './components/admin-view/vehicle-manufacture/vehicle-manufacture.component';
 import { TownCityListComponent } from './components/admin-view/town-city-list/town-city-list.component';
+import { LoginPageComponent } from './components/Pages/login-page/login-page.component';
+import { PersonPageComponent } from './components/Pages/person-page/person-page.component';
+import { RetailPremisesViewComponent } from './components/Pages/retail-premises-view/retail-premises-view.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: LogInComponent },
+  // { path: 'login', component: LogInComponent },
+  { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'person', component: PersonFormComponent, canActivate: [AuthService] },
+  { path: 'person', component: PersonPageComponent, canActivate: [AuthService] },
   { path: 'addcountry', component: AddCountryComponent, canActivate: [AuthService] },
   { path: 'countryList', component: CountryListComponent, canActivate: [AuthService] },
   { path: 'countyList', component: CountyListComponent, canActivate: [AuthService] },
@@ -30,6 +34,7 @@ const routes: Routes = [
   { path: 'vehicletype', component: VehicleTypeComponent, canActivate: [AuthService] },
   { path: 'vehiclemanufacture', component: VehicleManufactureComponent, canActivate: [AuthService] },
   { path: 'townorcity', component: TownCityListComponent, canActivate: [AuthService] },
+  { path: 'retailpremises', component: RetailPremisesViewComponent, canActivate: [AuthService] },
 ];
 
 @NgModule({

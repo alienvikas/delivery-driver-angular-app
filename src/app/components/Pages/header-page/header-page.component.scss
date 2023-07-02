@@ -1,0 +1,14 @@
+.example-is-mobile .example-toolbar {
+    position: fixed;
+    z-index: 2;    
+}
+
+h1.example-app-name {
+    margin-left: 8px;
+    margin-bottom: 0 !important;
+}
+
+mat-toolbar{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
+    color: #ffffff !important;
+}
