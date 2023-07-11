@@ -1,326 +1,67 @@
-<!-- <mat-stepper orientation="vertical" [linear]="true" #stepper>
-    <form [formGroup]="retailFormGroup" #retailPremisesDetailForm="ngForm">
-        <mat-step>
-            <ng-template matStepLabel>{{'Labels.basicDetails'|translate}}</ng-template>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'retailPremisesName'"
-                            inputPlaceholderKey="{{'Labels.retailName'|translate}}" [iconType]="'badge'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'buildingName'"
-                            inputPlaceholderKey="{{'Labels.buildingName'|translate}}" [iconType]="'store'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'addressNumber'"
-                            inputPlaceholderKey="{{'Labels.addressNumber'|translate}}" [iconType]="'home'"></app-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'streetOrRoad'"
-                            inputPlaceholderKey="{{'Labels.streetOrRoad'|translate}}"
-                            [iconType]="'streetview'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'area'"
-                            inputPlaceholderKey="{{'Labels.area'|translate}}" [iconType]="'my_location'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input-auto-complete [dropdownData]="ukAreaOptions" [labelText]="('townOrCity'|translate)"
-                            inputPlaceholder="Please type to choose the town/city" [formGroup]="retailFormGroup"
-                            [controlName]="'townOrCity'" [iconType]="'location_city'">
-                        </app-input-auto-complete>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <app-input-auto-complete [dropdownData]="countyOptions" labelText="{{'county'|translate}}"
-                            inputPlaceholder="Please type to choose the county" [formGroup]="retailFormGroup"
-                            [controlName]="'county'" [iconType]="'room'">
-                        </app-input-auto-complete>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'postCode'"
-                            inputPlaceholderKey="{{'Labels.postCode'|translate}}" [iconType]="'pin_drop'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input-auto-complete [dropdownData]="countryOptions" labelText="{{'country'|translate}}"
-                            inputPlaceholder="Please type to choose the country" [formGroup]="retailFormGroup"
-                            [controlName]="'country'" [iconType]="'outlined_flag'">
-                        </app-input-auto-complete>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'creationNotes'"
-                            inputPlaceholderKey="{{'Labels.creationNotes'|translate}}"
-                            [iconType]="'description'"></app-input>
-                    </div>
-                    <div class="col-sm"></div>
-                    <div class="col-sm"></div>
-                </div>
-            </div>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>{{'Labels.communication'|translate}}</ng-template>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <app-input [inputType]="'email'" [group]="retailFormGroup" [controlName]="'emailCommunication'"
-                            inputPlaceholderKey="{{'Labels.comminicationEmail'|translate}}"
-                            [iconType]="'email'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'email'" [group]="retailFormGroup" [controlName]="'emailInvoicing'"
-                            inputPlaceholderKey="{{'Labels.invoicingEmail'|translate}}"
-                            [iconType]="'email'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'number'" [group]="retailFormGroup" [controlName]="'retailLandline'"
-                            inputPlaceholderKey="{{'Labels.retailersLandline'|translate}}"
-                            [iconType]="'phone'"></app-input>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'retialLandlineTitle'"
-                            inputPlaceholderKey="{{'Labels.landlineTitle'|translate}}" [iconType]="'title'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'number'" [group]="retailFormGroup"
-                            [controlName]="'retialMobileOneNumber'"
-                            inputPlaceholderKey="{{'Labels.retailMobileOne'|translate}}"
-                            [iconType]="'smartphone'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'retailMobileOneTitle'"
-                            inputPlaceholderKey="{{'Labels.mobileOneTitle'|translate}}"
-                            [iconType]="'title'"></app-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <app-input [inputType]="'number'" [group]="retailFormGroup"
-                            [controlName]="'retialMobileTwoNumber'"
-                            inputPlaceholderKey="{{'Labels.retailMobileTwo'|translate}}"
-                            [iconType]="'smartphone'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'retailMobileTwoTitle'"
-                            inputPlaceholderKey="{{'Labels.mobileTwoTitle'|translate}}"
-                            [iconType]="'title'"></app-input>
-                    </div>
-                    <div class="col-sm">
-                        <app-input [inputType]="'number'" [group]="retailFormGroup"
-                            [controlName]="'retialMobileThreeNumber'"
-                            inputPlaceholderKey="{{'Labels.retailMobileThree'|translate}}"
-                            [iconType]="'smartphone'"></app-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <app-input [inputType]="'text'" [group]="retailFormGroup"
-                            [controlName]="'retailMobileThreeTitle'"
-                            inputPlaceholderKey="{{'Labels.mobileThreeTitle'|translate}}"
-                            [iconType]="'title'"></app-input>
-                    </div>
-                </div>
-            </div>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>{{'Labels.payment'|translate}}</ng-template>
-            <div class="row">
-                <div class="col-sm">
-                    <app-single-select [group]="retailFormGroup" [controlName]="'currencyPaid'"
-                        [dropdownData]="currencyPaidOptions" [displayProp]="'value'"
-                        dropdownPlaceholder="{{'Labels.currencyPaidIn'|translate}}" [iconType]="'attach_money'">
-                    </app-single-select>
-                </div>
-                <div class="col-sm">
-                    <app-single-select [group]="retailFormGroup" [controlName]="'pricePerHour'"
-                        [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                        dropdownPlaceholder="{{'Labels.pricePerHour'|translate}}" [iconType]="'money'">
-                    </app-single-select>
-                </div>
-                <div class="col-sm">
-                    <app-single-select [group]="retailFormGroup" [controlName]="'pricePerDrop'"
-                        [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                        dropdownPlaceholder="{{'Labels.pricePerDrop'|translate}}" [iconType]="'price_change'">
-                    </app-single-select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    <app-single-select [group]="retailFormGroup" [controlName]="'extrasNotes'"
-                        [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                        dropdownPlaceholder="{{'Labels.extrasPerDrop'|translate}}" [iconType]="'request_quote'">
-                    </app-single-select>
-                </div>
-                <div class="col-sm">
-                    <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'extrasNotes'"
-                        inputPlaceholderKey="{{'Labels.extrasNotes'|translate}}" [iconType]="'description'"></app-input>
-                </div>
-                <div class="col-sm">
-                    <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
-                        [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                        dropdownPlaceholder="{{'Labels.agreedMinimumPerHour'|translate}}" [iconType]="'request_quote'">
-                    </app-single-select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    <app-input [inputType]="'number'" [group]="retailFormGroup" [controlName]="'oneOffPrice'"
-                        inputPlaceholderKey="{{'Labels.oneOffPrice'|translate}}" [iconType]="'numbers'"></app-input>
-                </div>
-                <div class="col-sm">
-                    <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
-                        [dropdownData]="payModeOptions" [displayProp]="'value'"
-                        dropdownPlaceholder="{{'Labels.payMode'|translate}}" [iconType]="'request_quote'">
-                    </app-single-select>
-                </div>
-                <div class="col-sm">
-                    <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
-                        [dropdownData]="payFrequencyOptions" [displayProp]="'value'"
-                        dropdownPlaceholder="{{'Labels.payFrequency'|translate}}" [iconType]="'request_quote'">
-                    </app-single-select>
-                </div>
-            </div>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>{{'Labels.helpNotes'|translate}}</ng-template>
-            <div class="row">
-                <div class="col-sm">
-                    <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'otherNotes'"
-                        inputPlaceholderKey="{{'Labels.otherNotes'|translate}}" [iconType]="'description'"></app-input>
-                </div>
-                <div class="col-sm">
-                    <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'notesAndTips'"
-                        inputPlaceholderKey="{{'Labels.notesAndTips'|translate}}"
-                        [iconType]="'description'"></app-input>
-                </div>
-            </div>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>{{'Labels.visuals'|translate}}</ng-template>
-            <div class="row">
-                <div class="col-sm">
-                    <label>{{'Labels.logo'|translate}}</label>
-                    <mat-list class="mat-list d-flex" style="padding: 0;">
-                        <mat-list-item class="horizontal-mat-list-item">
-                            <input type="file" class="file-input" formControlName="logo" [accept]="requiredFileType"
-                                (change)="onFileSelected($event,'logo')" #fileUploadLogo>
-                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
-                                (click)="fileUploadLogo.click()" [matTooltip]='fileUploadLogo.value.
-                                substring(fileUploadLogo.value
-                                .lastIndexOf(" \\")).replace("\\","")'>
-                                <mat-icon class="material-icons">cloud_upload</mat-icon>
-                            </button>
-                        </mat-list-item>
-                        <mat-divider [vertical]="true"></mat-divider>
-                        <mat-list-item class="horizontal-mat-list-item">
-                            <button type="button" class="file-upload-btn" (click)="takeSelfie(fileUploadLogo)">
-                                <mat-icon>camera_alt</mat-icon>
-                            </button>
-                        </mat-list-item>
-                        <mat-list-item class="horizontal-mat-list-item">
-                            <label>
-                                {{fileUploadLogo.value.
-                                substring(fileUploadLogo.value
-                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
-                            </label>
-                        </mat-list-item>
-                    </mat-list>
-                </div>
-                <div class="col-sm">
-                    <label>{{'Labels.frontDoorVisual'|translate}}</label>
-                    <mat-list class="mat-list d-flex" style="padding: 0;">
-                        <mat-list-item class="horizontal-mat-list-item">
-                            <input type="file" class="file-input" formControlName="frontDoorVisual"
-                                [accept]="requiredFileType" (change)="onFileSelected($event,'frontDoorVisual')"
-                                #fileUploadFrontDoorVisual>
-                            <button type="button" class="file-upload-btn" mat-raise-button color="primary"
-                                (click)="fileUploadFrontDoorVisual.click()" [matTooltip]='fileUploadFrontDoorVisual.value.
-                                substring(fileUploadFrontDoorVisual.value
-                                .lastIndexOf(" \\")).replace("\\","")'>
-                                <mat-icon class="material-icons">cloud_upload</mat-icon>
-                            </button>
-                        </mat-list-item>
-                        <mat-divider [vertical]="true"></mat-divider>
-                        <mat-list-item class="horizontal-mat-list-item">
-                            <button type="button" class="file-upload-btn"
-                                (click)="takeSelfie(fileUploadFrontDoorVisual)">
-                                <mat-icon>camera_alt</mat-icon>
-                            </button>
-                        </mat-list-item>
-                        <mat-list-item class="horizontal-mat-list-item">
-                            <label>
-                                {{fileUploadFrontDoorVisual.value.
-                                substring(fileUploadFrontDoorVisual.value
-                                .lastIndexOf("\\")).replace("\\","") || "File upload/Take photo"}}
-                            </label>
-                        </mat-list-item>
-                    </mat-list>
-                </div>
-            </div>
-        </mat-step>
-    </form>
-</mat-stepper> -->
-
-<form [formGroup]="retailFormGroup" #retailPremisesDetailForm="ngForm"
+<form #retailPremisesDetailForm="ngForm" [formGroup]="retailFormGroup"
     (ngSubmit)="onRetailPremisesSubmit(retailFormGroup.value)">
     <div class="row container-fluid">
         <div class="col-sm">
-            <mat-stepper orientation="vertical" [linear]="true" #stepper>
+            <mat-stepper orientation="vertical" #stepper (selectionChange)="stepChanged($event, stepper)">
                 <mat-step>
                     <ng-template matStepLabel>{{'Labels.basicDetails'|translate}}</ng-template>
                     <div class="container">
                         <div class="row py-1">
                             <div class="col-sm">
+                                <app-single-select [group]="retailFormGroup" [controlName]="'Authoriser'"
+                                    [dropdownData]="userOptions" [displayProp]="'fullName'" [selectedData]="currentUser"
+                                    dropdownPlaceholder="{{'chooseintroducer'|translate}}"
+                                    [iconType]="'supervised_user_circle'">
+                                </app-single-select>
+                            </div>
+                            <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup"
                                     [controlName]="'retailPremisesName'"
-                                    inputPlaceholderKey="{{'Labels.retailName'|translate}}"
-                                    [iconType]="'badge'"></app-input>
+                                    inputPlaceholderKey="{{'Labels.retailName'|translate}}" [iconType]="'badge'"
+                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','retailPremisesName')?('Validation.retailpremisesrequired'|translate):'')"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'buildingName'"
                                     inputPlaceholderKey="{{'Labels.buildingName'|translate}}"
                                     [iconType]="'store'"></app-input>
                             </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup"
                                     [controlName]="'addressNumber'"
                                     inputPlaceholderKey="{{'Labels.addressNumber'|translate}}"
                                     [iconType]="'home'"></app-input>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'streetOrRoad'"
-                                    inputPlaceholderKey="{{'Labels.streetOrRoad'|translate}}"
-                                    [iconType]="'streetview'"></app-input>
+                                    inputPlaceholderKey="{{'Labels.streetOrRoad'|translate}}" [iconType]="'streetview'"
+                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','streetOrRoad')?('Validation.retailstreetorroadrequired'|translate):'')"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'area'"
                                     inputPlaceholderKey="{{'Labels.area'|translate}}"
                                     [iconType]="'my_location'"></app-input>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm">
                                 <app-input-auto-complete [dropdownData]="ukAreaOptions"
                                     labelText="{{'Labels.townOrCity'|translate}}"
                                     inputPlaceholder="Please type to choose the town/city" [formGroup]="retailFormGroup"
-                                    [controlName]="'townOrCity'" [iconType]="'location_city'">
+                                    [controlName]="'townOrCity'"
+                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','townOrCity')?('Validation.townorcityrequired'|translate):'')"
+                                    [iconType]="'location_city'">
                                 </app-input-auto-complete>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm">
                                 <app-input-auto-complete [dropdownData]="countyOptions"
                                     labelText="{{'Labels.county'|translate}}"
                                     inputPlaceholder="Please type to choose the county" [formGroup]="retailFormGroup"
-                                    [controlName]="'county'" [iconType]="'room'">
+                                    [controlName]="'county'"
+                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','county')?('Validation.countyrequired'|translate):'')"
+                                    [iconType]="'room'">
                                 </app-input-auto-complete>
                             </div>
                             <div class="col-sm">
@@ -328,29 +69,24 @@
                                     inputPlaceholderKey="{{'Labels.postCode'|translate}}"
                                     [iconType]="'pin_drop'"></app-input>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm">
                                 <app-input-auto-complete [dropdownData]="countryOptions"
                                     labelText="{{'Labels.country'|translate}}"
                                     inputPlaceholder="Please type to choose the country" [formGroup]="retailFormGroup"
-                                    [controlName]="'country'" [iconType]="'outlined_flag'">
+                                    [controlName]="'country'"
+                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','country')?('Validation.countryrequired'|translate):'')"
+                                    [iconType]="'outlined_flag'">
                                 </app-input-auto-complete>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm">
                                 <app-input [inputType]="'textarea'" [group]="retailFormGroup"
                                     [controlName]="'creationNotes'"
                                     inputPlaceholderKey="{{'Labels.creationNotes'|translate}}"
+                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','creationNotes')?('Validation.creationnotesrequired'|translate):'')"
                                     [iconType]="'description'"></app-input>
                             </div>
-                            <div class="col-sm">
-                                <app-single-select [group]="retailFormGroup" [controlName]="'Authoriser'"
-                                    [dropdownData]="userOptions" [displayProp]="'fullName'" [selectedData]="currentUser"
-                                    dropdownPlaceholder="{{'Labels.chooseintroducer'|translate}}"
-                                    [iconType]="'supervised_user_circle'">
-                                </app-single-select>
-                            </div>
-                            <div class="col-sm"></div>
                         </div>
                     </div>
                 </mat-step>
@@ -573,7 +309,7 @@
         </div>
         <div class="w-100"></div>
         <div class="col-sm py-1">
-            <button mat-raised-button [style.float]="'right'" type="submit">Submit</button>
+            <button mat-raised-button [style.float]="'right'" (click)="onClick()" type="submit">Submit</button>
         </div>
     </div>
 </form>

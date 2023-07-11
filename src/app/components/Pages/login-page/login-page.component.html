@@ -2,22 +2,20 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <app-input inputAppearanceType="fill" [inputType]="'email'" [iconType]="'email'"
-                    [inputPlaceholderKey]="'Labels.email'" [group]="loginForm" [controlName]="'email'"
-                    [isFormSubmitted]="isFormSubmitted"
-                    [errorMessage]="isFormSubmitted==true && (Email.errors?.['required']?('Validation.emailrequired'|translate):'' || Email.errors?.['email']?('Validation.emailpattern'|translate):'')"></app-input>
+                <app-input [inputType]="'email'" [iconType]="'email'" inputPlaceholder="{{'email'|translate}}"
+                    [group]="loginForm" [controlName]="'email'" labelText="{{'email'|translate}}"
+                    [errorMessage]="ngForm.submitted && (Email.errors?.['required']?('emailrequired'|translate):'' || Email.errors?.['email']?('Validation.emailpattern'|translate):'')"></app-input>
             </div>
             <div class="col-sm">
-                <app-input inputAppearanceType="fill" [inputType]="'password'" [iconType]="'lock'"
-                    [inputPlaceholderKey]="'Labels.password'" [group]="loginForm" [controlName]="'password'"
-                    [isFormSubmitted]="isFormSubmitted"
-                    [errorMessage]="isFormSubmitted==true && Password.errors?.['required']?('Validation.passwordrequired'|translate):''"></app-input>
+                <app-input [inputType]="'password'" [iconType]="'lock'" labelText="{{'password'|translate}}"
+                    inputPlaceholder="{{'password'|translate}}" [group]="loginForm" [controlName]="'password'"
+                    [errorMessage]="ngForm.submitted && Password.errors?.['required']?('passwordrequired'|translate):''"></app-input>
             </div>
         </div>
         <div class="row">
             <div class="col-sm">
                 <button mat-raised-button type="submit" class="rounded-4"
-                    (click)="onClick()">{{'Labels.login'|translate}}</button>
+                    (click)="onClick()">{{'login'|translate}}</button>
             </div>
         </div>
     </div>

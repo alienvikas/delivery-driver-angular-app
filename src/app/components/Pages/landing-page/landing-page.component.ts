@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UserTypeEnum } from 'src/app/enums/user-type-enum';
-import { RegisterComponent } from '../../register/register.component';
 import { GlobalComponent } from 'src/app/global-component';
 import { LoginService } from 'src/app/services/login/login.service';
 import { TranslateService } from '@ngx-translate/core';
+import { RegisterPageComponent } from '../register-page/register-page.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -38,7 +38,7 @@ export class LandingPageComponent implements OnInit {
 
   //#region Opening sign up in pop-up
   openRegisterDialog() {
-    const dialogRef = this.dialog.open(RegisterComponent, {
+    const dialogRef = this.dialog.open(RegisterPageComponent, {
       width: '50rem',
       disableClose: true
     });

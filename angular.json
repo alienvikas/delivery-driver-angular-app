@@ -31,7 +31,7 @@
               "src/web.config"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
               "node_modules/flag-icons/css/flag-icons.min.css",

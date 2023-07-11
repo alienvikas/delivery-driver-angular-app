@@ -16,7 +16,8 @@ export class InputComponent implements OnInit {
   @Input() group!: FormGroup;
   @Input() controlName: any;
   @Input() inputAppearanceType!: MatFormFieldAppearance;
-  @Input() inputPlaceholderKey!: string;
+  @Input() inputPlaceholder!: string;
+  @Input() labelText!: string;
   @Input() inputType!: string;
   @Input() isReadOnly!: boolean;
   @Input() isInputDisabled!: boolean;
@@ -31,6 +32,8 @@ export class InputComponent implements OnInit {
 
   onBlur() {
     if (this.errorMessage != '')
+      this.group.markAllAsTouched();
+    else
       this.group.markAsUntouched();
   }
 

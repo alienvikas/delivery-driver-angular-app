@@ -1,0 +1,95 @@
+<div class="container-fluid">
+    <div class="row align-items-center">
+        <div class="col" [style.padding-left]="'0'">
+            <div mat-dialog-title>
+                {{'register'|translate}}
+            </div>
+        </div>
+        <div class="col pointer-cursor">
+            <mat-icon (click)="dialogRef.close()" [style.float]="'right'">close</mat-icon>
+        </div>
+    </div>
+</div>
+
+
+<mat-divider></mat-divider>
+<form #signUpForm="ngForm" [formGroup]="registerForm"
+    (ngSubmit)="onSubmit(signUpForm.value,'User created successfully!!!','Success')">
+
+    <mat-dialog-content class="mat-typography">
+        <div class="row">
+            <div class="col">
+                <app-input [inputType]="'text'" inputPlaceholder="{{'firstname'|translate}}" [group]="registerForm"
+                    [controlName]="'firstName'" [iconType]="'face'" labelText="{{'firstname'|translate}}"
+                    [errorMessage]="signUpForm.submitted && (registerForm.hasError('required','firstName')?('firstnamerequired'|translate):'')"></app-input>
+            </div>
+            <div class="col">
+                <app-input [inputType]="'text'" inputPlaceholder="{{'lastname'|translate}}" [group]="registerForm"
+                    [controlName]="'lastName'" [iconType]="'face'" labelText="{{'lastname'|translate}}"
+                    [errorMessage]="signUpForm.submitted && f['lastName'].errors?.['required']?('lastnamerequired'|translate):''"></app-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-input [inputType]="'email'" inputPlaceholder="{{'email'|translate}}" [group]="registerForm"
+                    [controlName]="'email'" [iconType]="'email'" labelText="{{'email'|translate}}"
+                    [errorMessage]="signUpForm.submitted && 
+                    (f['email'].errors?.['required']?('emailrequired'|translate):f['email'].errors?.['email']?('emailpattern'|translate):'')"></app-input>
+            </div>
+            <div class="col">
+                <app-input [inputType]="'number'" inputPlaceholder="{{'mobile'|translate}}" [group]="registerForm"
+                    [controlName]="'mobile'" [iconType]="'phone'" labelText="{{'mobile'|translate}}" [errorMessage]="signUpForm.submitted && 
+                    (f['mobile'].errors?.['required']?('mobilerequired'|translate):'')"></app-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-input [inputType]="'password'" [group]="registerForm" [controlName]="'password'"
+                    inputPlaceholderKey="{{'createownpassword'|translate}}"
+                    labelText="{{'createownpassword'|translate}}" [iconType]="'lock'" [errorMessage]="signUpForm.submitted && 
+                    (f['password'].errors?.['required']?('passwordrequired'|translate):'')"></app-input>
+            </div>
+            <div class="col">
+                <app-input [inputType]="'password'" [group]="registerForm" [controlName]="'confirmPassword'"
+                    inputPlaceholderKey="{{'confirmpassword'|translate}}" labelText="{{'confirmpassword'|translate}}"
+                    [iconType]="'lock'" [errorMessage]="signUpForm.submitted && 
+                    (f['confirmPassword'].errors?.['required']?('confirmPasswordrequired'|translate):
+                    f['confirmPassword'].errors?.['confirmedValidator']?('confirmpassword'|translate):'')"></app-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-single-select [dropdownData]="ukareatelephone" dropdownPlaceholder="{{'countrylivesin'|translate}}"
+                    [group]="registerForm" [controlName]="'ukAreaTelephone'" [iconType]="'outlined_flag'"
+                    [displayProp]="'name'" [errorMessage]="signUpForm.submitted && (registerForm.hasError('required','ukAreaTelephone')?
+                    ('retailpremisesrequired'|translate):'')"></app-single-select>
+            </div>
+            <div class="col">
+                <app-single-select [dropdownData]="countries" dropdownPlaceholder="{{'countrylivesin'|translate}}"
+                    [group]="registerForm" [controlName]="'country'" [iconType]="'travel_explore'"
+                    [displayProp]="'name'"
+                    [errorMessage]="signUpForm.submitted && (registerForm.hasError('required','country')?('retailpremisesrequired'|translate):'')"></app-single-select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-single-select [dropdownData]="newPersonelInputsOptions"
+                    dropdownPlaceholder="{{'applyingFor'|translate}}" [group]="registerForm"
+                    [controlName]="'personelInputCatagory'" [iconType]="'pending_actions'" [isEnum]="true"
+                    [value]="'id'" [displayProp]="'name'"></app-single-select>
+            </div>
+            <div class="col">
+                <app-single-select [dropdownData]="roles" dropdownPlaceholder="{{'role'|translate}}"
+                    [group]="registerForm" [controlName]="'role'" [iconType]="'travel_explore'"
+                    [displayProp]="'name'"></app-single-select>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button class="rounded-pill" mat-button mat-raised-button mat-dialog-close
+            color="warn">{{'cancel'|translate}}</button>
+        <button type="submit" class="rounded-pill" mat-button mat-raised-button (click)="onClick()" color="primary"
+            cdkFocusInitial>{{'create'|translate}}</button>
+    </mat-dialog-actions>
+</form>

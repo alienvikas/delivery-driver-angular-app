@@ -1,6 +1,8 @@
 import { group } from "@angular/animations";
 import { Injectable } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { ConfirmedValidator } from "./commonMethods/confirmedValidator";
+import { formatDate } from "@angular/common";
 
 @Injectable()
 export class FormInitialize {
@@ -86,7 +88,7 @@ export class FormInitialize {
     public static initializeRetailPremisesForm(fb: FormBuilder) {
         return fb.group({
             Authoriser: new FormControl(null),
-            retailPremisesName: new FormControl(null, [Validators.required]),
+            retailPremisesName: new FormControl("", [Validators.required]),
             buildingName: new FormControl(null),
             addressNumber: new FormControl(null),
             streetOrRoad: new FormControl(null, [Validators.required]),
@@ -118,5 +120,29 @@ export class FormInitialize {
             frontDoorVisual: new FormControl(null),
             autoNumber: new FormControl(null)
         })
+    }
+
+    public static initialzeRegisterForm(fb: FormBuilder) {
+        return fb.group({
+            firstName: new FormControl("", [Validators.required]),
+            middleName: new FormControl(""),
+            lastName: new FormControl("", [Validators.required]),
+            email: new FormControl("", [Validators.required, Validators.email]),
+            password: new FormControl("", [Validators.required, Validators.minLength(6)]),
+            confirmPassword: ['', Validators.required],
+            mobile: new FormControl("", [Validators.required]),
+            country: new FormControl("", Validators.required),
+            memberSience: new FormControl(formatDate(new Date(), 'dd/MM/yyyy HH:mm:ss', 'en-GB')),
+            isAccountLocked: new FormControl(false),
+            personelInputCatagory: new FormControl(null),
+            role: new FormControl(""),
+            ukAreaTelephone: new FormControl("", [Validators.required]),
+            //uniqueNumber: new FormControl()
+        }
+            // ,
+            // {
+            //     validator: ConfirmedValidator('password', 'confirmPassword')
+            // }
+        )
     }
 }
