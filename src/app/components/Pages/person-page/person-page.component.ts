@@ -30,6 +30,7 @@ import { IWorkingDDArea } from 'src/app/interface/dd-working-area';
 import { ICountryWorking } from 'src/app/interface/country-working';
 import { VehiclePowerSourceService } from 'src/app/services/vehicle-power-source/vehicle-power-source.service';
 import { User } from 'src/app/models/user';
+import { PersonelInputCatagoryEnum } from 'src/app/enums/new-personel-input';
 
 
 @Component({
@@ -88,6 +89,12 @@ export class PersonPageComponent {
   fileList: any[] = [];
   user: any;
   personalPhoto: any;
+
+  personalInputCatagory!: PersonelInputCatagoryEnum;
+  isStaff: boolean = false;
+  isDriver: boolean = false;
+  isAuthorisedPerson: boolean = false;
+  isNewRetailOwner: boolean = false;
   /* #endregion */
 
   constructor(private fb: FormBuilder, private notificationService: NotificationService,
@@ -242,7 +249,11 @@ export class PersonPageComponent {
 
   getPersonalDetail() {
     this.personalDetailService.findOne(JSON.parse(this.user).id).subscribe((res: any) => {
-      this.personForm = FormInitialize.initializePersonalForm(this.fb, res);
+      debugger;
+      this.personalInputCatagory = res["user"]["personelInputCatagory"];
+      this.setPersonelInputCatagory();
+      console.log(this.isStaff);
+      this.personForm = FormInitialize.initializePersonalForm(this.fb, res["personalDetail"]);
       const reader = new FileReader();
       reader.onload = (e: any) => localStorage.setItem("personalPhoto", e.target.result);
       reader.readAsDataURL(new Blob([this.personForm.value["personPhoto"]]));
@@ -390,6 +401,23 @@ export class PersonPageComponent {
   displayFn(option: any) {
     if (option != null)
       return option.name;
+  }
+
+  setPersonelInputCatagory() {
+    switch (this.personalInputCatagory) {
+      case PersonelInputCatagoryEnum.Staff:
+        this.isStaff = true;
+        break;
+      case PersonelInputCatagoryEnum.Driver:
+        this.isDriver = true;
+        break;
+      case PersonelInputCatagoryEnum.AuthorisedPerson:
+        this.isAuthorisedPerson = true;
+        break;
+      case PersonelInputCatagoryEnum.NewRetailOwners:
+        this.isNewRetailOwner = true;
+        break;        
+    }
   }
 
   // get enumValue(vehicleTypeEnum: VehicleTypeEnum) { return VehicleTypeLabel.get(vehicleTypeEnum); }

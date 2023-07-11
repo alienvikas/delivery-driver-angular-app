@@ -17,12 +17,13 @@ import { TownCityListComponent } from './components/admin-view/town-city-list/to
 import { LoginPageComponent } from './components/Pages/login-page/login-page.component';
 import { PersonPageComponent } from './components/Pages/person-page/person-page.component';
 import { RetailPremisesViewComponent } from './components/Pages/retail-premises-view/retail-premises-view.component';
+import { RegisterPageComponent } from './components/Pages/register-page/register-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   // { path: 'login', component: LogInComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterPageComponent },
   { path: 'person', component: PersonPageComponent, canActivate: [AuthService] },
   { path: 'addcountry', component: AddCountryComponent, canActivate: [AuthService] },
   { path: 'countryList', component: CountryListComponent, canActivate: [AuthService] },

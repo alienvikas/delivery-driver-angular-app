@@ -2,18 +2,27 @@
 
 <ng-template #reactive>
     <form [formGroup]="group" #ngForm="ngForm">
-        <mat-form-field appearance="fill">
-            <mat-label>{{dropdownPlaceholder|translate}}</mat-label>
-            <mat-select [formControlName]="controlName" [placeholder]="dropdownPlaceholder" [value]="selectedData">
+        <mat-form-field appearance="outline">
+            <mat-label>{{matLabel|translate}}</mat-label>
+            <mat-select [formControlName]="controlName" [placeholder]="dropdownPlaceholder" [value]="selectedData"
+                (selectionChange)="onChange($event)">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let option of dropdownData;let i = index;" [value]="option">
-                    {{option[displayProp]}}
-                </mat-option>
+                <ng-container *ngIf="!isEnum">
+                    <mat-option *ngFor="let option of dropdownData;let i = index;" [value]="option">
+                        {{option[displayProp]}}
+                    </mat-option>
+                </ng-container>
+
+                <ng-container *ngIf="isEnum">
+                    <mat-option *ngFor="let option of dropdownData;let i = index;" [value]="option[value]">
+                        {{option[displayProp]}}
+                    </mat-option>
+                </ng-container>
+
             </mat-select>
-            <mat-icon matPrefix>{{iconType}}</mat-icon>
-            <!-- <mat-error *ngIf="group.hasError('required')">{{requiredErrorMessageKey|translate}}</mat-error> -->
-            <mat-error
-                *ngIf="group.hasError('required',controlName) && ngForm.submitted">{{requiredErrorMessageKey|translate}}
+            <mat-icon *ngIf="iconType!=''" matPrefix>{{iconType}}</mat-icon>
+            <mat-error *ngIf="errorMessage != ''">
+                {{errorMessage}}
             </mat-error>
         </mat-form-field>
     </form>

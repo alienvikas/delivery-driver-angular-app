@@ -8,7 +8,7 @@
             <app-side-nav-page></app-side-nav-page>
         </mat-sidenav>
 
-        <mat-sidenav-content>
+        <mat-sidenav-content class="scrollbar">
             <router-outlet></router-outlet>
             <!-- <app-landing-page></app-landing-page> -->
         </mat-sidenav-content>
@@ -20,4 +20,5 @@
     </footer>
 </div>
 
-<app-landing-page *ngIf="!loginService.isLoggedIn()"></app-landing-page>
+<app-landing-page *ngIf="!loginService.isLoggedIn()" [style.height]="'100%'" [style.display]="'flex'"
+    [style.align-items]="'center'"></app-landing-page>

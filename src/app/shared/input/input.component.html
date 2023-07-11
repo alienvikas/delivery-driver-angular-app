@@ -2,21 +2,21 @@
 
 <ng-template #reactive>
     <form [formGroup]="group" class="example-form">
-        <mat-form-field [appearance]="inputAppearanceType" class="example-full-width">
+        <mat-form-field appearance="outline" class="example-full-width">
 
-            <mat-label>{{inputPlaceholderKey}}</mat-label>
+            <mat-label>{{labelText}}</mat-label>
 
-            <input matInput *ngIf="inputType=='text'" [placeholder]="inputPlaceholderKey"
-                [formControlName]="controlName" (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
+            <input matInput *ngIf="inputType=='text'" placeholder="{{inputPlaceholder}}" [formControlName]="controlName"
+                (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
 
-            <input matInput *ngIf="inputType=='email'" placeholder="{{inputPlaceholderKey|translate}}" type="email"
+            <input matInput *ngIf="inputType=='email'" [placeholder]="inputPlaceholder" type="email"
                 [formControlName]="controlName" (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
 
             <input matInput *ngIf="inputType=='password'" [type]="hide ? 'password' : 'text'"
-                placeholder="{{inputPlaceholderKey|translate}}" type="password" [formControlName]="controlName"
-                (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
+                [placeholder]="inputPlaceholder" type="password" [formControlName]="controlName" (blur)="onBlur()"
+                [readonly]="isReadOnly" [disabled]="isInputDisabled">
 
-            <input matInput *ngIf="inputType=='number'" placeholder="{{inputPlaceholderKey|translate}}" type="number"
+            <input matInput *ngIf="inputType=='number'" [placeholder]="inputPlaceholder" type="number"
                 [formControlName]="controlName" (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
 
             <textarea matInput *ngIf="inputType=='textarea'" placeholder="Ex. 100 Main St"
@@ -43,14 +43,14 @@
 <ng-template #template>
     <div class="example-form">
         <mat-form-field [appearance]="inputAppearanceType" class="example-full-width">
-            <mat-label>{{inputPlaceholderKey|translate}}</mat-label>
-            <input matInput *ngIf="inputType=='text'" placeholder="{{inputPlaceholderKey|translate}}" type="text"
+            <mat-label>{{labelText}}</mat-label>
+            <input matInput *ngIf="inputType=='text'" [placeholder]="inputPlaceholder" type="text"
                 formControlName="controlName" [readonly]="isReadOnly" [disabled]="isInputDisabled">
-            <input matInput *ngIf="inputType=='email'" placeholder="{{inputPlaceholderKey|translate}}" type="email"
+            <input matInput *ngIf="inputType=='email'" [placeholder]="inputPlaceholder" type="email"
                 formControlName="controlName" [readonly]="isReadOnly" [disabled]="isInputDisabled">
             <input matInput *ngIf="inputType=='password'" [type]="hide ? 'password' : 'text'"
-                placeholder="{{inputPlaceholderKey|translate}}" type="password" formControlName="controlName"
-                [readonly]="isReadOnly" [disabled]="isInputDisabled">
+                [placeholder]="inputPlaceholder" type="password" formControlName="controlName" [readonly]="isReadOnly"
+                [disabled]="isInputDisabled">
 
             <button *ngIf="inputType=='password'" mat-icon-button matSuffix (click)="hide = !hide"
                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">

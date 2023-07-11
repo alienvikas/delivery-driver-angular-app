@@ -19,7 +19,31 @@ export class SingleSelectComponent {
   @Input() customClass?: string;
   @Input() displayProp!: string;
   @Input() dropdownAppearanceType!: MatFormFieldAppearance;
-  @Output() selectionChange = new EventEmitter<any>();
+  @Output() onSelectionChange = new EventEmitter<any>();
   @Input() iconType: string = '';
+  @Input() isEnum: boolean = false;
+  @Input() errorMessage: string = '';
+  @Input() value: string = '';
+  @Input() matLabel: string = '';
   //#endregion
+
+  constructor() { }
+
+  onChange(event: any) {
+    console.log(event);
+    this.onSelectionChange.emit();
+  }
+
+  getEnumKey(enumValue: any) {
+    debugger;
+    //alert(enumValue)
+    if (isNaN(enumValue))
+      return enumValue;
+  }
+
+  displayEnumValue(enumValue: any) {
+    debugger;
+    if (!isNaN(enumValue))
+      return enumValue;
+  }
 }

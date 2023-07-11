@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, ReplaySubject, map, startWith } from 'rxjs';
 import { CurrencyPaidEnum, CurrencyPaidList } from 'src/app/enums/currency-paid-enum';
 import { PayFrequencyEnum } from 'src/app/enums/pay-frequrency-enum';
@@ -51,7 +51,7 @@ export class RetailPremisesViewComponent implements OnInit {
   //#endregion
 
   currentUser!: User;
-
+  isSubmitted: boolean = false;
   fileName = '';
   requiredFileType = "image/png";
   fileList: any[] = [];
@@ -59,27 +59,10 @@ export class RetailPremisesViewComponent implements OnInit {
   constructor(private fb: FormBuilder, private ukAreaService: UkTelephoneService,
     private countyService: CountyService, private countryService: CountryService,
     private retailPremisesService: RetailPremisesService, private dialog: MatDialog,
-    private snachBar: MatSnackBar, private userService: UserService) {
-
-    this.retailFormGroup = FormInitialize.initializeRetailPremisesForm(this.fb);
-    // this.filteredArea = this.retailFormGroup.controls["townOrCity"].valueChanges.pipe(
-    //   startWith(''),
-    //   map(area =>
-    //     (area ? this.filterArea(area) : this.ukAreaOptions.slice())),
-    // );
-    // this.filteredCounty = this.retailFormGroup.controls["county"].valueChanges.pipe(
-    //   startWith(''),
-    //   map(county =>
-    //     (county ? this.filterCounty(county) : this.countyOptions.slice())),
-    // );
-    // this.filteredCountry = this.retailFormGroup.controls["country"].valueChanges.pipe(
-    //   startWith(''),
-    //   map(country =>
-    //     (country ? this.filterCountry(country) : this.countryOptions.slice())),
-    // );
-  }
+    private snachBar: MatSnackBar, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.retailFormGroup = FormInitialize.initializeRetailPremisesForm(this.fb);
     const userJson = localStorage.getItem('user');
     this.currentUser = userJson !== null ? JSON.parse(userJson) : new User();
     this.getAllUkArea();
@@ -87,7 +70,6 @@ export class RetailPremisesViewComponent implements OnInit {
     this.getAllCountry();
     this.getAllPayments();
     this.getAllUser();
-    //this.selectedUser = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
   getAllUkArea() {
@@ -217,6 +199,15 @@ export class RetailPremisesViewComponent implements OnInit {
     for (let index = 0; index < this.fileList.length; index++) {
       this.retailFormGroup.value[this.fileList[index].propName] = this.fileList[index].base64;
     }
+  }
+
+  onClick() {
+    this.isSubmitted = true;
+    this.retailFormGroup.markAllAsTouched();
+  }
+
+  stepChanged(event: any, stepper: any) {
+    stepper.selected.interacted = false;
   }
 
   // private filterCounty(value: any): County[] {

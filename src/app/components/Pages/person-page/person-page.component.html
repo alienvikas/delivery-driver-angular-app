@@ -5,16 +5,17 @@
 <form #personDetailForm="ngForm" [formGroup]="personForm" (ngSubmit)="onPersonDetailSubmit(personForm)">
     <mat-vertical-stepper class="matVerticalStepper" [linear]="false" #stepper [animationDuration]="duration.value">
         <mat-step class="mb-2">
-            <ng-template matStepLabel>{{'Labels.personaldetails'|translate}}</ng-template>
+            <ng-template matStepLabel>{{'personaldetails'|translate}}</ng-template>
             <div class="row">
                 <div class="col">
-                    <!-- <app-single-select [group]="personForm" [controlName]="'introducer'"
-                        [requiredErrorMessageKey]="'introducerrequired'" dropdownAppearanceType="fill"
-                        [dropdownData]="introducerOptions" [dropdownPlaceholder]="'Labels.chooseintroducer'"
-                        [displayProp]="'name'">
-                    </app-single-select> -->
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{'Labels.chooseintroducer'|translate}}</mat-label>
+                    <app-single-select [group]="personForm" [controlName]="'introducer'"
+                        matLabel="{{'chooseintroducer'|translate}}" [dropdownData]="introducerOptions"
+                        dropdownPlaceholder="{{'chooseintroducer'|translate}}" [displayProp]="'name'"
+                        [iconType]="'person'" [errorMessage]="personDetailForm.submitted 
+                        && (personForm.hasError('required','introducerId')?('Select introducer'|translate):'')">
+                    </app-single-select>
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>{{'chooseintroducer'|translate}}</mat-label>
                         <mat-select formControlName="introducer">
                             <mat-option *ngFor="let introducer of introducerOptions" [value]="introducer">
                                 {{introducer.name}}
@@ -24,10 +25,10 @@
                             *ngIf="personForm.hasError('required','introducerId') && personDetailForm.submitted">Select
                             introducer
                         </mat-error>
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </div>
-                <div class="col">
-                    <app-input [group]="personForm" [controlName]="'officalName'" inputPlaceholderKey="Offical name"
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
+                    <app-input [group]="personForm" [controlName]="'officalName'" inputPlaceholder="Offical name"
                         [inputType]="'text'"></app-input>
                     <!-- <mat-form-field appearance="outline">
                         <mat-label>Offical name</mat-label>
@@ -44,8 +45,8 @@
                     </mat-form-field> -->
                 </div>
                 <div class="col">
-                    <app-input [group]="personForm" [controlName]="'knownAs'" inputPlaceholderKey="Known as"
-                        [inputType]="'text'"></app-input>
+                    <app-input [group]="personForm" [controlName]="'knownAs'" inputPlaceholder="Known as"
+                        [inputType]="'text'" labelText="Known as" [iconType]="'person'"></app-input>
                     <!-- <mat-form-field appearance="outline">
                         <mat-label>Known as</mat-label>
                         <input matInput (blur)="onBlur()" formControlName="knownAs">
@@ -63,7 +64,7 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <mat-form-field appearance="outline">
                         <mat-label>Date of birth</mat-label>
                         <input matInput (blur)="onBlur()" [matDatepicker]="picker" formControlName="dateOfBirth"
@@ -74,7 +75,7 @@
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'Labels.choosenationality'|translate}}</mat-label>
+                        <mat-label>{{'choosenationality'|translate}}</mat-label>
                         <mat-select formControlName="nationality">
                             <mat-form-field appearance="fill" class="select-element">
                                 <input matInput #nationalitySearch placeholder="Search nationality"
@@ -98,7 +99,7 @@
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'Labels.mobile'|translate}}</mat-label>
+                        <mat-label>{{'mobile'|translate}}</mat-label>
                         <input matInput (blur)="onBlur()" formControlName="phoneNumber" placeholder="+xxx xxxx xxxxxx">
                         <mat-hint>
                             <mat-icon matTooltip="it should be in the format +*** **** ******">help
@@ -126,16 +127,16 @@
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'Labels.email'|translate}}</mat-label>
+                        <mat-label>{{'email'|translate}}</mat-label>
                         <input matInput (blur)="onBlur()" formControlName="emailAddress" placeholder="example@abc.com">
                         <mat-error *ngIf="f['emailAddress'].hasError('required')">Mobile number
                             required</mat-error>
                         <mat-error *ngIf="f['emailAddress'].hasError('email')">Invalid email</mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'Labels.homenamenumber'|translate}}</mat-label>
+                        <mat-label>{{'homenamenumber'|translate}}</mat-label>
                         <input matInput (blur)="onBlur()" formControlName="residenceNumber">
                         <mat-error *ngIf="f['residenceNumber'].hasError('required')">Home/Residence name or
                             number
@@ -145,7 +146,7 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <!-- <mat-form-field appearance="outline">
                         <mat-label>Town or City</mat-label>
                         <input matInput formControlName="townOrCity">
@@ -165,7 +166,7 @@
                         <ng-template #notFoundTemplate let-notFound>
                             <div [innerHTML]="notFound"></div>
                         </ng-template>
-                    </div> -->  
+                    </div> -->
 
                     <mat-form-field appearance="outline">
                         <mat-label>Town or City</mat-label>
@@ -182,14 +183,14 @@
                             required</mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <mat-form-field appearance="outline">
                         <mat-label>Street</mat-label>
                         <input matInput formControlName="street">
                         <mat-error *ngIf="f['street'].hasError('required')">Street required</mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <mat-form-field appearance="outline">
                         <mat-label>Area</mat-label>
                         <input matInput formControlName="area">
@@ -200,7 +201,7 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <mat-form-field appearance="outline" class="select-element">
                         <mat-label>County</mat-label>
                         <mat-select #matCountySelect (selectionChange)="onCountyChange($event)"
@@ -213,7 +214,7 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <mat-form-field appearance="outline">
                         <mat-label>Post Code</mat-label>
                         <input matInput (blur)="onBlur()" formControlName="postcode">
@@ -221,7 +222,7 @@
                             required</mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <mat-form-field appearance="outline">
                         <mat-label>Country</mat-label>
                         <mat-select #matCountrySelect placeholder="Country" [multiple]="false"
@@ -236,7 +237,7 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <label>Personal Photo</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
                         <mat-list-item class="horizontal-mat-list-item">
@@ -286,7 +287,7 @@
                 <button type="button" mat-button matStepperNext>Next</button>
             </div>
         </mat-step>
-        <mat-step>
+        <mat-step *ngIf="isStaff || isDriver">
             <ng-template matStepLabel>Identification</ng-template>
 
             <div class="row">
@@ -368,8 +369,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xl col-md col-sm">
+            <div class="row" *ngIf="isDriver">
+                <div class="col-xl col-md col-sm" *ngIf="isDriver">
                     <label>Identity Card (Front)</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
                         <mat-list-item class="horizontal-mat-list-item">
@@ -397,7 +398,7 @@
                         </mat-list-item>
                     </mat-list>
                 </div>
-                <div class="col-xl col-md col-sm">
+                <div class="col-xl col-md col-sm" *ngIf="isDriver">
                     <label>Identity Card (Back)</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
                         <mat-list-item class="horizontal-mat-list-item">
@@ -425,7 +426,7 @@
                         </mat-list-item>
                     </mat-list>
                 </div>
-                <div class="col-xl col-md col-sm">
+                <div class="col-xl col-md col-sm" *ngIf="isDriver">
                     <label>Visa (Front)</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
                         <mat-list-item class="horizontal-mat-list-item">
@@ -454,7 +455,7 @@
                 </div>
             </div>
             <div class="mb-3"></div>
-            <div class="row">
+            <div class="row" *ngIf="isDriver">
                 <div class="col-xl col-md col-sm">
                     <label>Visa (Back)</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
@@ -539,7 +540,7 @@
                 </div>
             </div>
             <div class="mb-3"></div>
-            <div class="row">
+            <div class="row" *ngIf="isDriver">
                 <div class="col-xl col-md col-sm">
                     <label>HMRC Communication 1</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
@@ -624,7 +625,7 @@
                 </div>
             </div>
             <div class="mb-3"></div>
-            <div class="row">
+            <div class="row" *ngIf="isDriver">
                 <div class="col-xl col-md col-sm">
                     <label>Other 2</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
@@ -705,7 +706,7 @@
                 </div>
             </div>
             <div class="mb-3"></div>
-            <div class="row">
+            <div class="row" *ngIf="isDriver">
                 <div class="col-xl col-md col-sm">
                     <label>UK Driving Licence (Front)</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
@@ -793,7 +794,7 @@
                 </div>
             </div>
             <div class="mb-3"></div>
-            <div class="row">
+            <div class="row" *ngIf="isDriver">
                 <div class="col-xl col-md col-sm">
                     <label>Foreign Driving Licence (Back)</label>
                     <mat-list class="mat-list d-flex" style="padding: 0;">
@@ -860,7 +861,7 @@
                 <button mat-button matStepperNext>Next</button>
             </div>
         </mat-step>
-        <mat-step>
+        <mat-step *ngIf="isDriver">
             <ng-template matStepLabel>Vehicle Details</ng-template>
 
             <div class="row">
@@ -1111,7 +1112,7 @@
         <mat-step>
             <ng-template matStepLabel>Working Area</ng-template>
 
-            <div class="row">
+            <div class="row" *ngIf="isDriver">
                 <div class="col-xl col-md col-sm">
                     <mat-form-field appearance="fill">
                         <mat-label>Working country</mat-label>
@@ -1142,7 +1143,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" *ngIf="isDriver || isStaff">
                 <div class="col-xl col-md col-sm">
                     <mat-slide-toggle formControlName="workingStatus" color="primary">Working Status</mat-slide-toggle>
                 </div>
@@ -1155,13 +1156,14 @@
                 <button mat-button matStepperNext>Next</button>
             </div>
         </mat-step>
-        <mat-step>
+        <mat-step *ngIf="isStaff||isDriver||isNewRetailOwner">
             <ng-template matStepLabel>Payment</ng-template>
             To get more feature please pay the subscription...
             <div class="mt-2">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button>Reset</button>
             </div>
-        </mat-step>
+        </mat-step>        
     </mat-vertical-stepper>
+    <button mat-raised-button type="submit">Save</button>
 </form>
