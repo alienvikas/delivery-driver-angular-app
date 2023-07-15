@@ -23,7 +23,7 @@ steps:
       command: custom
       verbose: true
       workingDir: $(System.DefaultWorkingDirectory)
-      customCommand: 'install @angular/material-moment-adapter'
+      customCommand: 'install @angular/material-moment-adapter --legacy-peer-deps --force'
 
   - task: Npm@1
     displayName: 'npm build'
