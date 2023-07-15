@@ -4,7 +4,7 @@
         <div class="col-sm">
             <mat-stepper orientation="vertical" #stepper (selectionChange)="stepChanged($event, stepper)">
                 <mat-step>
-                    <ng-template matStepLabel>{{'Labels.basicDetails'|translate}}</ng-template>
+                    <ng-template matStepLabel>{{'basicDetails'|translate}}</ng-template>
                     <div class="container">
                         <div class="row py-1">
                             <div class="col-sm">
@@ -17,12 +17,12 @@
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup"
                                     [controlName]="'retailPremisesName'"
-                                    inputPlaceholderKey="{{'Labels.retailName'|translate}}" [iconType]="'badge'"
+                                    inputPlaceholderKey="{{'retailName'|translate}}" [iconType]="'badge'"
                                     [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','retailPremisesName')?('Validation.retailpremisesrequired'|translate):'')"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'buildingName'"
-                                    inputPlaceholderKey="{{'Labels.buildingName'|translate}}"
+                                    inputPlaceholderKey="{{'buildingName'|translate}}"
                                     [iconType]="'store'"></app-input>
                             </div>
 
@@ -31,24 +31,24 @@
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup"
                                     [controlName]="'addressNumber'"
-                                    inputPlaceholderKey="{{'Labels.addressNumber'|translate}}"
+                                    inputPlaceholderKey="{{'addressNumber'|translate}}"
                                     [iconType]="'home'"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'streetOrRoad'"
-                                    inputPlaceholderKey="{{'Labels.streetOrRoad'|translate}}" [iconType]="'streetview'"
+                                    inputPlaceholderKey="{{'streetOrRoad'|translate}}" [iconType]="'streetview'"
                                     [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','streetOrRoad')?('Validation.retailstreetorroadrequired'|translate):'')"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'area'"
-                                    inputPlaceholderKey="{{'Labels.area'|translate}}"
+                                    inputPlaceholderKey="{{'area'|translate}}"
                                     [iconType]="'my_location'"></app-input>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm">
                                 <app-input-auto-complete [dropdownData]="ukAreaOptions"
-                                    labelText="{{'Labels.townOrCity'|translate}}"
+                                    labelText="{{'townOrCity'|translate}}"
                                     inputPlaceholder="Please type to choose the town/city" [formGroup]="retailFormGroup"
                                     [controlName]="'townOrCity'"
                                     [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','townOrCity')?('Validation.townorcityrequired'|translate):'')"
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-sm">
                                 <app-input-auto-complete [dropdownData]="countyOptions"
-                                    labelText="{{'Labels.county'|translate}}"
+                                    labelText="{{'county'|translate}}"
                                     inputPlaceholder="Please type to choose the county" [formGroup]="retailFormGroup"
                                     [controlName]="'county'"
                                     [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','county')?('Validation.countyrequired'|translate):'')"
@@ -66,14 +66,14 @@
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'postCode'"
-                                    inputPlaceholderKey="{{'Labels.postCode'|translate}}"
+                                    inputPlaceholderKey="{{'postCode'|translate}}"
                                     [iconType]="'pin_drop'"></app-input>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm">
                                 <app-input-auto-complete [dropdownData]="countryOptions"
-                                    labelText="{{'Labels.country'|translate}}"
+                                    labelText="{{'country'|translate}}"
                                     inputPlaceholder="Please type to choose the country" [formGroup]="retailFormGroup"
                                     [controlName]="'country'"
                                     [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','country')?('Validation.countryrequired'|translate):'')"
@@ -83,7 +83,7 @@
                             <div class="col-sm">
                                 <app-input [inputType]="'textarea'" [group]="retailFormGroup"
                                     [controlName]="'creationNotes'"
-                                    inputPlaceholderKey="{{'Labels.creationNotes'|translate}}"
+                                    inputPlaceholderKey="{{'creationNotes'|translate}}"
                                     [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','creationNotes')?('Validation.creationnotesrequired'|translate):'')"
                                     [iconType]="'description'"></app-input>
                             </div>
@@ -91,25 +91,25 @@
                     </div>
                 </mat-step>
                 <mat-step>
-                    <ng-template matStepLabel>{{'Labels.communication'|translate}}</ng-template>
+                    <ng-template matStepLabel>{{'communication'|translate}}</ng-template>
                     <div class="container">
                         <div class="row py-1">
                             <div class="col-sm">
                                 <app-input [inputType]="'email'" [group]="retailFormGroup"
                                     [controlName]="'emailCommunication'"
-                                    inputPlaceholderKey="{{'Labels.comminicationEmail'|translate}}"
+                                    inputPlaceholderKey="{{'comminicationEmail'|translate}}"
                                     [iconType]="'email'"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'email'" [group]="retailFormGroup"
                                     [controlName]="'emailInvoicing'"
-                                    inputPlaceholderKey="{{'Labels.invoicingEmail'|translate}}"
+                                    inputPlaceholderKey="{{'invoicingEmail'|translate}}"
                                     [iconType]="'email'"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'number'" [group]="retailFormGroup"
                                     [controlName]="'retailLandline'"
-                                    inputPlaceholderKey="{{'Labels.retailersLandline'|translate}}"
+                                    inputPlaceholderKey="{{'retailersLandline'|translate}}"
                                     [iconType]="'phone'"></app-input>
                             </div>
                         </div>
@@ -118,19 +118,19 @@
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup"
                                     [controlName]="'retialLandlineTitle'"
-                                    inputPlaceholderKey="{{'Labels.landlineTitle'|translate}}"
+                                    inputPlaceholderKey="{{'landlineTitle'|translate}}"
                                     [iconType]="'title'"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'number'" [group]="retailFormGroup"
                                     [controlName]="'retialMobileOneNumber'"
-                                    inputPlaceholderKey="{{'Labels.retailMobileOne'|translate}}"
+                                    inputPlaceholderKey="{{'retailMobileOne'|translate}}"
                                     [iconType]="'smartphone'"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup"
                                     [controlName]="'retailMobileOneTitle'"
-                                    inputPlaceholderKey="{{'Labels.mobileOneTitle'|translate}}"
+                                    inputPlaceholderKey="{{'mobileOneTitle'|translate}}"
                                     [iconType]="'title'"></app-input>
                             </div>
                         </div>
@@ -138,19 +138,19 @@
                             <div class="col-sm">
                                 <app-input [inputType]="'number'" [group]="retailFormGroup"
                                     [controlName]="'retialMobileTwoNumber'"
-                                    inputPlaceholderKey="{{'Labels.retailMobileTwo'|translate}}"
+                                    inputPlaceholderKey="{{'retailMobileTwo'|translate}}"
                                     [iconType]="'smartphone'"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup"
                                     [controlName]="'retailMobileTwoTitle'"
-                                    inputPlaceholderKey="{{'Labels.mobileTwoTitle'|translate}}"
+                                    inputPlaceholderKey="{{'mobileTwoTitle'|translate}}"
                                     [iconType]="'title'"></app-input>
                             </div>
                             <div class="col-sm">
                                 <app-input [inputType]="'number'" [group]="retailFormGroup"
                                     [controlName]="'retialMobileThreeNumber'"
-                                    inputPlaceholderKey="{{'Labels.retailMobileThree'|translate}}"
+                                    inputPlaceholderKey="{{'retailMobileThree'|translate}}"
                                     [iconType]="'smartphone'"></app-input>
                             </div>
                         </div>
@@ -158,31 +158,31 @@
                             <div class="col-sm">
                                 <app-input [inputType]="'text'" [group]="retailFormGroup"
                                     [controlName]="'retailMobileThreeTitle'"
-                                    inputPlaceholderKey="{{'Labels.mobileThreeTitle'|translate}}"
+                                    inputPlaceholderKey="{{'mobileThreeTitle'|translate}}"
                                     [iconType]="'title'"></app-input>
                             </div>
                         </div>
                     </div>
                 </mat-step>
                 <mat-step>
-                    <ng-template matStepLabel>{{'Labels.payment'|translate}}</ng-template>
+                    <ng-template matStepLabel>{{'payment'|translate}}</ng-template>
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'currencyPaid'"
                                 [dropdownData]="currencyPaidOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'Labels.currencyPaidIn'|translate}}" [iconType]="'attach_money'">
+                                dropdownPlaceholder="{{'currencyPaidIn'|translate}}" [iconType]="'attach_money'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'pricePerHour'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'Labels.pricePerHour'|translate}}" [iconType]="'money'">
+                                dropdownPlaceholder="{{'pricePerHour'|translate}}" [iconType]="'money'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'pricePerDrop'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'Labels.pricePerDrop'|translate}}" [iconType]="'price_change'">
+                                dropdownPlaceholder="{{'pricePerDrop'|translate}}" [iconType]="'price_change'">
                             </app-single-select>
                         </div>
                     </div>
@@ -190,18 +190,18 @@
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'extrasNotes'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'Labels.extrasPerDrop'|translate}}" [iconType]="'request_quote'">
+                                dropdownPlaceholder="{{'extrasPerDrop'|translate}}" [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'extrasNotes'"
-                                inputPlaceholderKey="{{'Labels.extrasNotes'|translate}}"
+                                inputPlaceholderKey="{{'extrasNotes'|translate}}"
                                 [iconType]="'description'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'Labels.agreedMinimumPerHour'|translate}}"
+                                dropdownPlaceholder="{{'agreedMinimumPerHour'|translate}}"
                                 [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
@@ -209,43 +209,43 @@
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup" [controlName]="'oneOffPrice'"
-                                inputPlaceholderKey="{{'Labels.oneOffPrice'|translate}}"
+                                inputPlaceholderKey="{{'oneOffPrice'|translate}}"
                                 [iconType]="'numbers'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
                                 [dropdownData]="payModeOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'Labels.payMode'|translate}}" [iconType]="'request_quote'">
+                                dropdownPlaceholder="{{'payMode'|translate}}" [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
                                 [dropdownData]="payFrequencyOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'Labels.payFrequency'|translate}}" [iconType]="'request_quote'">
+                                dropdownPlaceholder="{{'payFrequency'|translate}}" [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
                     </div>
                 </mat-step>
                 <mat-step>
-                    <ng-template matStepLabel>{{'Labels.helpNotes'|translate}}</ng-template>
+                    <ng-template matStepLabel>{{'helpNotes'|translate}}</ng-template>
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'otherNotes'"
-                                inputPlaceholderKey="{{'Labels.otherNotes'|translate}}"
+                                inputPlaceholderKey="{{'otherNotes'|translate}}"
                                 [iconType]="'description'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'notesAndTips'"
-                                inputPlaceholderKey="{{'Labels.notesAndTips'|translate}}"
+                                inputPlaceholderKey="{{'notesAndTips'|translate}}"
                                 [iconType]="'description'"></app-input>
                         </div>
                     </div>
                 </mat-step>
                 <mat-step>
-                    <ng-template matStepLabel>{{'Labels.visuals'|translate}}</ng-template>
+                    <ng-template matStepLabel>{{'visuals'|translate}}</ng-template>
                     <div class="row py-1">
                         <div class="col-sm">
-                            <label>{{'Labels.logo'|translate}}</label>
+                            <label>{{'logo'|translate}}</label>
                             <mat-list class="mat-list d-flex" style="padding: 0;">
                                 <mat-list-item class="horizontal-mat-list-item">
                                     <input type="file" class="file-input" formControlName="logo"
@@ -274,7 +274,7 @@
                             </mat-list>
                         </div>
                         <div class="col-sm">
-                            <label>{{'Labels.frontDoorVisual'|translate}}</label>
+                            <label>{{'frontDoorVisual'|translate}}</label>
                             <mat-list class="mat-list d-flex" style="padding: 0;">
                                 <mat-list-item class="horizontal-mat-list-item">
                                     <input type="file" class="file-input" formControlName="frontDoorVisual"
