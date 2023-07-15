@@ -19,10 +19,9 @@ steps:
   - task: Npm@1
     displayName: 'ng build'
     inputs:
-      command: custom
-      verbose: false
-      customCommand: 'run'
-      workingDir: $(System.DefaultWorkingDirectory)
+      command: 'custom'
+      workingDir: '$(System.DefaultWorkingDirectory)'
+      customCommand: 'build'
 
   - task: CmdLine@2
     inputs:
