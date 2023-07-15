@@ -32,5 +32,5 @@ steps:
       )
     inputs:
       ArtifactName: Angular
-      PathtoPublish: $(System.DefaultWorkingDirectory)/dist/delivery-driver-angular-app
+      PathtoPublish: $(System.DefaultWorkingDirectory)/dist/delivery-driver-angular-app/
       publishLocation: Container
