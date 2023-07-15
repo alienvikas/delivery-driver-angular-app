@@ -16,12 +16,9 @@ steps:
       verbose: true
       workingDir: $(System.DefaultWorkingDirectory)
       customCommand: 'install  --legacy-peer-deps --force'
-  - task: Npm@1
-    displayName: 'ng build'
-    inputs:
-      command: 'custom'
-      workingDir: '$(System.DefaultWorkingDirectory)'
-      customCommand: 'build'
+      
+  - script: 'ng build'
+    displayName: NG Build
 
   - task: CmdLine@2
     inputs:
