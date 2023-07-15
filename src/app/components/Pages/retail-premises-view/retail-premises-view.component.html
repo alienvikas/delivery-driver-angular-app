@@ -5,162 +5,142 @@
             <mat-stepper orientation="vertical" #stepper (selectionChange)="stepChanged($event, stepper)">
                 <mat-step>
                     <ng-template matStepLabel>{{'basicDetails'|translate}}</ng-template>
-                    <div class="container">
-                        <div class="row py-1">
-                            <div class="col-sm">
-                                <app-single-select [group]="retailFormGroup" [controlName]="'Authoriser'"
-                                    [dropdownData]="userOptions" [displayProp]="'fullName'" [selectedData]="currentUser"
-                                    dropdownPlaceholder="{{'chooseintroducer'|translate}}"
-                                    [iconType]="'supervised_user_circle'">
-                                </app-single-select>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                    [controlName]="'retailPremisesName'"
-                                    inputPlaceholderKey="{{'retailName'|translate}}" [iconType]="'badge'"
-                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','retailPremisesName')?('Validation.retailpremisesrequired'|translate):'')"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'buildingName'"
-                                    inputPlaceholderKey="{{'buildingName'|translate}}"
-                                    [iconType]="'store'"></app-input>
-                            </div>
+                    <div class="row py-1">
+                        <div class="col-sm">
+                            <app-single-select [group]="retailFormGroup" [controlName]="'Authoriser'"
+                                [dropdownData]="userOptions" [displayProp]="'fullName'" [selectedData]="currentUser"
+                                dropdownPlaceholder="{{'chooseintroducer'|translate}}"
+                                [iconType]="'supervised_user_circle'">
+                            </app-single-select>
+                        </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup"
+                                [controlName]="'retailPremisesName'" inputPlaceholderKey="{{'retailName'|translate}}"
+                                [iconType]="'badge'"
+                                [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','retailPremisesName')?('Validation.retailpremisesrequired'|translate):'')"></app-input>
+                        </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'buildingName'"
+                                inputPlaceholderKey="{{'buildingName'|translate}}" [iconType]="'store'"></app-input>
+                        </div>
 
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'addressNumber'"
+                                inputPlaceholderKey="{{'addressNumber'|translate}}" [iconType]="'home'"></app-input>
                         </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                    [controlName]="'addressNumber'"
-                                    inputPlaceholderKey="{{'addressNumber'|translate}}"
-                                    [iconType]="'home'"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'streetOrRoad'"
-                                    inputPlaceholderKey="{{'streetOrRoad'|translate}}" [iconType]="'streetview'"
-                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','streetOrRoad')?('Validation.retailstreetorroadrequired'|translate):'')"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'area'"
-                                    inputPlaceholderKey="{{'area'|translate}}"
-                                    [iconType]="'my_location'"></app-input>
-                            </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'streetOrRoad'"
+                                inputPlaceholderKey="{{'streetOrRoad'|translate}}" [iconType]="'streetview'"
+                                [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','streetOrRoad')?('Validation.retailstreetorroadrequired'|translate):'')"></app-input>
                         </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <app-input-auto-complete [dropdownData]="ukAreaOptions"
-                                    labelText="{{'townOrCity'|translate}}"
-                                    inputPlaceholder="Please type to choose the town/city" [formGroup]="retailFormGroup"
-                                    [controlName]="'townOrCity'"
-                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','townOrCity')?('Validation.townorcityrequired'|translate):'')"
-                                    [iconType]="'location_city'">
-                                </app-input-auto-complete>
-                            </div>
-                            <div class="col-sm">
-                                <app-input-auto-complete [dropdownData]="countyOptions"
-                                    labelText="{{'county'|translate}}"
-                                    inputPlaceholder="Please type to choose the county" [formGroup]="retailFormGroup"
-                                    [controlName]="'county'"
-                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','county')?('Validation.countyrequired'|translate):'')"
-                                    [iconType]="'room'">
-                                </app-input-auto-complete>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'postCode'"
-                                    inputPlaceholderKey="{{'postCode'|translate}}"
-                                    [iconType]="'pin_drop'"></app-input>
-                            </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'area'"
+                                inputPlaceholderKey="{{'area'|translate}}" [iconType]="'my_location'"></app-input>
                         </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <app-input-auto-complete [dropdownData]="countryOptions"
-                                    labelText="{{'country'|translate}}"
-                                    inputPlaceholder="Please type to choose the country" [formGroup]="retailFormGroup"
-                                    [controlName]="'country'"
-                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','country')?('Validation.countryrequired'|translate):'')"
-                                    [iconType]="'outlined_flag'">
-                                </app-input-auto-complete>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'textarea'" [group]="retailFormGroup"
-                                    [controlName]="'creationNotes'"
-                                    inputPlaceholderKey="{{'creationNotes'|translate}}"
-                                    [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','creationNotes')?('Validation.creationnotesrequired'|translate):'')"
-                                    [iconType]="'description'"></app-input>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-input-auto-complete [dropdownData]="ukAreaOptions"
+                                labelText="{{'townOrCity'|translate}}"
+                                inputPlaceholder="Please type to choose the town/city" [formGroup]="retailFormGroup"
+                                [controlName]="'townOrCity'"
+                                [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','townOrCity')?('Validation.townorcityrequired'|translate):'')"
+                                [iconType]="'location_city'">
+                            </app-input-auto-complete>
+                        </div>
+                        <div class="col-sm">
+                            <app-input-auto-complete [dropdownData]="countyOptions" labelText="{{'county'|translate}}"
+                                inputPlaceholder="Please type to choose the county" [formGroup]="retailFormGroup"
+                                [controlName]="'county'"
+                                [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','county')?('Validation.countyrequired'|translate):'')"
+                                [iconType]="'room'">
+                            </app-input-auto-complete>
+                        </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'postCode'"
+                                inputPlaceholderKey="{{'postCode'|translate}}" [iconType]="'pin_drop'"></app-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-input-auto-complete [dropdownData]="countryOptions" labelText="{{'country'|translate}}"
+                                inputPlaceholder="Please type to choose the country" [formGroup]="retailFormGroup"
+                                [controlName]="'country'"
+                                [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','country')?('Validation.countryrequired'|translate):'')"
+                                [iconType]="'outlined_flag'">
+                            </app-input-auto-complete>
+                        </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'textarea'" [group]="retailFormGroup"
+                                [controlName]="'creationNotes'" inputPlaceholderKey="{{'creationNotes'|translate}}"
+                                [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','creationNotes')?('Validation.creationnotesrequired'|translate):'')"
+                                [iconType]="'description'"></app-input>
                         </div>
                     </div>
                 </mat-step>
                 <mat-step>
                     <ng-template matStepLabel>{{'communication'|translate}}</ng-template>
-                    <div class="container">
-                        <div class="row py-1">
-                            <div class="col-sm">
-                                <app-input [inputType]="'email'" [group]="retailFormGroup"
-                                    [controlName]="'emailCommunication'"
-                                    inputPlaceholderKey="{{'comminicationEmail'|translate}}"
-                                    [iconType]="'email'"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'email'" [group]="retailFormGroup"
-                                    [controlName]="'emailInvoicing'"
-                                    inputPlaceholderKey="{{'invoicingEmail'|translate}}"
-                                    [iconType]="'email'"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'number'" [group]="retailFormGroup"
-                                    [controlName]="'retailLandline'"
-                                    inputPlaceholderKey="{{'retailersLandline'|translate}}"
-                                    [iconType]="'phone'"></app-input>
-                            </div>
+                    <div class="row py-1">
+                        <div class="col-sm">
+                            <app-input [inputType]="'email'" [group]="retailFormGroup"
+                                [controlName]="'emailCommunication'"
+                                inputPlaceholderKey="{{'comminicationEmail'|translate}}"
+                                [iconType]="'email'"></app-input>
                         </div>
-
-                        <div class="row">
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                    [controlName]="'retialLandlineTitle'"
-                                    inputPlaceholderKey="{{'landlineTitle'|translate}}"
-                                    [iconType]="'title'"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'number'" [group]="retailFormGroup"
-                                    [controlName]="'retialMobileOneNumber'"
-                                    inputPlaceholderKey="{{'retailMobileOne'|translate}}"
-                                    [iconType]="'smartphone'"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                    [controlName]="'retailMobileOneTitle'"
-                                    inputPlaceholderKey="{{'mobileOneTitle'|translate}}"
-                                    [iconType]="'title'"></app-input>
-                            </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'email'" [group]="retailFormGroup" [controlName]="'emailInvoicing'"
+                                inputPlaceholderKey="{{'invoicingEmail'|translate}}" [iconType]="'email'"></app-input>
                         </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <app-input [inputType]="'number'" [group]="retailFormGroup"
-                                    [controlName]="'retialMobileTwoNumber'"
-                                    inputPlaceholderKey="{{'retailMobileTwo'|translate}}"
-                                    [iconType]="'smartphone'"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                    [controlName]="'retailMobileTwoTitle'"
-                                    inputPlaceholderKey="{{'mobileTwoTitle'|translate}}"
-                                    [iconType]="'title'"></app-input>
-                            </div>
-                            <div class="col-sm">
-                                <app-input [inputType]="'number'" [group]="retailFormGroup"
-                                    [controlName]="'retialMobileThreeNumber'"
-                                    inputPlaceholderKey="{{'retailMobileThree'|translate}}"
-                                    [iconType]="'smartphone'"></app-input>
-                            </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'number'" [group]="retailFormGroup" [controlName]="'retailLandline'"
+                                inputPlaceholderKey="{{'retailersLandline'|translate}}"
+                                [iconType]="'phone'"></app-input>
                         </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                    [controlName]="'retailMobileThreeTitle'"
-                                    inputPlaceholderKey="{{'mobileThreeTitle'|translate}}"
-                                    [iconType]="'title'"></app-input>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup"
+                                [controlName]="'retialLandlineTitle'"
+                                inputPlaceholderKey="{{'landlineTitle'|translate}}" [iconType]="'title'"></app-input>
+                        </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'number'" [group]="retailFormGroup"
+                                [controlName]="'retialMobileOneNumber'"
+                                inputPlaceholderKey="{{'retailMobileOne'|translate}}"
+                                [iconType]="'smartphone'"></app-input>
+                        </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup"
+                                [controlName]="'retailMobileOneTitle'"
+                                inputPlaceholderKey="{{'mobileOneTitle'|translate}}" [iconType]="'title'"></app-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-input [inputType]="'number'" [group]="retailFormGroup"
+                                [controlName]="'retialMobileTwoNumber'"
+                                inputPlaceholderKey="{{'retailMobileTwo'|translate}}"
+                                [iconType]="'smartphone'"></app-input>
+                        </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup"
+                                [controlName]="'retailMobileTwoTitle'"
+                                inputPlaceholderKey="{{'mobileTwoTitle'|translate}}" [iconType]="'title'"></app-input>
+                        </div>
+                        <div class="col-sm">
+                            <app-input [inputType]="'number'" [group]="retailFormGroup"
+                                [controlName]="'retialMobileThreeNumber'"
+                                inputPlaceholderKey="{{'retailMobileThree'|translate}}"
+                                [iconType]="'smartphone'"></app-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-input [inputType]="'text'" [group]="retailFormGroup"
+                                [controlName]="'retailMobileThreeTitle'"
+                                inputPlaceholderKey="{{'mobileThreeTitle'|translate}}" [iconType]="'title'"></app-input>
                         </div>
                     </div>
                 </mat-step>
@@ -201,16 +181,14 @@
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'agreedMinimumPerHour'|translate}}"
-                                [iconType]="'request_quote'">
+                                dropdownPlaceholder="{{'agreedMinimumPerHour'|translate}}" [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
                     </div>
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup" [controlName]="'oneOffPrice'"
-                                inputPlaceholderKey="{{'oneOffPrice'|translate}}"
-                                [iconType]="'numbers'"></app-input>
+                                inputPlaceholderKey="{{'oneOffPrice'|translate}}" [iconType]="'numbers'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
@@ -231,8 +209,7 @@
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'otherNotes'"
-                                inputPlaceholderKey="{{'otherNotes'|translate}}"
-                                [iconType]="'description'"></app-input>
+                                inputPlaceholderKey="{{'otherNotes'|translate}}" [iconType]="'description'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'notesAndTips'"
