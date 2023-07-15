@@ -18,6 +18,14 @@ steps:
       customCommand: 'install  --legacy-peer-deps --force'
       
   - task: Npm@1
+    displayName: Install Moment
+    inputs:
+      command: custom
+      verbose: true
+      workingDir: $(System.DefaultWorkingDirectory)
+      customCommand: 'install @angular/material-moment-adapter'
+
+  - task: Npm@1
     displayName: 'npm build'
     inputs:
       command: 'custom'
