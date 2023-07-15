@@ -121,7 +121,7 @@
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup"
                                 [controlName]="'retailMobileOneTitle'" inputPlaceholder="{{'mobileOneTitle'|translate}}"
-                                [iconType]="'title'"></app-input>
+                                labelText="{{'mobileOneTitle'|translate}}" [iconType]="'title'"></app-input>
                         </div>
                     </div>
                     <div class="row">
@@ -129,24 +129,24 @@
                             <app-input [inputType]="'number'" [group]="retailFormGroup"
                                 [controlName]="'retialMobileTwoNumber'"
                                 inputPlaceholder="{{'retailMobileTwo'|translate}}"
-                                [iconType]="'smartphone'"></app-input>
+                                labelText="{{'retailMobileTwo'|translate}}" [iconType]="'smartphone'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup"
                                 [controlName]="'retailMobileTwoTitle'" inputPlaceholder="{{'mobileTwoTitle'|translate}}"
-                                [iconType]="'title'"></app-input>
+                                labelText="{{'mobileTwoTitle'|translate}}" [iconType]="'title'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup"
                                 [controlName]="'retialMobileThreeNumber'"
                                 inputPlaceholder="{{'retailMobileThree'|translate}}"
-                                [iconType]="'smartphone'"></app-input>
+                                labelText="{{'retailMobileThree'|translate}}" [iconType]="'smartphone'"></app-input>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                [controlName]="'retailMobileThreeTitle'"
+                                [controlName]="'retailMobileThreeTitle'" labelText="{{'mobileThreeTitle'|translate}}"
                                 inputPlaceholder="{{'mobileThreeTitle'|translate}}" [iconType]="'title'"></app-input>
                         </div>
                     </div>
@@ -194,7 +194,8 @@
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup" [controlName]="'oneOffPrice'"
-                                inputPlaceholder="{{'oneOffPrice'|translate}}" [iconType]="'numbers'"></app-input>
+                                inputPlaceholder="{{'oneOffPrice'|translate}}" labelText="{{'oneOffPrice'|translate}}"
+                                [iconType]="'numbers'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
@@ -215,11 +216,13 @@
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'otherNotes'"
-                                inputPlaceholder="{{'otherNotes'|translate}}" [iconType]="'description'"></app-input>
+                                inputPlaceholder="{{'otherNotes'|translate}}" labelText="{{'otherNotes'|translate}}"
+                                [iconType]="'description'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'notesAndTips'"
-                                inputPlaceholder="{{'notesAndTips'|translate}}" [iconType]="'description'"></app-input>
+                                inputPlaceholder="{{'notesAndTips'|translate}}" labelText="{{'notesAndTips'|translate}}"
+                                [iconType]="'description'"></app-input>
                         </div>
                     </div>
                 </mat-step>
