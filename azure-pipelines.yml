@@ -23,14 +23,19 @@ steps:
       verbose: false
       customCommand: 'run'
       workingDir: $(System.DefaultWorkingDirectory)
-  - task: PublishBuildArtifacts@1
-    displayName: Publish Build Artifacts
-    condition: |-
-      and(
-        succeeded(),
-        ne(variables['Build.Reason'], 'PullRequest')
-      )
+
+  - task: CmdLine@2
     inputs:
-      ArtifactName: Angular
-      PathtoPublish: $(System.DefaultWorkingDirectory)/dist/delivery-driver-angular-app/
-      publishLocation: Container
+      script: 'dir $(System.DefaultWorkingDirectory)'
+    
+  # - task: PublishBuildArtifacts@1
+  #   displayName: Publish Build Artifacts
+  #   condition: |-
+  #     and(
+  #       succeeded(),
+  #       ne(variables['Build.Reason'], 'PullRequest')
+  #     )
+  #   inputs:
+  #     ArtifactName: Angular
+  #     PathtoPublish: $(System.DefaultWorkingDirectory)/dist/delivery-driver-angular-app
+  #     publishLocation: Container
