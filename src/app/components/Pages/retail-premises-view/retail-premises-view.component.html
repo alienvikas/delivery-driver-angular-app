@@ -15,29 +15,33 @@
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                [controlName]="'retailPremisesName'" inputPlaceholderKey="{{'retailName'|translate}}"
-                                [iconType]="'badge'"
+                                [controlName]="'retailPremisesName'" inputPlaceholder="{{'retailName'|translate}}"
+                                [iconType]="'badge'" labelText="{{'retailName'|translate}}"
                                 [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','retailPremisesName')?('Validation.retailpremisesrequired'|translate):'')"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'buildingName'"
-                                inputPlaceholderKey="{{'buildingName'|translate}}" [iconType]="'store'"></app-input>
+                                inputPlaceholder="{{'buildingName'|translate}}" labelText="{{'buildingName'|translate}}"
+                                [iconType]="'store'"></app-input>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'addressNumber'"
-                                inputPlaceholderKey="{{'addressNumber'|translate}}" [iconType]="'home'"></app-input>
+                                inputPlaceholder="{{'addressNumber'|translate}}"
+                                labelText="{{'addressNumber'|translate}}" [iconType]="'home'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'streetOrRoad'"
-                                inputPlaceholderKey="{{'streetOrRoad'|translate}}" [iconType]="'streetview'"
+                                inputPlaceholder="{{'streetOrRoad'|translate}}" labelText="{{'streetOrRoad'|translate}}"
+                                [iconType]="'streetview'"
                                 [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','streetOrRoad')?('Validation.retailstreetorroadrequired'|translate):'')"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'area'"
-                                inputPlaceholderKey="{{'area'|translate}}" [iconType]="'my_location'"></app-input>
+                                inputPlaceholderKey="{{'area'|translate}}" labelText="{{'area'|translate}}"
+                                [iconType]="'my_location'"></app-input>
                         </div>
                     </div>
                     <div class="row">
@@ -60,7 +64,8 @@
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup" [controlName]="'postCode'"
-                                inputPlaceholderKey="{{'postCode'|translate}}" [iconType]="'pin_drop'"></app-input>
+                                inputPlaceholder="{{'postCode'|translate}}" labelText="{{'postCode'|translate}}"
+                                [iconType]="'pin_drop'"></app-input>
                         </div>
                     </div>
                     <div class="row">
@@ -74,7 +79,8 @@
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup"
-                                [controlName]="'creationNotes'" inputPlaceholderKey="{{'creationNotes'|translate}}"
+                                [controlName]="'creationNotes'" inputPlaceholder="{{'creationNotes'|translate}}"
+                                labelText="{{'creationNotes'|translate}}"
                                 [errorMessage]="retailPremisesDetailForm.submitted && (retailFormGroup.hasError('required','creationNotes')?('Validation.creationnotesrequired'|translate):'')"
                                 [iconType]="'description'"></app-input>
                         </div>
@@ -86,53 +92,54 @@
                         <div class="col-sm">
                             <app-input [inputType]="'email'" [group]="retailFormGroup"
                                 [controlName]="'emailCommunication'"
-                                inputPlaceholderKey="{{'comminicationEmail'|translate}}"
-                                [iconType]="'email'"></app-input>
+                                inputPlaceholder="{{'comminicationEmail'|translate}}"
+                                labelText="{{'comminicationEmail'|translate}}" [iconType]="'email'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'email'" [group]="retailFormGroup" [controlName]="'emailInvoicing'"
-                                inputPlaceholderKey="{{'invoicingEmail'|translate}}" [iconType]="'email'"></app-input>
+                                inputPlaceholder="{{'invoicingEmail'|translate}}"
+                                labelText="{{'invoicingEmail'|translate}}" [iconType]="'email'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup" [controlName]="'retailLandline'"
-                                inputPlaceholderKey="{{'retailersLandline'|translate}}"
-                                [iconType]="'phone'"></app-input>
+                                inputPlaceholder="{{'retailersLandline'|translate}}"
+                                labelText="{{'retailersLandline'|translate}}" [iconType]="'phone'"></app-input>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                [controlName]="'retialLandlineTitle'"
-                                inputPlaceholderKey="{{'landlineTitle'|translate}}" [iconType]="'title'"></app-input>
+                                [controlName]="'retialLandlineTitle'" inputPlaceholder="{{'landlineTitle'|translate}}"
+                                labelText="{{'landlineTitle'|translate}}" [iconType]="'title'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup"
                                 [controlName]="'retialMobileOneNumber'"
-                                inputPlaceholderKey="{{'retailMobileOne'|translate}}"
-                                [iconType]="'smartphone'"></app-input>
+                                inputPlaceholder="{{'retailMobileOne'|translate}}"
+                                labelText="{{'retailMobileOne'|translate}}" [iconType]="'smartphone'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                [controlName]="'retailMobileOneTitle'"
-                                inputPlaceholderKey="{{'mobileOneTitle'|translate}}" [iconType]="'title'"></app-input>
+                                [controlName]="'retailMobileOneTitle'" inputPlaceholder="{{'mobileOneTitle'|translate}}"
+                                [iconType]="'title'"></app-input>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup"
                                 [controlName]="'retialMobileTwoNumber'"
-                                inputPlaceholderKey="{{'retailMobileTwo'|translate}}"
+                                inputPlaceholder="{{'retailMobileTwo'|translate}}"
                                 [iconType]="'smartphone'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup"
-                                [controlName]="'retailMobileTwoTitle'"
-                                inputPlaceholderKey="{{'mobileTwoTitle'|translate}}" [iconType]="'title'"></app-input>
+                                [controlName]="'retailMobileTwoTitle'" inputPlaceholder="{{'mobileTwoTitle'|translate}}"
+                                [iconType]="'title'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup"
                                 [controlName]="'retialMobileThreeNumber'"
-                                inputPlaceholderKey="{{'retailMobileThree'|translate}}"
+                                inputPlaceholder="{{'retailMobileThree'|translate}}"
                                 [iconType]="'smartphone'"></app-input>
                         </div>
                     </div>
@@ -140,7 +147,7 @@
                         <div class="col-sm">
                             <app-input [inputType]="'text'" [group]="retailFormGroup"
                                 [controlName]="'retailMobileThreeTitle'"
-                                inputPlaceholderKey="{{'mobileThreeTitle'|translate}}" [iconType]="'title'"></app-input>
+                                inputPlaceholder="{{'mobileThreeTitle'|translate}}" [iconType]="'title'"></app-input>
                         </div>
                     </div>
                 </mat-step>
@@ -175,8 +182,7 @@
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'extrasNotes'"
-                                inputPlaceholderKey="{{'extrasNotes'|translate}}"
-                                [iconType]="'description'"></app-input>
+                                inputPlaceholder="{{'extrasNotes'|translate}}" [iconType]="'description'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
@@ -188,7 +194,7 @@
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-input [inputType]="'number'" [group]="retailFormGroup" [controlName]="'oneOffPrice'"
-                                inputPlaceholderKey="{{'oneOffPrice'|translate}}" [iconType]="'numbers'"></app-input>
+                                inputPlaceholder="{{'oneOffPrice'|translate}}" [iconType]="'numbers'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
@@ -209,12 +215,11 @@
                     <div class="row py-1">
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'otherNotes'"
-                                inputPlaceholderKey="{{'otherNotes'|translate}}" [iconType]="'description'"></app-input>
+                                inputPlaceholder="{{'otherNotes'|translate}}" [iconType]="'description'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'notesAndTips'"
-                                inputPlaceholderKey="{{'notesAndTips'|translate}}"
-                                [iconType]="'description'"></app-input>
+                                inputPlaceholder="{{'notesAndTips'|translate}}" [iconType]="'description'"></app-input>
                         </div>
                     </div>
                 </mat-step>
