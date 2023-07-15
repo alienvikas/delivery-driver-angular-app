@@ -12,10 +12,9 @@ steps:
   - task: Npm@1
     displayName: NPM Install
     inputs:
-      command: custom
+      command: 'install'
+      workingDir: '$(System.DefaultWorkingDirectory)'
       verbose: true
-      workingDir: $(System.DefaultWorkingDirectory)
-      customCommand: 'install  --legacy-peer-deps --force'
   - task: Npm@1
     displayName: 'ng build'
     inputs:
