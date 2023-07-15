@@ -1,15 +1,9 @@
-<!-- <mat-toolbar class="mat-elevation-z8" color="primary">
-    <button mat-icon-button>
-        <mat-icon> menu </mat-icon>
-    </button> {{"Labels.header"|translate}}
-</mat-toolbar> -->
-
 <mat-toolbar class="example-toolbar">
     <button mat-icon-button (click)="matSideNav.toggle();toggleIcon();">
         <mat-icon *ngIf="!closeIconVisibilty">menu</mat-icon>
         <mat-icon *ngIf="closeIconVisibilty">close</mat-icon>
     </button>
-    <h1 class="example-app-name">{{"Labels.header"|translate}}</h1>
+    <h1 class="example-app-name">{{"header"|translate}}</h1>
     <span style="flex: 1 1 auto;"></span>
     <div>
         <button mat-icon-button matTooltip="Switch Apps">
