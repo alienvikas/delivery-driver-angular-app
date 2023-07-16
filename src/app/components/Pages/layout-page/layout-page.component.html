@@ -8,8 +8,10 @@
             <app-side-nav-page></app-side-nav-page>
         </mat-sidenav>
 
-        <mat-sidenav-content class="scrollbar">
-            <router-outlet></router-outlet>
+        <mat-sidenav-content #matSideNavContent cdkscrollable class="scrollbar">
+            <router-outlet>
+            </router-outlet>
+            <app-scroll-to-top [sidenavContentScrollable]="matSideNavContent"></app-scroll-to-top>
         </mat-sidenav-content>
     </mat-sidenav-container>
 
