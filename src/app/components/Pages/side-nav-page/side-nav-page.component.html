@@ -23,7 +23,42 @@
     <span title="Retail Premises">Retail Premises</span>
 </button>
 
-<button mat-button class="menu-button" (click)="menuTrigger.openMenu()">Menu
+<h2>Data Section</h2>
+<mat-divider></mat-divider>
+<button mat-button class="menu-button" routerLink="/countryList">
+    <mat-icon>add_location</mat-icon>
+    <span title="Country List">Country List</span>
+</button>
+<button mat-button class="menu-button" routerLink="/countyList">
+    <mat-icon>notification_important</mat-icon>
+    <span title="County List">County List</span>
+</button>
+<button mat-button class="menu-button" routerLink="/passportList">
+    <mat-icon>notification_important</mat-icon>
+    <span title="Passport List">Passport List</span>
+</button>
+<button mat-button class="menu-button" routerLink="/roleList">
+    <mat-icon>view_list</mat-icon>
+    <span title="Role List">Role List</span>
+</button>
+<button mat-button class="menu-button" routerLink="/ukareatelephone">
+    <mat-icon>settings_phone</mat-icon>
+    <span title="UK Area">UK Area Phone Code List</span>
+</button>
+<button mat-button class="menu-button" routerLink="/vehicletype">
+    <mat-icon>directions_car</mat-icon>
+    <span title="Vehicle Type">Vehicle Type</span>
+</button>
+<button mat-button class="menu-button" routerLink="/vehiclemanufacture">
+    <mat-icon>directions_car</mat-icon>
+    <span title="Vehicle Manufacture">Vehicle Manufacture</span>
+</button>
+<button mat-button class="menu-button" routerLink="/townorcity">
+    <mat-icon>location_city</mat-icon>
+    <span title="Town Or City">Town Or City</span>
+</button>
+
+<!-- <button mat-button class="menu-button" (click)="menuTrigger.openMenu()">Menu
     <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu"></div>
 </button>
 <mat-menu mat-button #menu="matMenu" yPosition="below" xPosition="before">
@@ -39,4 +74,4 @@
 <button mat-button class="menu-button">
     <mat-icon>help</mat-icon>
     <span>Help</span>
-</button>
+</button> -->

@@ -63,6 +63,8 @@ import { RegisterPageComponent } from './components/Pages/register-page/register
 import { LoginPageComponent } from './components/Pages/login-page/login-page.component';
 import { PersonPageComponent } from './components/Pages/person-page/person-page.component';
 import { RetailPremisesViewComponent } from './components/Pages/retail-premises-view/retail-premises-view.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -105,7 +107,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterPageComponent,
     LoginPageComponent,
     PersonPageComponent,
-    RetailPremisesViewComponent
+    RetailPremisesViewComponent,
+    ScrollToTopComponent
   ],
   imports: [
     BrowserModule,
@@ -118,6 +121,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FlexLayoutModule,
     FontAwesomeModule,
     ToastrModule,
+    ScrollingModule,
     SharedModule,
     ToastrModule.forRoot({
       timeOut: 10000,
