@@ -10,7 +10,7 @@
                             <app-single-select [group]="retailFormGroup" [controlName]="'Authoriser'"
                                 [dropdownData]="userOptions" [displayProp]="'fullName'" [selectedData]="currentUser"
                                 dropdownPlaceholder="{{'chooseintroducer'|translate}}"
-                                [iconType]="'supervised_user_circle'">
+                                matLabel="{{'chooseintroducer'|translate}}" [iconType]="'supervised_user_circle'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
@@ -149,6 +149,8 @@
                                 [controlName]="'retailMobileThreeTitle'" labelText="{{'mobileThreeTitle'|translate}}"
                                 inputPlaceholder="{{'mobileThreeTitle'|translate}}" [iconType]="'title'"></app-input>
                         </div>
+                        <div class="col-sm"></div>
+                        <div class="col-sm"></div>
                     </div>
                 </mat-step>
                 <mat-step>
@@ -157,19 +159,22 @@
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'currencyPaid'"
                                 [dropdownData]="currencyPaidOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'currencyPaidIn'|translate}}" [iconType]="'attach_money'">
+                                dropdownPlaceholder="{{'currencyPaidIn'|translate}}"
+                                matLabel="{{'currencyPaidIn'|translate}}" [iconType]="'attach_money'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'pricePerHour'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'pricePerHour'|translate}}" [iconType]="'money'">
+                                dropdownPlaceholder="{{'pricePerHour'|translate}}"
+                                matLabel="{{'pricePerHour'|translate}}" [iconType]="'money'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'pricePerDrop'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'pricePerDrop'|translate}}" [iconType]="'price_change'">
+                                dropdownPlaceholder="{{'pricePerDrop'|translate}}"
+                                matLabel="{{'pricePerDrop'|translate}}" [iconType]="'price_change'">
                             </app-single-select>
                         </div>
                     </div>
@@ -177,17 +182,20 @@
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'extrasNotes'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'extrasPerDrop'|translate}}" [iconType]="'request_quote'">
+                                dropdownPlaceholder="{{'extrasPerDrop'|translate}}"
+                                matLabel="{{'extrasPerDrop'|translate}}" [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
                             <app-input [inputType]="'textarea'" [group]="retailFormGroup" [controlName]="'extrasNotes'"
-                                inputPlaceholder="{{'extrasNotes'|translate}}" [iconType]="'description'"></app-input>
+                                inputPlaceholder="{{'extrasNotes'|translate}}" labelText="{{'extrasNotes'|translate}}"
+                                [iconType]="'description'"></app-input>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
                                 [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'agreedMinimumPerHour'|translate}}" [iconType]="'request_quote'">
+                                dropdownPlaceholder="{{'agreedMinimumPerHour'|translate}}"
+                                matLabel="{{'agreedMinimumPerHour'|translate}}" [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
                     </div>
@@ -200,13 +208,15 @@
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
                                 [dropdownData]="payModeOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'payMode'|translate}}" [iconType]="'request_quote'">
+                                dropdownPlaceholder="{{'payMode'|translate}}" matLabel="{{'payMode'|translate}}"
+                                [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
                                 [dropdownData]="payFrequencyOptions" [displayProp]="'value'"
-                                dropdownPlaceholder="{{'payFrequency'|translate}}" [iconType]="'request_quote'">
+                                dropdownPlaceholder="{{'payFrequency'|translate}}"
+                                matLabel="{{'payFrequency'|translate}}" [iconType]="'request_quote'">
                             </app-single-select>
                         </div>
                     </div>

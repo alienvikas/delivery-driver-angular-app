@@ -9,15 +9,14 @@
         </mat-sidenav>
 
         <mat-sidenav-content #matSideNavContent cdkscrollable class="scrollbar">
-            <router-outlet>
-            </router-outlet>
-            <app-scroll-to-top [sidenavContentScrollable]="matSideNavContent"></app-scroll-to-top>
+            <app-scroll-to-top (scrollToTop)="onScrollToTop(matSideNavContent)"></app-scroll-to-top>
+            <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>
 
     <!-------------------Footer section-------------------------------->
     <footer fxFlexOffset="auto">
-        <p>© 2023 Copyright: <b>Delivery Driver</b></p>
+        <p><mat-icon>copyright</mat-icon> {{currentDate().getFullYear()}} Copyright: <b>Delivery Driver</b></p>
     </footer>
 </div>
 

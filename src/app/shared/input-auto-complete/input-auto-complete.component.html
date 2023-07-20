@@ -2,7 +2,7 @@
 
 <ng-template #reactive>
     <form [formGroup]="formGroup" #ngForm="ngForm" class="example-form">
-        <mat-form-field appearance="fill" class="example-full-width">
+        <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>{{labelText}}</mat-label>
             <input #matTown matInput [placeholder]="inputPlaceholder" [matAutocomplete]="auto"
                 [formControlName]="controlName">
@@ -21,7 +21,7 @@
 </ng-template>
 
 <ng-template #template>
-    <mat-form-field appearance="fill" class="example-full-width">
+    <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>{{labelText}}</mat-label>
         <input #matTown matInput [placeholder]="inputPlaceholder" [matAutocomplete]="auto3"
             formControlName="controlName">

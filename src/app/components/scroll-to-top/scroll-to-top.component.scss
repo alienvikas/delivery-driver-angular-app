@@ -1,13 +1,23 @@
-.to-top {
-    bottom: 0;
-    cursor: pointer;
-    margin: 0 8px 12px 0;
+:host {
     position: fixed;
-    right: 0;
-    opacity: 0;
+    float: right;
+    cursor: pointer;
+    right: 14px;
+    bottom: 14px;
+    z-index: 100;
+    opacity: 0.75;
 }
 
-.show-scrollTop {
+:host:hover {
     opacity: 1;
-    transition: all 0.2s ease-in-out;
+}
+
+.scroll-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-mdc-mini-fab.mat-primary {
+    background-color: rgba(18, 18, 18, 0.8);
 }

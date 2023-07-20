@@ -18,13 +18,14 @@ export class SingleSelectComponent {
   @Input() dropdownPlaceholder!: string;
   @Input() customClass?: string;
   @Input() displayProp!: string;
-  @Input() dropdownAppearanceType!: MatFormFieldAppearance;
-  @Output() onSelectionChange = new EventEmitter<any>();
+  @Input() dropdownAppearanceType!: MatFormFieldAppearance;  
   @Input() iconType: string = '';
   @Input() isEnum: boolean = false;
   @Input() errorMessage: string = '';
   @Input() value: string = '';
   @Input() matLabel: string = '';
+
+  @Output() onSelectionChange = new EventEmitter<any>();
   //#endregion
 
   constructor() { }

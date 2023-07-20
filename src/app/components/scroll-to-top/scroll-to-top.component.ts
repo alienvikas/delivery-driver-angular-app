@@ -1,26 +1,26 @@
-import { Component, OnInit, Inject, HostListener, Input } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
+const MATERIAL_MODULES = [MatButtonModule, MatIconModule];
 
 @Component({
   selector: 'app-scroll-to-top',
   templateUrl: './scroll-to-top.component.html',
-  styleUrls: ['./scroll-to-top.component.scss']
+  styleUrls: ['./scroll-to-top.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+  // selector: 'app-scroll-to-top',
+  // templateUrl: './scroll-to-top.component.html',
+  // styleUrls: ['./scroll-to-top.component.scss']
 })
 export class ScrollToTopComponent implements OnInit {
-  @Input() sidenavContentScrollable: any
-  constructor() { }
   ngOnInit(): void {
     //throw new Error('Method not implemented.');
   }
+  @Output() scrollToTop = new EventEmitter<void>();
 
-  scrollToTop() {
-    if (this.sidenavContentScrollable) {
-      this.sidenavContentScrollable.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-    }
+  onScrollToTop(): void {
+    this.scrollToTop.emit();
   }
 
 }
