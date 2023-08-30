@@ -7,7 +7,7 @@ import { AppComponent, MY_DATE_FORMATS } from './app.component';
 /* Angular Material */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -66,6 +66,14 @@ import { RetailPremisesViewComponent } from './components/Pages/retail-premises-
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
 
+/* calendar */
+import { CalendarModule, DateAdapter, MOMENT } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { SchedulerModule } from 'angular-calendar-scheduler';
+import * as moment from 'moment';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ShiftCalendarComponent } from './components/Pages/shift-calendar/shift-calendar.component';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -108,7 +116,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginPageComponent,
     PersonPageComponent,
     RetailPremisesViewComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+    ShiftCalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -123,6 +132,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastrModule,
     ScrollingModule,
     SharedModule,
+    CalendarModule,
+    FullCalendarModule, // register FullCalendar with your app
+    SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
@@ -136,9 +148,15 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       defaultLanguage: 'en'
     }),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [
     AuthService,
+    { provide: LOCALE_ID, useValue: 'en-GB' },
+    { provide: MOMENT, useValue: moment },
     { provide: MAT_DATE_LOCALE, useValue: MY_DATE_FORMATS },
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
   bootstrap: [AppComponent],

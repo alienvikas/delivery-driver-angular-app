@@ -1,0 +1,13 @@
+<ng-container *ngTemplateOutlet='group ? reactive : template'></ng-container>
+
+<ng-template #reactive>
+    <form [formGroup]="group" class="example-form">
+        <button class="file-upload-button">
+            <input type="file" #fileInput (change)="onFileSelect(fileInput)" [formControlName]="controlName" />
+            <mat-icon>cloud_upload</mat-icon>
+        </button>
+        <span class="file-info">{{ fileInfo }}</span>
+    </form>
+</ng-template>
+
+<ng-template #template></ng-template>

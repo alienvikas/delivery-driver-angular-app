@@ -172,7 +172,7 @@
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'pricePerDrop'"
-                                [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
+                                [dropdownData]="pricePerDropOptions" [displayProp]="'value'"
                                 dropdownPlaceholder="{{'pricePerDrop'|translate}}"
                                 matLabel="{{'pricePerDrop'|translate}}" [iconType]="'price_change'">
                             </app-single-select>
@@ -193,7 +193,7 @@
                         </div>
                         <div class="col-sm">
                             <app-single-select [group]="retailFormGroup" [controlName]="'agreedMinimumPerHour'"
-                                [dropdownData]="pricePerHourOptions" [displayProp]="'value'"
+                                [dropdownData]="agreededMinimumPerHour" [displayProp]="'value'"
                                 dropdownPlaceholder="{{'agreedMinimumPerHour'|translate}}"
                                 matLabel="{{'agreedMinimumPerHour'|translate}}" [iconType]="'request_quote'">
                             </app-single-select>
@@ -241,6 +241,31 @@
                     <div class="row py-1">
                         <div class="col-sm">
                             <label>{{'logo'|translate}}</label>
+                            <!-- <mat-button-toggle-group>
+                                <mat-button-toggle>
+                                    <app-file-upload-button [group]="retailFormGroup"
+                                        [controlName]="'logo'"></app-file-upload-button>
+                                </mat-button-toggle>
+                                <mat-button-toggle value="italic">
+                                    <button type="button" class="file-upload-btn">
+                                        <mat-icon>camera_alt</mat-icon>
+                                    </button>
+                                </mat-button-toggle>
+                            </mat-button-toggle-group> -->
+                            <!-- <div class="container-sm">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <app-file-upload-button [group]="retailFormGroup"
+                                            [controlName]="'logo'"></app-file-upload-button>
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="file-upload-btn">
+                                            <mat-icon>camera_alt</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> -->
+
                             <mat-list class="mat-list d-flex" style="padding: 0;">
                                 <mat-list-item class="horizontal-mat-list-item">
                                     <input type="file" class="file-input" formControlName="logo"

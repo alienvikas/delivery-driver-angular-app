@@ -20,6 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { InputDateComponent } from './input-date/input-date.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { InputAutoCompleteComponent } from './input-auto-complete/input-auto-complete.component';
+import { FileUploadButtonComponent } from './file-upload-button/file-upload-button.component';
 // import { MatNativeDateModule } from '@angular/material/core';
 // import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -28,7 +29,8 @@ import { InputAutoCompleteComponent } from './input-auto-complete/input-auto-com
         SingleSelectComponent,
         InputComponent,
         InputDateComponent,
-        InputAutoCompleteComponent
+        InputAutoCompleteComponent,
+        FileUploadButtonComponent
     ],
     imports: [
         FormsModule,
@@ -58,6 +60,7 @@ import { InputAutoCompleteComponent } from './input-auto-complete/input-auto-com
         InputComponent,
         InputDateComponent,
         InputAutoCompleteComponent,
+        FileUploadButtonComponent,
     ],
     providers: [
 

@@ -16,7 +16,9 @@
 
     <!-------------------Footer section-------------------------------->
     <footer fxFlexOffset="auto">
-        <p><mat-icon>copyright</mat-icon> {{currentDate().getFullYear()}} Copyright: <b>Delivery Driver</b></p>
+        <span [style.display]="'inline-flex'">
+            <mat-icon>copyright</mat-icon> {{currentDate().getFullYear()}} Copyright: <b>Delivery Driver</b>
+        </span>
     </footer>
 </div>
 

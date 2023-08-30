@@ -43,6 +43,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgFor } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 // Available options
 interface NgxSpinnerConfig {
@@ -94,6 +95,7 @@ const materialModules = [
   MatStepperModule,
   MatDatepickerModule,
   FontAwesomeModule,
+  FullCalendarModule,
   NgFor
 ];
 
