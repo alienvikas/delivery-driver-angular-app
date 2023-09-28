@@ -1,10 +1,9 @@
-// Variable overrides first
+@import 'bootstrap/dist/css/bootstrap.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
 $primary: #900;
 $enable-shadows: true;
 $prefix: "mo-";
-
-// Then import Bootstrap
-@import "../node_modules/bootstrap/scss/bootstrap";
 
 html,
 body {
@@ -27,4 +26,20 @@ body {
 
 .pointer-cursor:hover {
     cursor: pointer;
+}
+
+.custom-scrollbar-css::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* scrollbar track */
+.custom-scrollbar-css::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+/* scrollbar handle */
+.custom-scrollbar-css::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: #00d2ff;
+    background-image: linear-gradient(to top, #00d2ff 0%, #3a7bd5 100%);
 }

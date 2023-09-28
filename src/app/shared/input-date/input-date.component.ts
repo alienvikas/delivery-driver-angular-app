@@ -25,7 +25,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 export class InputDateComponent {
   @Input() group!: FormGroup;
   @Input() controlName: any;
-  @Input() inputPlaceholderKey!: string;
+  @Input() inputPlaceholder: string = '';
   @Input() isReadOnly!: boolean;
   @Input() isInputDisabled!: boolean;
   @Input() iconType: string = '';

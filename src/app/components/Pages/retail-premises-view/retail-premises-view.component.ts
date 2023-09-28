@@ -47,6 +47,8 @@ export class RetailPremisesViewComponent implements OnInit {
   payModeOptions: IPayment[] = [];
   payFrequencyOptions: IPayment[] = [];
   pricePerHourOptions: IPayment[] = [];
+  pricePerDropOptions: IPayment[] = [];
+  agreededMinimumPerHour: IPayment[] = [];
   userOptions: any[] = [];
   //#endregion
 
@@ -113,11 +115,15 @@ export class RetailPremisesViewComponent implements OnInit {
       { id: PayFrequencyEnum.EveryCalendarMonth, value: "Every Calendar Month" },
     ]
 
-    this.pricePerHourOptions = [
-      { id: 1, value: "25p" },
-      { id: 2, value: "50p" },
-      { id: 3, value: "1p" },
-    ]
+    // this.pricePerHourOptions = [
+    //   { id: 1, value: "25p" },
+    //   { id: 2, value: "50p" },
+    //   { id: 3, value: "1p" },
+    // ]
+
+    this.pricePerHourOptions = this.getPayment(5, 20, 0.25);
+    this.pricePerDropOptions = this.getPayment(1, 10, 0.5);
+    this.agreededMinimumPerHour = this.getPayment(10, 20, 0.25);
   }
 
   getAllUser() {
@@ -208,6 +214,15 @@ export class RetailPremisesViewComponent implements OnInit {
 
   stepChanged(event: any, stepper: any) {
     stepper.selected.interacted = false;
+  }
+
+  getPayment(initialAmt: number, endAmt: number, incrementBy: number) {
+    var paymentList: IPayment[] = [];
+    for (let index = 0; initialAmt <= endAmt; index++) {
+      paymentList.push({ id: index, value: '£' + initialAmt.toString() })
+      initialAmt = initialAmt + incrementBy;
+    }
+    return paymentList;
   }
 
   // private filterCounty(value: any): County[] {

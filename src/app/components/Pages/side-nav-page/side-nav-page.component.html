@@ -1,64 +1,69 @@
-<img class="avatar mat-elevation-z8" [src]="personalPhoto" />
+<div class="custom-scrollbar-css">
+    <img class="avatar mat-elevation-z8" [src]="personalPhoto" />
 
-<h4 class="name"><b>{{fullName|uppercase}}</b></h4>
-<p class="designation">{{uniqueNumber}}</p>
+    <h4 class="name"><b>{{fullName|uppercase}}</b></h4>
+    <p class="designation">{{uniqueNumber}}</p>
 
-<mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-<button mat-button class="menu-button" routerLink="/person">
-    <mat-icon>people</mat-icon>
-    <span title="Person">Person</span>
-</button>
-<button mat-button class="menu-button">
-    <mat-icon>person</mat-icon>
-    <span title="Profile">Profile</span>
-</button>
-<button mat-button class="menu-button">
-    <mat-icon>info</mat-icon>
-    <span title="About">About</span>
-</button>
-<button mat-button class="menu-button" routerLink="/retailpremises">
-    <mat-icon svgIcon="shopping-building">
-    </mat-icon>
-    <span title="Retail Premises">Retail Premises</span>
-</button>
+    <button mat-button class="menu-button" routerLink="/person">
+        <mat-icon>people</mat-icon>
+        <span title="Person">Person</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/shiftcalendar">
+        <mat-icon>calendar</mat-icon>
+        <span title="Person">Shift Calendar</span>
+    </button>
+    <button mat-button class="menu-button">
+        <mat-icon>person</mat-icon>
+        <span title="Profile">Profile</span>
+    </button>
+    <button mat-button class="menu-button">
+        <mat-icon>info</mat-icon>
+        <span title="About">About</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/retailpremises">
+        <mat-icon svgIcon="shopping-building">
+        </mat-icon>
+        <span title="Retail Premises">Retail Premises</span>
+    </button>
 
-<h2>Data Section</h2>
-<mat-divider></mat-divider>
-<button mat-button class="menu-button" routerLink="/countryList">
-    <mat-icon>add_location</mat-icon>
-    <span title="Country List">Country List</span>
-</button>
-<button mat-button class="menu-button" routerLink="/countyList">
-    <mat-icon>notification_important</mat-icon>
-    <span title="County List">County List</span>
-</button>
-<button mat-button class="menu-button" routerLink="/passportList">
-    <mat-icon>notification_important</mat-icon>
-    <span title="Passport List">Passport List</span>
-</button>
-<button mat-button class="menu-button" routerLink="/roleList">
-    <mat-icon>view_list</mat-icon>
-    <span title="Role List">Role List</span>
-</button>
-<button mat-button class="menu-button" routerLink="/ukareatelephone">
-    <mat-icon>settings_phone</mat-icon>
-    <span title="UK Area">UK Area Phone Code List</span>
-</button>
-<button mat-button class="menu-button" routerLink="/vehicletype">
-    <mat-icon>directions_car</mat-icon>
-    <span title="Vehicle Type">Vehicle Type</span>
-</button>
-<button mat-button class="menu-button" routerLink="/vehiclemanufacture">
-    <mat-icon>directions_car</mat-icon>
-    <span title="Vehicle Manufacture">Vehicle Manufacture</span>
-</button>
-<button mat-button class="menu-button" routerLink="/townorcity">
-    <mat-icon>location_city</mat-icon>
-    <span title="Town Or City">Town Or City</span>
-</button>
+    <h2>Data Section</h2>
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button" routerLink="/countryList">
+        <mat-icon>add_location</mat-icon>
+        <span title="Country List">Country List</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/countyList">
+        <mat-icon>notification_important</mat-icon>
+        <span title="County List">County List</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/passportList">
+        <mat-icon>notification_important</mat-icon>
+        <span title="Passport List">Passport List</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/roleList">
+        <mat-icon>view_list</mat-icon>
+        <span title="Role List">Role List</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/ukareatelephone">
+        <mat-icon>settings_phone</mat-icon>
+        <span title="UK Area">UK Area Phone Code List</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/vehicletype">
+        <mat-icon>directions_car</mat-icon>
+        <span title="Vehicle Type">Vehicle Type</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/vehiclemanufacture">
+        <mat-icon>directions_car</mat-icon>
+        <span title="Vehicle Manufacture">Vehicle Manufacture</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/townorcity">
+        <mat-icon>location_city</mat-icon>
+        <span title="Town Or City">Town Or City</span>
+    </button>
 
-<!-- <button mat-button class="menu-button" (click)="menuTrigger.openMenu()">Menu
+    <!-- <button mat-button class="menu-button" (click)="menuTrigger.openMenu()">Menu
     <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu"></div>
 </button>
 <mat-menu mat-button #menu="matMenu" yPosition="below" xPosition="before">
@@ -75,3 +80,4 @@
     <mat-icon>help</mat-icon>
     <span>Help</span>
 </button> -->
+</div>

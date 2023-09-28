@@ -1,0 +1,154 @@
+<h2 class="divAction" mat-dialog-title>
+    Add Shift
+</h2>
+<mat-divider></mat-divider>
+<form #retailPremisesDetailForm="ngForm" [formGroup]="addCalendarShiftForm"
+    (ngSubmit)="addShift(addCalendarShiftForm.value)">
+    <mat-dialog-content class="mat-typography container">
+        <div class="row">
+            <div class="col">
+                <app-input [inputType]="'text'" [group]="addCalendarShiftForm" [controlName]="'retailerName'"
+                    inputPlaceholder="{{'Labels.RetailName'|translate}}" labelText="{{'Labels.RetailName'|translate}}"
+                    [iconType]="'corporate_fare'" [errorMessage]="retailPremisesDetailForm.submitted && 
+                    retailPremisesDetailForm.hasError('required','retailerName')?
+                    ('Validation.RetailerNameRequired'|translate):''"></app-input>
+            </div>
+            <div class="col">
+                <app-input [inputType]="'number'" [group]="addCalendarShiftForm" [controlName]="'retailerNumber'"
+                    inputPlaceholder="{{'Labels.RetailNumber'|translate}}"
+                    labelText="{{'Labels.RetailNumber'|translate}}" [iconType]="'numbers'" [errorMessage]="retailPremisesDetailForm.submitted && 
+                    retailPremisesDetailForm.hasError('required','retailerNumber')?
+                    ('Validation.RetailerNumberRequired'|translate):''"></app-input>
+            </div>
+            <div class="col">
+                <!-- <mat-form-field appearance="outline">
+                    <mat-label>{{ 'Labels.ShiftStartTime' | translate }}</mat-label>
+                    <input matInput [format]="24" [ngxTimepicker]="shiftStartTime" formControlName="shiftStartTime"
+                        placeholder="{{ 'Labels.ShiftStartTime' | translate }}" [disableClick]="true" readonly />
+                    <mat-icon matSuffix (click)="shiftStartTime.open()">
+                        watch_later
+                    </mat-icon>
+                </mat-form-field>
+                <div class="ngx-mtp-box-bordered">
+                    <ngx-material-timepicker #shiftStartTime></ngx-material-timepicker>
+                </div> -->
+
+                <app-material-timepicker [group]="addCalendarShiftForm" [controlName]="'shiftStartTime'"
+                    inputPlaceholder="{{'Labels.ShiftStartTime'|translate}}" [errorMessage]="retailPremisesDetailForm.submitted && 
+                    retailPremisesDetailForm.hasError('required','shiftStartTime')?
+                    ('Validation.ShiftStartDayRequired'|translate):''">
+                </app-material-timepicker>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-input-date [group]="addCalendarShiftForm" [controlName]="'shiftStartDate'"
+                    inputPlaceholder="{{'Labels.ShiftStartDate'|translate}}" [errorMessage]="retailPremisesDetailForm.submitted && 
+                    retailPremisesDetailForm.hasError('required','shiftStartDate')?
+                    ('Validation.ShiftStartDayRequired'|translate):''"></app-input-date>
+            </div>
+            <div class="col">
+                <app-single-select [group]="addCalendarShiftForm" [controlName]="'shiftStartDay'"
+                    [dropdownData]="dayList" [displayProp]="'value'"
+                    dropdownPlaceholder="{{'Labels.ShiftStartDay'|translate}}"
+                    matLabel="{{'Labels.ShiftStartDay'|translate}}" [iconType]="'calendar_today'">
+                </app-single-select>
+            </div>
+            <div class="col">
+                <!-- <mat-form-field appearance="outline">
+                    <mat-label>{{ 'Labels.ShiftFinishTime' | translate }}</mat-label>
+                    <input matInput [format]="24" [ngxTimepicker]="shiftFinishTime" formControlName="shiftFinishTime"
+                        placeholder="{{ 'Labels.ShiftFinishTime' | translate }}" [disableClick]="true" readonly />
+                    <mat-icon matSuffix (click)="shiftFinishTime.open()">
+                        watch_later
+                    </mat-icon>
+                </mat-form-field>
+                <div class="ngx-mtp-box-bordered">
+                    <ngx-material-timepicker #shiftFinishTime></ngx-material-timepicker>
+                </div> -->
+
+                <app-material-timepicker [group]="addCalendarShiftForm" [controlName]="'shiftFinishTime'"
+                    inputPlaceholder="{{'Labels.ShiftFinishTime'|translate}}" [errorMessage]="retailPremisesDetailForm.submitted && 
+                    retailPremisesDetailForm.hasError('required','shiftFinishTime')?
+                    ('Validation.ShiftStartDayRequired'|translate):''">
+                </app-material-timepicker>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-input-date [group]="addCalendarShiftForm" [controlName]="'shiftFinishDate'"
+                    inputPlaceholder="{{'Labels.ShiftFinishDate'|translate}}" [errorMessage]="retailPremisesDetailForm.submitted && 
+                retailPremisesDetailForm.hasError('required','shiftFinishDate')?
+                ('Validation.ShiftStartDayRequired'|translate):''"></app-input-date>
+            </div>
+            <div class="col">
+                <app-single-select [group]="addCalendarShiftForm" [controlName]="'shiftFinishDay'"
+                    [dropdownData]="dayList" [displayProp]="'value'"
+                    dropdownPlaceholder="{{'Labels.ShiftFinishDay'|translate}}"
+                    matLabel="{{'Labels.ShiftFinishDay'|translate}}" [iconType]="'calendar_today'">
+                </app-single-select>
+            </div>
+            <div class="col">
+                <app-single-select [group]="addCalendarShiftForm" [controlName]="'shiftExtraBonus'"
+                    [dropdownData]="shiftExtraBonusList" [displayProp]="'value'"
+                    dropdownPlaceholder="{{'Labels.ShiftExtraBonus'|translate}}"
+                    matLabel="{{'Labels.ShiftExtraBonus'|translate}}" [iconType]="'calendar_today'">
+                </app-single-select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-single-select [group]="addCalendarShiftForm" [controlName]="'shiftPricePerHour'"
+                    [dropdownData]="shiftExtraBonusList" [displayProp]="'value'"
+                    dropdownPlaceholder="{{'Labels.ShiftPricePerHour'|translate}}"
+                    matLabel="{{'Labels.ShiftPricePerHour'|translate}}" [iconType]="'calendar_today'">
+                </app-single-select>
+            </div>
+            <div class="col">
+                <app-single-select [group]="addCalendarShiftForm" [controlName]="'shiftExtraPerDrop'"
+                    [dropdownData]="shiftExtraBonusList" [displayProp]="'value'"
+                    dropdownPlaceholder="{{'Labels.ShiftExtraPerDrop'|translate}}"
+                    matLabel="{{'Labels.ShiftExtraPerDrop'|translate}}" [iconType]="'calendar_today'">
+                </app-single-select>
+            </div>
+            <div class="col">
+                <app-single-select [group]="addCalendarShiftForm" [controlName]="'shiftExtra'"
+                    [dropdownData]="shiftExtraBonusList" [displayProp]="'value'"
+                    dropdownPlaceholder="{{'Labels.ShiftExtra'|translate}}" matLabel="{{'Labels.ShiftExtra'|translate}}"
+                    [iconType]="'calendar_today'">
+                </app-single-select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-single-select [group]="addCalendarShiftForm" [controlName]="'shiftMinimumPerHour'"
+                    [dropdownData]="shiftExtraBonusList" [displayProp]="'value'"
+                    dropdownPlaceholder="{{'Labels.ShiftMinimumPerHour'|translate}}"
+                    matLabel="{{'Labels.ShiftMinimumPerHour'|translate}}" [iconType]="'calendar_today'">
+                </app-single-select>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'Labels.ShiftColor'|translate}}</mat-label>
+                    <input matInput [ngxMatColorPicker]="picker" placeholder="{{'Labels.ShiftColor'|translate}}"
+                        [disabled]="disabled" formControlName="shiftColor">
+                    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+                    <ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <app-input [inputType]="'text'" [group]="addCalendarShiftForm" [controlName]="'username'"
+                    inputPlaceholder="{{'Labels.Username'|translate}}" labelText="{{'Labels.Username'|translate}}"
+                    [iconType]="'corporate_fare'" [errorMessage]="retailPremisesDetailForm.submitted && 
+                    retailPremisesDetailForm.hasError('required','username')?
+                    ('Validation.RetailerNameRequired'|translate):''"></app-input>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+        <button type="submit" mat-button mat-raised-button color="primary" (click)="onClick()"
+            cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
+</form>

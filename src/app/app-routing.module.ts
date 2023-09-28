@@ -18,6 +18,7 @@ import { LoginPageComponent } from './components/Pages/login-page/login-page.com
 import { PersonPageComponent } from './components/Pages/person-page/person-page.component';
 import { RetailPremisesViewComponent } from './components/Pages/retail-premises-view/retail-premises-view.component';
 import { RegisterPageComponent } from './components/Pages/register-page/register-page.component';
+import { ShiftCalendarComponent } from './components/Pages/shift-calendar/shift-calendar.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'vehiclemanufacture', component: VehicleManufactureComponent, canActivate: [AuthService] },
   { path: 'townorcity', component: TownCityListComponent, canActivate: [AuthService] },
   { path: 'retailpremises', component: RetailPremisesViewComponent, canActivate: [AuthService] },
+  { path: 'shiftcalendar', component: ShiftCalendarComponent, canActivate: [AuthService] },
 ];
 
 @NgModule({

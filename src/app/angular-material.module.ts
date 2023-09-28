@@ -36,13 +36,22 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-//import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { WebcamModule } from 'ngx-webcam';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgFor } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarModule, MOMENT } from 'angular-calendar';
+import { SchedulerModule } from 'angular-calendar-scheduler';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { jqxSchedulerModule } from 'jqwidgets-ng/jqxscheduler';
+import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+import { MatFabMenuModule } from '@angular-material-extensions/fab-menu';
 
 // Available options
 interface NgxSpinnerConfig {
@@ -87,25 +96,46 @@ const materialModules = [
   NgxSpinnerModule,
   MatDialogModule,
   NgxMatSelectSearchModule,
-  //NgMultiSelectDropDownModule,
   WebcamModule,
   AutocompleteLibModule,
   MatSlideToggleModule,
   MatStepperModule,
   MatDatepickerModule,
   FontAwesomeModule,
+  FullCalendarModule,
+  CalendarModule,
+  SchedulerModule,
+  ScrollingModule,
+  ToastrModule,
+  FullCalendarModule, // register FullCalendar with your app
+  jqxSchedulerModule,
+  NgxMaterialTimepickerModule,
+  NgxMatColorPickerModule,
+  MatFabMenuModule,
   NgFor
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }), // ToastrModule added
+    SchedulerModule.forRoot({ locale: 'en-GB', headerDateFormat: 'daysRange' }),
     NgxSpinnerModule.forRoot({ type: 'la-square-jelly-box' }),
-    //NgMultiSelectDropDownModule.forRoot(),
     ...materialModules
   ],
   exports: [
     ...materialModules
+  ],
+  providers: [
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ],
 })
 
