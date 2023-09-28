@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { ConfirmedValidator } from "./commonMethods/confirmedValidator";
 import { formatDate } from "@angular/common";
+import { validate } from "uuid";
+import { Color } from "@angular-material-components/color-picker";
 
 @Injectable()
 export class FormInitialize {
@@ -144,5 +146,26 @@ export class FormInitialize {
             //     validator: ConfirmedValidator('password', 'confirmPassword')
             // }
         )
+    }
+
+    public static initializeCalendarShiftForm(fb: FormBuilder) {
+        return fb.group({
+            username: new FormControl(null, [Validators.required]),
+            retailerName: new FormControl(null, [Validators.required]),
+            retailerNumber: new FormControl(null, [Validators.required]),
+            shiftStartTime: new FormControl(null, [Validators.required]),
+            shiftStartDay: new FormControl(null, [Validators.required]),
+            shiftStartDate: new FormControl(null, [Validators.required]),
+            shiftFinishTime: new FormControl(null, [Validators.required]),
+            shiftFinishDay: new FormControl(null, [Validators.required]),
+            shiftFinishDate: new FormControl(null, [Validators.required]),
+            shiftExtraBonus: new FormControl(null, [Validators.required]),
+            shiftPricePerHour: new FormControl(null, [Validators.required]),
+            shiftExtraPerDrop: new FormControl(null, [Validators.required]),
+            shiftExtra: new FormControl(null, [Validators.required]),
+            shiftMinimumPerHour: new FormControl(null, [Validators.required]),
+            shiftColor: new FormControl(null),
+            shiftAutoNumber: new FormControl()
+        });
     }
 }

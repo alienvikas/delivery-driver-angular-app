@@ -1,0 +1,25 @@
+<ng-container *ngTemplateOutlet='group ? reactive : template'></ng-container>
+
+<ng-template #reactive>
+    <form [formGroup]="group" #ngForm="ngForm">
+        <mat-form-field appearance="outline">
+            <mat-label>{{inputPlaceholder}}</mat-label>
+            <input matInput [ngxTimepicker]="picker" [format]="24" [formControlName]="controlName" (blur)="onBlur()"
+                placeholder="{{inputPlaceholder}}" [disableClick]="true" readonly />
+            <mat-icon matSuffix (click)="picker.open()">
+                watch_later
+            </mat-icon>
+            <mat-icon matSuffix class="icon-error" *ngIf="errorMessage != ''">error</mat-icon>
+            <mat-error *ngIf="errorMessage != ''">
+                {{errorMessage}}
+            </mat-error>
+        </mat-form-field>
+        <div class="ngx-mtp-box-bordered">
+            <ngx-material-timepicker #picker></ngx-material-timepicker>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #template>
+
+</ng-template>

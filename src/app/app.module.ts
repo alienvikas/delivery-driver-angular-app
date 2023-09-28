@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ToastrModule } from 'ngx-toastr';
 
 /* FormsModule */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -63,103 +62,90 @@ import { RegisterPageComponent } from './components/Pages/register-page/register
 import { LoginPageComponent } from './components/Pages/login-page/login-page.component';
 import { PersonPageComponent } from './components/Pages/person-page/person-page.component';
 import { RetailPremisesViewComponent } from './components/Pages/retail-premises-view/retail-premises-view.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
+import { CalendarWeekViewComponent } from './components/Pages/calendar-week-view/calendar-week-view.component';
+import { AddCalendarShiftComponent } from './components/popup-dialog/add-calendar-shift/add-calendar-shift.component';
 
 /* calendar */
-import { CalendarModule, DateAdapter, MOMENT } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { SchedulerModule } from 'angular-calendar-scheduler';
+import { MOMENT } from 'angular-calendar';
 import * as moment from 'moment';
-import { FullCalendarModule } from '@fullcalendar/angular';
 import { ShiftCalendarComponent } from './components/Pages/shift-calendar/shift-calendar.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LogInComponent,
-    RegisterComponent,
-    PersonFormComponent,
-    NavigationBarComponent,
-    AddCountryComponent,
-    CountryListComponent,
-    EditCountryComponent,
-    ConfirmationDialogComponent,
-    UploadDataComponent,
-    CountyListComponent,
-    AddCountyComponent,
-    EditCountyComponent,
-    PassportListComponent,
-    AddPassportListComponent,
-    RoleListComponent,
-    EditPassportComponent,
-    HomeComponent,
-    UkAreaTelephoneListComponent,
-    WebCamComponent,
-    VehicleTypeComponent,
-    VehicleManufactureComponent,
-    TownCityListComponent,
-    AddEditUkAreaComponent,
-    HeaderComponent,
-    FooterComponent,
-    LandingPageComponent,
-    LayoutPageComponent,
-    HeaderPageComponent,
-    FooterPageComponent,
-    SideNavPageComponent,
-    RegisterPageComponent,
-    LoginPageComponent,
-    PersonPageComponent,
-    RetailPremisesViewComponent,
-    ScrollToTopComponent,
-    ShiftCalendarComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    AngularMaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
-    FlexLayoutModule,
-    FontAwesomeModule,
-    ToastrModule,
-    ScrollingModule,
-    SharedModule,
-    CalendarModule,
-    FullCalendarModule, // register FullCalendar with your app
-    SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
-    ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }), // ToastrModule added
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      },
-      defaultLanguage: 'en'
-    }),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-  ],
-  providers: [
-    AuthService,
-    { provide: LOCALE_ID, useValue: 'en-GB' },
-    { provide: MOMENT, useValue: moment },
-    { provide: MAT_DATE_LOCALE, useValue: MY_DATE_FORMATS },
-    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    declarations: [
+        AppComponent,
+        LogInComponent,
+        RegisterComponent,
+        PersonFormComponent,
+        NavigationBarComponent,
+        AddCountryComponent,
+        CountryListComponent,
+        EditCountryComponent,
+        ConfirmationDialogComponent,
+        UploadDataComponent,
+        CountyListComponent,
+        AddCountyComponent,
+        EditCountyComponent,
+        PassportListComponent,
+        AddPassportListComponent,
+        RoleListComponent,
+        EditPassportComponent,
+        HomeComponent,
+        UkAreaTelephoneListComponent,
+        WebCamComponent,
+        VehicleTypeComponent,
+        VehicleManufactureComponent,
+        TownCityListComponent,
+        AddEditUkAreaComponent,
+        HeaderComponent,
+        FooterComponent,
+        LandingPageComponent,
+        LayoutPageComponent,
+        HeaderPageComponent,
+        FooterPageComponent,
+        SideNavPageComponent,
+        RegisterPageComponent,
+        LoginPageComponent,
+        PersonPageComponent,
+        RetailPremisesViewComponent,
+        ScrollToTopComponent,
+        ShiftCalendarComponent,
+        CalendarWeekViewComponent,
+        AddCalendarShiftComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        AngularMaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
+        FlexLayoutModule,
+        FontAwesomeModule,
+        SharedModule,        
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            },
+            defaultLanguage: 'en'
+        }),
+
+    ],
+    providers: [
+        AuthService,
+        { provide: LOCALE_ID, useValue: 'en-GB' },
+        { provide: MOMENT, useValue: moment },
+        { provide: MAT_DATE_LOCALE, useValue: MY_DATE_FORMATS },
+        { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

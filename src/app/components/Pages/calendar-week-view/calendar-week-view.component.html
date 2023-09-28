@@ -1,0 +1,39 @@
+<full-calendar id='calendar' [options]="calendarOptions"></full-calendar>
+<!-- Floating Action Button like Google Material -->
+<!-- <mat-fab-menu color="primary" [fabButtons]="fabButtonsRandom">
+</mat-fab-menu> -->
+<!-- <div class="example-button-row">
+    <div class="example-flex-container">
+        <div class="example-button-container">
+            <button mat-fab aria-label="Example icon button with a delete icon">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</div> -->
+<div id="container-floating">
+    <!-- <div class="nd4 nds"><img class="reminder">
+        <p class="letter">C</p>
+    </div>
+
+    <div class="nd3 nds"><img class="reminder"
+            src="//ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/ic_reminders_speeddial_white_24dp.png" />
+    </div> -->
+
+    <!-- <div class="nd1 nds">
+        <button mat-mini-fab color="accent" title="{{'Add Shift'|translate}}">
+            <mat-icon>person_add</mat-icon>
+        </button>
+    </div> -->
+
+    <div id="floating-button">
+        <button mat-fab extended (click)="openShiftDialog()" color="warn" title="{{'Add Shift'|translate}}">
+            <mat-icon>add</mat-icon>
+            {{'Add Shift'|translate}}
+        </button>
+        <!-- <button mat-fab color="warn" class="edit">
+            <mat-icon>edit</mat-icon>
+        </button> -->
+        <!-- <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png"> -->
+    </div>
+</div>

@@ -2,14 +2,14 @@
 
 <ng-template #reactive>
     <form [formGroup]="group" #ngForm="ngForm" class="example-form">
-        <mat-form-field appearance="fill" class="example-full-width">
-            <mat-label>{{inputPlaceholderKey}}</mat-label>
-            <input matInput [matDatepicker]="dp" placeholder="{{inputPlaceholderKey}}" [formControlName]="controlName"
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>{{inputPlaceholder}}</mat-label>
+            <input matInput [matDatepicker]="dp" placeholder="{{inputPlaceholder}}" [formControlName]="controlName"
                 (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
-            <mat-icon matPrefix>{{iconType}}</mat-icon>
+            <mat-icon matPrefix>date_range</mat-icon>
             <mat-icon matSuffix class="icon-error" *ngIf="errorMessage != ''">error</mat-icon>
             <mat-error *ngIf="errorMessage != ''">
                 {{errorMessage}}
@@ -19,12 +19,12 @@
 </ng-template>
 
 <ng-template #template>
-    <mat-form-field appearance="fill" class="example-full-width">
+    <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Date of birth</mat-label>
-        <input matInput [matDatepicker]="dp" placeholder="{{inputPlaceholderKey}}" type="password"
+        <input matInput [matDatepicker]="dp" placeholder="{{inputPlaceholder}}" type="password"
             [formControlName]="controlName" (blur)="onBlur()" [readonly]="isReadOnly" [disabled]="isInputDisabled">
         <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matIconPrefix [for]="dp"></mat-datepicker-toggle>
         <mat-datepicker #dp></mat-datepicker>
     </mat-form-field>
 </ng-template>

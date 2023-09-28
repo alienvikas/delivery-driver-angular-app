@@ -1,12 +1,9 @@
-// Variable overrides first
+@import 'bootstrap/dist/css/bootstrap.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
 $primary: #900;
 $enable-shadows: true;
 $prefix: "mo-";
-
-// Then import Bootstrap
-@import "../node_modules/bootstrap/scss/bootstrap";
-/* angular-cli file: src/styles.css */
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 html,
 body {
@@ -31,25 +28,6 @@ body {
     cursor: pointer;
 }
 
-/*
-*
-* ==========================================
-* CUSTOM UTIL CLASSES
-* ==========================================
-*
-*/
-.custom-scrollbar-js,
-.custom-scrollbar-css {
-    //height: 200px;
-}
-
-
-/* Custom Scrollbar using CSS */
-.custom-scrollbar-css {
-    //overflow-y: scroll;
-}
-
-/* scrollbar width */
 .custom-scrollbar-css::-webkit-scrollbar {
     width: 5px;
 }

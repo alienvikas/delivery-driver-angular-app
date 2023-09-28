@@ -14,52 +14,14 @@
                         [iconType]="'person'" [errorMessage]="personDetailForm.submitted 
                         && (personForm.hasError('required','introducerId')?('Select introducer'|translate):'')">
                     </app-single-select>
-                    <!-- <mat-form-field appearance="outline">
-                        <mat-label>{{'chooseintroducer'|translate}}</mat-label>
-                        <mat-select formControlName="introducer">
-                            <mat-option *ngFor="let introducer of introducerOptions" [value]="introducer">
-                                {{introducer.name}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error
-                            *ngIf="personForm.hasError('required','introducerId') && personDetailForm.submitted">Select
-                            introducer
-                        </mat-error>
-                    </mat-form-field> -->
                 </div>
                 <div class="col" *ngIf="isStaff || isDriver || isNewRetailOwner">
                     <app-input [group]="personForm" [controlName]="'officalName'" inputPlaceholder="Offical name"
                         [inputType]="'text'"></app-input>
-                    <!-- <mat-form-field appearance="outline">
-                        <mat-label>Offical name</mat-label>
-                        <input matInput (blur)="onBlur()" formControlName="officalName">
-                        <mat-hint>
-                            <mat-icon matTooltip="Full Name as on Your passport
-                                ">help
-                                outline
-                                icon</mat-icon>
-                        </mat-hint>
-                        <mat-error
-                            *ngIf="personForm.hasError('required','officalName') && personDetailForm.submitted">Offical
-                            name required</mat-error>
-                    </mat-form-field> -->
                 </div>
                 <div class="col">
                     <app-input [group]="personForm" [controlName]="'knownAs'" inputPlaceholder="Known as"
                         [inputType]="'text'" labelText="Known as" [iconType]="'person'"></app-input>
-                    <!-- <mat-form-field appearance="outline">
-                        <mat-label>Known as</mat-label>
-                        <input matInput (blur)="onBlur()" formControlName="knownAs">
-                        <mat-hint>
-                            <mat-icon
-                                matTooltip="What you would like to be Known As (Christian Name, + Surname or Family name)">help
-                                outline
-                                icon</mat-icon>
-                        </mat-hint>
-                        <mat-error
-                            *ngIf="personForm.hasError('required','knownAs') && personDetailForm.submitted">KnownAs
-                            required</mat-error>
-                    </mat-form-field> -->
                 </div>
             </div>
 
@@ -1163,7 +1125,7 @@
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button>Reset</button>
             </div>
-        </mat-step>        
+        </mat-step>
     </mat-vertical-stepper>
     <button mat-raised-button type="submit">Save</button>
 </form>
